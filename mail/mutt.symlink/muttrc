@@ -3,11 +3,11 @@
 # Main configuration
   set mbox_type           = Maildir                               # mailbox type
   set folder              = ~/Mail                                # mailbox location
-  set spoolfile           = "+Codegestalt/INBOX"                  # Codegestalt is default inbox
+  set spoolfile           = "+codegestalt/INBOX"                  # Codegestalt is default inbox
   set realname            = "Rodrigo Haenggi"                     # who am i?
   mailboxes +codegestalt/INBOX
   source ~/.mutt/codegestalt                                      # What account should be used
-  folder-hook Codegestalt/*      source ~/.mutt/codegestalt
+  folder-hook codegestalt/*      source ~/.mutt/codegestalt
 
 
 # directories and commands
@@ -19,7 +19,7 @@
   set tmpdir              = ~/.mutt/temp                          # where to keep temp files
   set editor              = "vim +:silent+/^$"                    # use vim and skip to first blank line
   set ispell              = "aspell -e -c"                        # use aspell as ispell
-  set query_command       = "mail-query '%s' ~/Mail/Codegestalt/INBOX"  # query existing mails
+  set query_command       = "mail-query '%s' ~/Mail/codegestalt/INBOX"  # query existing mails
   set print_command       = "enscript -p - | psselect -r | lp"    # print email in reverse page order
 
 # main options
