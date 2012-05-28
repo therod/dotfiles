@@ -1,0 +1,31 @@
+#!/bin/sh
+IFS=$'\n'
+
+# Copies a few key files to a mounted sparsebundle which is then stored in Dropbox.
+
+# Your sparsebundle.
+sparsebundle="$HOME/Dropbox/Archive/backup.sparsebundle"
+
+# Your destination. My sparsebundle mounts to "backup".
+backup_location="/Volumes/backup"
+
+# Directories to backup. Recursive, implied home (~) location.
+directories=(
+  Development
+  "Documents/iChats"
+  ".ssh"
+  ".boom"
+  ".localrc"
+  ".dotfiles"
+  ".heroku"
+  ".zsh_history"
+)
+
+hdiutil attach -noverify $sparsebundle
+
+for directory in ${directories[@]}
+  do
+    rsync -avh --progress --delete ~/$directory $backup_location
+done
+
+hdiutil detach $backup_location

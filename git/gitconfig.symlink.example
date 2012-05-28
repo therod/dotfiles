@@ -1,0 +1,57 @@
+# Sample gitconfig
+#
+# This is a sample gitconfig. Usually we keep a lot of sensitive information
+# here (things like authentication tokens, email addresses, and so on), so this
+# file is ignored in this project's .gitignore.
+#
+# To set this up, rename this file to `gitconfig.symlink` and you'll be able to
+# install this to the correct location by running the project's main `rake`
+# task.
+[user
+[user]
+        name = YOUR NAME
+        email = you@yourdomain.com
+[alias]
+        a = config --get-regexp alias
+        b = branch
+        l = log --graph --pretty=format':%C(red)%h% %C(yellow) %an:%Cblue%d%Creset %s %C(green) (%ar)%Creset'
+        lol = log --pretty=oneline --abbrev-commit --graph --decorate
+        r = !git l -20
+        s = status --short
+        ci = commit -m
+        co = checkout
+        aa = add --all
+        h = !git l -1
+        la = !git l --all
+        ds = diff --stat=160,120
+        ra = !git r --all
+        dh1 = diff HEAD~1
+        unstage = reset HEAD
+        count   = !git shortlog -sn
+        current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+        wtf     = !$ZSH/bin/git-wtf
+        rank = !$ZSH/bin/git-rank-contributers
+[color]
+        diff = auto
+        ui = auto
+        status = auto
+        branch = auto
+[core]
+        excludesfile = ~/.gitignore
+        editor = vim
+[apply]
+        whitespace = warn
+[github]
+        user = YOUR_GITHUB_USERNAME
+        token = YOUR_GITHUB_TOKEN
+[merge]
+        tool = vimdiff
+[mergetool]
+        keepBackup = false
+[help]
+        autocorrect = 1
+[status]
+        submodule = 1
+[push]
+        # Only push branches that have been set up to track a remote branch.
+        default = current

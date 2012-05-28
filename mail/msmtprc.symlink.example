@@ -1,0 +1,13 @@
+# Readme: Make sure that this file is read only. ( chmod 0600 ./msmtprc.symlink )
+# MY_ACCOUNT
+account MY_ACCOUNT 
+host SMTP_SERVER
+port SMTP_SERVER_PORT
+auth on
+from "MY NAME"
+user MY_USERNAME
+password MY_PASSWORD
+tls on
+tls_nocertcheck
+
+account default : MY_ACCOUNT

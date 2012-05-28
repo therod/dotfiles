@@ -1,0 +1,31 @@
+# Note: requires ./nametrans.py
+#
+# README: This is an example file. Replace MY_ACCOUNT with something that represends your Account name. Like 
+# "Gmail" for example.
+
+[general]
+ui = ttyui
+accounts = MY_ACCOUNT
+maxsyncaccounts = 2
+pythonfile = ~/.mutt/nametrans.py
+
+[Account MY_ACCOUNT]
+localrepository = MY_ACCOUNT-Local
+remoterepository = MY_ACCOUNT-Remote
+postsynchook = mu index --maildir=Mail 
+
+[Repository MY_ACCOUNT-Local]
+type = Maildir
+localfolders = ~/Mail/MY_ACCOUNT                # Path to the directory where offlineimap will store the
+                                                # physical files. Make sure that you disable Spotlight
+                                                # indexing on this directory!
+nametrans = nt_local
+
+[Repository MY_ACCOUNT-Remote]
+type = Gmail
+remoteuser = me@mydomain.com
+remotepass = MY_PASSWORD
+realdelete = no
+postsynchook = mu index --maildir=Mail 
+maxconnections = 3
+nametrans = nt_remote
