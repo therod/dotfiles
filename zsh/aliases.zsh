@@ -13,7 +13,7 @@ alias m='vim'
 alias vi='vim'
 
 # Producitivity
-alias t='task'
+alias ta='task'
 
 #ack madness!
 alias aack="ack --all"
