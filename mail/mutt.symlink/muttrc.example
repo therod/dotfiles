@@ -1,28 +1,32 @@
 # ~/.mutt/muttrc
+# This is one of my older configuration files that I will provide as an example.
+# For more information read the fucking muttrc manpage.
 
 # Main configuration
   set mbox_type           = Maildir                               # mailbox type
   set folder              = ~/Mail                                # mailbox location
   set spoolfile           = "+codegestalt/INBOX"                  # Codegestalt is default inbox
-  set realname            = "Rodrigo Haenggi"                     # who am i?
-  mailboxes +codegestalt/INBOX
-  source ~/.mutt/codegestalt                                      # What account should be used
-  folder-hook codegestalt/*      source ~/.mutt/codegestalt
+  set realname            = "Rodrigo Haenggi"                     # who am I?
 
+  # boxes
+  mailboxes +codegestalt/INBOX +codegestalt/all_mail +codegestalt/drafts +codegestalt/sent_mamil +codegestalt/spam +codegestalt/trash
+  mailboxes +osisa/INBOX +osisa/deleted_items +osisa/archive +osisa/drafts +osisa/sent_items
+
+  # always sourced
+  source ~/.mutt/codegestalt.muttrc                                 # source codegestalt as default
 
 # directories and commands
   set certificate_file    = ~/.mutt/certificates                  # where to store certs
   set header_cache        = ~/.mutt/cache/headers                 # where to store headers
   set message_cachedir    = ~/.mutt/cache/bodies                  # where to store bodies
   set mailcap_path        = ~/.mutt/mailcap                       # entrys for filetypes
-  set signature           = ~/.mutt/sig                           # my signature file
   set tmpdir              = ~/.mutt/temp                          # where to keep temp files
   set editor              = "vim +:silent+/^$"                    # use vim and skip to first blank line
   set ispell              = "aspell -e -c"                        # use aspell as ispell
-  set query_command       = "mail-query '%s' ~/Mail/codegestalt/INBOX"  # query existing mails
-  set print_command       = "enscript -p - | psselect -r | lp"    # print email in reverse page order
+  # TODO: set print_command       = "enscript -p - | psselect -r | lp"    # print email in reverse page order
 
 # main options
+  set sig_on_top                                                 # Put the signature on top
   set beep_new                                                    # terminal bell on new message
 unset confirmappend                                               # don't ask, just do
   set delete                                                      # don't ask, just do
@@ -92,7 +96,6 @@ bind index J       next-unread
 bind index,pager R group-reply
 
 # macros
-macro index ,i "<change-folder>!<return>" "go to inbox"
 macro index ,p "<pipe-message>cat > ~/" "save message as"
 macro index ,z "<shell-escape>offlineimap -q -o<return>" "sync IMAP"
 macro index ,r "<tag-pattern>all<return><tag-prefix><clear-flag>N<untag-pattern>all<return>" "mark all as read"
