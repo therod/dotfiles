@@ -1,8 +1,10 @@
 mutt.symlink/cache/*
 mutt.symlink/temp/*
-mutt.symlink/codegestalt
-mutt.symlink/osisa
-mutt.symlink/sig
+mutt.symlink/codegestalt.muttrc
+mutt.symlink/osisa.muttrc
+mutt.symlink/muttrc
+mutt.symlink/osisa.sig
+mutt.symlink/codegestalt.sig
 mutt.symlink/certificates
 mutt.symlink/nametrans.pyc
 msmtprc.symlink
