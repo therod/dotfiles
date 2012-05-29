@@ -1,6 +1,7 @@
 mutt.symlink/cache/*
 mutt.symlink/temp/*
 mutt.symlink/codegestalt
+mutt.symlink/osisa
 mutt.symlink/sig
 mutt.symlink/certificates
 mutt.symlink/nametrans.pyc
