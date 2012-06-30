@@ -75,24 +75,9 @@ task :dependencies do
     "bash-completion",
     "coreutils",
     "wget",                                 # Too dumb to use CURL
-
-    # Email
-    "mutt",                                 # The mutt Email Client
-    "msmtp",                                # SMTP app
-    "mu",                                   # Search tools for mailboxes
-    "offline-imap",                         # Sync IMAP Folders
-    "elinks",                               # CLI webbrowser
-    "urlview",                              # Open URLs from the Command Line
-
-    # Productivity
-    "task",                                 # Taskwrrior
     "spark",
     "tmux",                                 # Because fuck screen
     "reattach-to-user-namespace",           # For OS X
-
-    # Various
-    "transmission",                         # Bittorrent Client
-    "earthquake"                            # Twitter Client
   ]
 
   brew_recipes.each do |recipe|
