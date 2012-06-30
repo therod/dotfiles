@@ -3,7 +3,7 @@ set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # Don't torture me with your C-b
 unbind C-b
-set-option -g prefix C-f
+set-option -g prefix C-a
 
 # General configuration
 set-window-option -g utf8 on # utf8 support
