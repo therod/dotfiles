@@ -33,11 +33,6 @@ There's a few special files in the hierarchy.
 - **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
   last so that they get loaded after we set up zsh autocomplete functions.
 
-## Notes on Email
-
-I have moved my complete email to [mutt](http://www.mutt.org/) and use it in combination with [offlineimap](https://github.com/nicolas33/offlineimap), [msmtp](http://msmtp.sourceforge.net/) and [mu](http://code.google.com/p/mu0/).
-For detailed configuration instructions read the README.md inside the `mail` folder.
-
 ## Notes on Vim
 I use a lightweight vim folder using pathogen and my custom bundle script. 
 For more information read the README.md inside the `vim` folder.
