@@ -2,7 +2,6 @@
 
 git_bundles = [ 
     "git://github.com/kien/ctrlp.vim.git",                        # Fast file opener
-    "git://github.com/davidoc/taskpaper.vim.git",                 # TaskPaper bundle
     "git://github.com/tpope/vim-markdown.git",                    # Markdown Support
     "git://github.com/altercation/vim-colors-solarized.git",      # Solarized colorscheme for VIM
     "git://github.com/tpope/vim-commentary.git",                  # New commenting plugin by tpope
