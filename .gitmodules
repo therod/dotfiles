@@ -1,0 +1,39 @@
+[submodule "vim/vim.symlink/bundle/ctrlp"]
+	path = vim/vim.symlink/bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim.symlink/bundle/vim-colors-solarized"]
+	path = vim/vim.symlink/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/vim.symlink/bundle/vim-commentary"]
+	path = vim/vim.symlink/bundle/vim-commentary
+	url = git://github.com/tpope/vim-commentary.git
+[submodule "vim/vim.symlink/bundle/vim-eunuch"]
+	path = vim/vim.symlink/bundle/vim-eunuch
+	url = git://github.com/tpope/vim-eunuch.git
+[submodule "vim/vim.symlink/bundle/vim-fugitive"]
+	path = vim/vim.symlink/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim.symlink/bundle/vim-ruby"]
+	path = vim/vim.symlink/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/vim.symlink/bundle/taglist"]
+	path = vim/vim.symlink/bundle/taglist
+	url = git://github.com/vim-scripts/taglist.vim.git
+[submodule "vim/vim.symlink/bundle/vim-vroom"]
+	path = vim/vim.symlink/bundle/vim-vroom
+	url = git://github.com/skalnik/vim-vroom.git
+[submodule "vim/vim.symlink/bundle/vim-ruby-minitest"]
+	path = vim/vim.symlink/bundle/vim-ruby-minitest
+	url = git://github.com/sunaku/vim-ruby-minitest.git
+[submodule "vim/vim.symlink/bundle/vim-markdown"]
+	path = vim/vim.symlink/bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
+[submodule "vim/vim.symlink/bundle/vim-rails"]
+	path = vim/vim.symlink/bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "vim/vim.symlink/bundle/ack-vim"]
+	path = vim/vim.symlink/bundle/ack-vim
+	url = git://github.com/mileszs/ack.vim.git
+[submodule "vim/vim.symlink/bundle/vim-coffee-script"]
+	path = vim/vim.symlink/bundle/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git

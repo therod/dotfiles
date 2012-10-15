@@ -36,7 +36,6 @@ task :install do
 end
 
 task :uninstall do
-
   Dir.glob('**/*.symlink').each do |linkable|
 
     file = linkable.split('/').last.split('.symlink').last
@@ -55,6 +54,8 @@ task :uninstall do
   end
 end
 
+# TODO: Add Support for MacPorts
+desc "Install all the dependencies for these dotfiles using Homebrew"
 task :dependencies do
   # Check if we have Homebrew installed:
   unless system("which brew 2>&1 > /dev/null")
@@ -64,17 +65,14 @@ task :dependencies do
   end
 
   brew_recipes = [
-    # VIM with ruby support for OS X
     "https://raw.github.com/Homebrew/homebrew-dupes/master/vim.rb",
-
-    # Base utilities
-    "git",                                  # THE SCM tool of choice
-    "hub",                                  # GitHub Wrapper for git
+    "git",
+    "hub",
     "bash-completion",
     "coreutils",
-    "wget",                                 # Too dumb to use CURL
-    "tmux",                                 # Because fuck screen
-    "reattach-to-user-namespace",           # For OS X
+    "wget",
+    "tmux",
+    "reattach-to-user-namespace",
   ]
 
   brew_recipes.each do |recipe|
@@ -83,4 +81,15 @@ task :dependencies do
   end
 end
 
-task :default => 'install'
+namespace :vim do
+  namespace :plugins do
+    desc "Update the installed plugin "
+    task :update do
+      system("git submodule update")
+    end
+    desc "Install the configured VIM plugins"
+    task :install do
+      system("git submodule init")
+    end
+  end
+end
