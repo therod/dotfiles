@@ -46,10 +46,10 @@ task :uninstall do
     if File.symlink?(target)
       FileUtils.rm(target)
     end
-    
+
     # Replace any backups made during installation
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
-      `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
+      `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"`
     end
 
   end
@@ -70,12 +70,9 @@ task :dependencies do
     # Base utilities
     "git",                                  # THE SCM tool of choice
     "hub",                                  # GitHub Wrapper for git
-    "rbenv",                                # RVM alternative
-    "ruby-build",                           # Ruby builder
     "bash-completion",
     "coreutils",
     "wget",                                 # Too dumb to use CURL
-    "spark",
     "tmux",                                 # Because fuck screen
     "reattach-to-user-namespace",           # For OS X
   ]

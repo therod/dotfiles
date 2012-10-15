@@ -1,5 +1,6 @@
 # Fix pb{copy,paste} requires: reattach-to-usernamespace brew
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+# set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-command "/opt/local/bin/reattach-to-user-namespace -l zsh"
 
 # Don't torture me with your C-b
 unbind C-b
