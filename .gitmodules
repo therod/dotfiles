@@ -16,9 +16,6 @@
 [submodule "vim/vim.symlink/bundle/vim-ruby"]
 	path = vim/vim.symlink/bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
-[submodule "vim/vim.symlink/bundle/taglist"]
-	path = vim/vim.symlink/bundle/taglist
-	url = git://github.com/vim-scripts/taglist.vim.git
 [submodule "vim/vim.symlink/bundle/vim-vroom"]
 	path = vim/vim.symlink/bundle/vim-vroom
 	url = git://github.com/skalnik/vim-vroom.git
