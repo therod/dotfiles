@@ -65,19 +65,25 @@ task :dependencies do
   end
 
   brew_recipes = [
-    "https://raw.github.com/Homebrew/homebrew-dupes/master/vim.rb",
+    "zsh",
+    "mercurial",
     "git",
     "hub",
     "bash-completion",
     "coreutils",
-    "wget",
     "tmux",
     "reattach-to-user-namespace",
+    "https://raw.github.com/Homebrew/homebrew-dupes/master/vim.rb",
+    "ctags",
+    "curl",
+    "macvim",
+    "nodejs",
+    "postgresql"
   ]
 
   brew_recipes.each do |recipe|
     puts "Installing #{recipe}..."
-    `brew install #{recipe}`
+    system("brew install #{recipe}")
   end
 end
 
