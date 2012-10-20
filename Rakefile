@@ -97,7 +97,7 @@ namespace :vim do
     desc "Update the installed plugin "
     task :update do
       puts "Updating git submodules..."
-      system("git submodule update")
+      system("git submodule foreach git pull origin master")
     end
   end
 end
