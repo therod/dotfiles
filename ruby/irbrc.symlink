@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+require 'irbtools/more'
 require 'irb/completion'
 require 'map_by_method'
 require 'what_methods'
