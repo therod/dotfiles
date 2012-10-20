@@ -40,3 +40,6 @@
 [submodule "vim/vim.symlink/bundle/gist-vim"]
 	path = vim/vim.symlink/bundle/gist-vim
 	url = git://github.com/mattn/gist-vim.git
+[submodule "vim/vim.symlink/bundle/webapi-vim"]
+	path = vim/vim.symlink/bundle/webapi-vim
+	url = git://github.com/mattn/webapi-vim.git
