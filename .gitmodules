@@ -37,3 +37,6 @@
 [submodule "vim/vim.symlink/bundle/taglist"]
 	path = vim/vim.symlink/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
+[submodule "vim/vim.symlink/bundle/gist-vim"]
+	path = vim/vim.symlink/bundle/gist-vim
+	url = git://github.com/mattn/gist-vim.git
