@@ -1,6 +1,5 @@
-alias sc='script/console'
-alias sg='script/generate'
-alias sd='script/destroy'
+# switch the current shell to jruby
+alias j='rbenv shell jruby-1.6.8'
 
-alias migrate='rake db:migrate db:test:clone'
+alias r='rbenv local'
 alias b='bundle exec'
