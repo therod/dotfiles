@@ -49,8 +49,6 @@ bindkey '^?' backward-delete-char
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-
 bindkey -v
 bindkey '\e[3~' delete-char
 bindkey '^R' history-incremental-search-backward
-
