@@ -33,9 +33,6 @@ There's a few special files in the hierarchy.
 - **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
   last so that they get loaded after we set up zsh autocomplete functions.
 
-## Notes on Vim
-I use a lightweight vim folder using pathogen and my custom bundle script. 
-For more information read the README.md inside the `vim` folder.
 
 ## Special Thanks
 
