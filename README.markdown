@@ -33,6 +33,11 @@ There's a few special files in the hierarchy.
 - **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
   last so that they get loaded after we set up zsh autocomplete functions.
 
+## VIM
+
+Plugins are defined as bundles inside the `update_bundles.rb` script under `vim/vim.symlink/`.
+Running this script will install all defined plugins inside `vim/vim.symlink/bundles`, edit it to your liking.
+You can run the script form the root directory by using the `rake vim:update` command.
 
 ## Special Thanks
 
