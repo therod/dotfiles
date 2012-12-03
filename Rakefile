@@ -88,17 +88,8 @@ task :dependencies do
 end
 
 namespace :vim do
-  namespace :plugins do
-    desc "Install the configured VIM plugins"
-    task :install do
-      puts "Installing git submodules..."
-      system("git submodule init")
-      system("git submodule update")
-    end
-    desc "Update the installed plugin "
-    task :update do
-      puts "Updating git submodules..."
-      system("git submodule foreach git pull origin master")
-    end
+  desc "Update the installed plugin "
+  task :update do
+    system("vim/vim.symlink/update_bundles.rb")
   end
 end
