@@ -26,3 +26,6 @@ alias hi="history 1 | grep $*"
 alias ctags="ctags -R --exclude=.git --exclude=log *"
 
 alias reload!='. ~/.zshrc'
+
+# Tmuxinator
+alias t="tmuxinator"
