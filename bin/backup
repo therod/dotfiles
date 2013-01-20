@@ -4,7 +4,6 @@ IFS=$'\n'
 # Copies a few key files to a mounted sparsebundle which is then stored in Dropbox.
 
 # Your sparsebundle.
-developmentbundle="$HOME/Development.sparsebundle"
 sparsebundle="$HOME/Dropbox/Archive/backup.sparsebundle"
 
 # Your destination. My sparsebundle mounts to "backup".
@@ -28,11 +27,5 @@ for directory in ${directories[@]}
   do
     rsync -avh --progress --delete ~/$directory $backup_location
 done
-
-
-hdiutil attach -noverify $developmentbundle
-
-rsync -avh --progress --delete /Volumes/Development $backup_location
-
 
 hdiutil detach $backup_location
