@@ -73,7 +73,7 @@ task :dependencies do
     "coreutils",
     "tmux",
     "reattach-to-user-namespace",
-    "https://raw.github.com/Homebrew/homebrew-dupes/master/vim.rb",
+    "vim --with-ruby",
     "ctags",
     "curl",
     "macvim",
@@ -85,6 +85,7 @@ task :dependencies do
     puts "Installing #{recipe}..."
     system("brew install #{recipe}")
   end
+  ## TODO: Install rbenv and rubybuild from github!
 end
 
 namespace :vim do
