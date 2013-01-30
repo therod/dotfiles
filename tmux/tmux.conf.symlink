@@ -3,7 +3,6 @@
 
 # Don't torture me with your C-b
 unbind C-b
-set-option -g prefix C-a
 
 # General configuration
 set-window-option -g utf8 on # utf8 support
@@ -18,6 +17,8 @@ set -g visual-activity on
 set -g base-index 1
 setw -g pane-base-index 1
 
+# Change default delay
+set -s escape-time 1
 
 # Vim configuraiton
 setw -g mode-keys vi
@@ -55,7 +56,7 @@ set -g default-terminal "screen-256color"
 
 # Color
 set-option -g pane-border-fg white
-set-option -g pane-active-border-fg magenta
+set-option -g pane-active-border-fg white
 set -g status-bg black
 set -g status-fg white
 set -g status-right '#[fg=green]#H #[fg=white]| %m/%d %H:%M'
@@ -63,3 +64,8 @@ set -g status-right '#[fg=green]#H #[fg=white]| %m/%d %H:%M'
 set-window-option -g window-status-current-fg colour166 #orange
 set-option -g pane-border-fg colour235 #base02
 set-option -g pane-active-border-fg colour240 #base01
+
+# move x clipboard into tmux paste buffer
+bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
+# move tmux copy buffer into x clipboard
+bind C-y run "tmux show-buffer | xclip -i"
