@@ -1,0 +1,337 @@
+" This is Rodrigo Haenggi's .vimrc file
+
+" Save yourself a lot of pain by leaving this at the top...
+set nocompatible
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VUNDLE (https://github.com/gmarik/vundle)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VUNDLES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Core
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'sunaku/vim-ruby-minitest'
+Bundle 'skalnik/vim-vroom'
+
+" Frameworks
+Bundle 'tpope/vim-rails'
+Bundle 'vim-ruby/vim-ruby'
+
+" Extras
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+Bundle 'tpope/vim-surround'
+Bundle 'benmills/vimux'
+
+" Filetype Support
+Bundle 'tpope/vim-markdown'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'duwanis/tomdoc.vim'
+
+" Colorschemes
+Bundle 'altercation/vim-colors-solarized'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256
+set background=light
+colorscheme solarized
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC EDITING CONFIGURATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
+syntax on
+
+set autoindent
+set nocursorcolumn
+set nocursorline
+set backspace=indent,eol,start
+set cmdheight=1
+set encoding=utf-8
+set expandtab
+set formatoptions+=n
+set hidden
+set hlsearch
+set ignorecase smartcase
+set incsearch
+set laststatus=2
+set history=1000
+set nolazyredraw
+set noshowcmd
+set nosmarttab
+set nostartofline
+set nowrap
+set number
+set report=0
+set scrolloff=3
+set shell=zsh
+set shiftwidth=2
+set shortmess=filtIoOA
+set showmatch
+set showtabline=1
+set smartindent
+set softtabstop=2
+set switchbuf=useopen
+set tabstop=4
+set virtualedit=block
+set whichwrap+=<,>,h,l,[,]
+set wildmenu
+set wildmode=longest,list
+
+" Store temporary files in a central spot
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM AUTOCMDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+  autocmd FileType text setlocal textwidth=78
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType python set sw=4 sts=4 et
+  autocmd FileType ruby match OverLength /\%81v.\+/
+  autocmd FileType markdown match OverLength /\%81v.\+/
+
+  autocmd! BufRead,BufNewFile *.sass setfiletype sass
+
+  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+
+  " Indent p tags
+  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+
+  " Don't syntax highlight markdown because it's often wrong
+  " autocmd! FileType mkd setlocal syn=off
+
+  " Velocity
+  autocmd! BufRead,BufNewFile *.vm set filetype=velocity
+
+augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TABS N SHIT | TODO: Add shortcuts to jump to specific tabs
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-t> :tabnew<CR>
+map <C-l> :tabnext<CR>
+map <C-h> :tabprev<CR>
+
+" ----------------------------------------------------------------------------
+" REMAPPING
+" ----------------------------------------------------------------------------
+let mapleader = ","
+map WW :w!<CR>
+
+nnoremap Q gqap
+vnoremap Q gq
+"sane movement with wrap turned on
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
+
+" Remap the tab key to do autocompletion or indentation depending on the
+" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" Map ,e and ,v to open files in the same directory as the current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>V :view %%
+
+" Search for open Todos inside the directory structure
+map <leader>N :Ack --ignore-dir=tmp 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Control P
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildignore+=*/vendor/rails/*
+set wildignore+=*/.bundle/*
+set wildignore+=*/tmp/*
+let g:ctrlp_use_caching = 0 "Do not use caching
+let g:ctrlp_max_height = 20 "Display 20 results
+let g:ctrlp_show_hidden = 0 "Do not scan for dotfiles and dotdirs
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SWITCH BETWEEN TEST AND PRODUCTION CODE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  let in_spec = match(current_file, '^spec/') != -1
+  let going_to_spec = !in_spec
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1
+  if going_to_spec
+    if in_app
+      let new_file = substitute(new_file, '^app/', '', '')
+    end
+    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+    let new_file = 'spec/' . new_file
+  else
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '^spec/', '', '')
+    if in_app
+      let new_file = 'app/' . new_file
+    end
+  endif
+  return new_file
+endfunction
+nnoremap <leader>. :call OpenTestAlternate()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let vroom_detect_spec_helper = 1
+let g:vroom_use_vimux = 1 "enable vimux for vroom
+let g:vroom_use_spring = 1 "enable spring by default
+let g:VimuxUseNearestPane = 1
+
+" ----------------------------------------------------------------------------
+" STATUS LINE
+" ----------------------------------------------------------------------------
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
+" ----------------------------------------------------------------------------
+" MISC KEY MAPS
+" ----------------------------------------------------------------------------
+" clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
+
+" Run the current file in irb
+map <leader>x :!pry -r %<cr>
+
+" Shortcut to rapidly toggle `set list
+nmap <leader>l :set list!<cr>
+
+" ---------------------------------------------------------------------------
+" STRIP ALL TRAILING WHITESPACE
+" ---------------------------------------------------------------------------
+function! StripWhitespace ()
+  exec ':%s/ \+$//gc'
+endfunction
+map ,s :call StripWhitespace ()<CR>
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+      return "\<tab>"
+  else
+      return "\<c-p>"
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" ---------------------------------------------------------------------------
+" CTAGS
+" ---------------------------------------------------------------------------
+map <leader>ta :exec("tag ".expand("<cword>"))<CR>
+map <leader>ts :vsp <CR>:exec("tag " .expand("<cword>"))<CR>
+set tags+=./tags;
+set tags+=./gems.tags;
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ARROW KEYS ARE UNACCEPTABLE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Left> :echo "no!"<cr>
+map <Right> :echo "no!"<cr>
+map <Up> :echo "no!"<cr>
+map <Down> :echo "no!"<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OS X Specific
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Open the file using Marked.app => Good for previewing MARKDOWN files
+map <leader>p :!open -a /Applications/Marked.app '%'<cr>
+
+" ---------------------------------------------------------------------------
+" VARIOUS
+" ---------------------------------------------------------------------------
+let g:netrw_home = $HOME
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+set guifont=Inconsolata:h14
+set wrap
+set linebreak
+endif
