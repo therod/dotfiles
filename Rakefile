@@ -54,7 +54,6 @@ task :uninstall do
   end
 end
 
-# TODO: Add Support for MacPorts
 desc "Install all the dependencies for these dotfiles using Homebrew"
 task :dependencies do
   # Check if we have Homebrew installed:
@@ -75,22 +74,15 @@ task :dependencies do
     "reattach-to-user-namespace",
     "vim --with-ruby",
     "ctags",
-    "curl",
-    "macvim",
-    "nodejs",
-    "postgresql"
+    "curl"
   ]
 
   brew_recipes.each do |recipe|
     puts "Installing #{recipe}..."
     system("brew install #{recipe}")
   end
-  ## TODO: Install rbenv and rubybuild from github!
-end
 
-namespace :vim do
-  desc "Update the installed plugin "
-  task :update do
-    system("vim/vim.symlink/update_bundles.rb")
-  end
+  system("git clone git://github.com/sstephenson/rbenv.git ~/.rbenv")
+  system("git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build")
+
 end
