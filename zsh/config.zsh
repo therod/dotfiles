@@ -52,3 +52,4 @@ bindkey "^[[B" history-search-forward
 bindkey -v
 bindkey '\e[3~' delete-char
 bindkey '^R' history-incremental-search-backward
+bindkey '^F' history-incremental-search-forward
