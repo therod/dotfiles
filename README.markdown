@@ -3,6 +3,7 @@
 - `git clone git://github.com/therod/dotfiles ~/.dotfiles`
 - `cd ~/.dotfiles`
 - `rake install`
+- `rake dependencies`
 
 The install rake task will symlink the appropriate files in `.dotfiles` to your
 home directory. Everything is configured and tweaked within `~/.dotfiles`,
@@ -35,9 +36,7 @@ There's a few special files in the hierarchy.
 
 ## VIM
 
-Plugins are defined as bundles inside the `update_bundles.rb` script under `vim/vim.symlink/`.
-Running this script will install all defined plugins inside `vim/vim.symlink/bundles`, edit it to your liking.
-You can run the script form the root directory by using the `rake vim:update` command.
+Plugins are installed using [Vundle](https://github.com/gmarik/vundle).
 
 ## Special Thanks
 
