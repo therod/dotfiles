@@ -42,6 +42,7 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'benmills/vimux'
+Bundle 'davidoc/taskpaper.vim'
 
 " Filetype Support
 Bundle 'tpope/vim-markdown'
@@ -55,7 +56,6 @@ Bundle 'altercation/vim-colors-solarized'
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
-set background=light
 colorscheme solarized
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 

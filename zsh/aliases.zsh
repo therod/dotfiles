@@ -12,6 +12,10 @@ alias evimrc='vim $ZSH/vim/vimrc.symlink'
 alias m='vim'
 alias vi='vim'
 
+# change vim background color
+alias darkvim="echo 'set background=dark' > ~/.vim/plugin/background-color.vim"
+alias lightvim="echo 'set background=light' > ~/.vim/plugin/background-color.vim"
+
 #ack madness!
 alias aack="ack --all"
 alias rack="ack --ruby --follow"
@@ -29,3 +33,6 @@ alias reload!='. ~/.zshrc'
 
 # Tmuxinator
 alias t="tmuxinator"
+
+# Search engine:
+alias s="sr google -l $*"

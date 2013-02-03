@@ -1,1 +1,2 @@
-vim.symlink/.netrwhist
+.netrwhist
+vim.symlink/plugin/background-color.vim
