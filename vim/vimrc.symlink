@@ -137,9 +137,6 @@ augroup vimrcEx
   " Indent p tags
   autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 
-  " Don't syntax highlight markdown because it's often wrong
-  " autocmd! FileType mkd setlocal syn=off
-
   " Velocity
   autocmd! BufRead,BufNewFile *.vm set filetype=velocity
 
@@ -263,7 +260,7 @@ nnoremap  ,DK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
 " clear the search buffer when hitting return
 :nnoremap <CR> :nohlsearch<cr>
 
-" Run the current file in irb
+" Run the current file in pry
 map <leader>x :!pry -r %<cr>
 
 " Shortcut to rapidly toggle `set list
