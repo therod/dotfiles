@@ -30,24 +30,29 @@ Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'sunaku/vim-ruby-minitest'
 Bundle 'skalnik/vim-vroom'
 
-" Frameworks
-Bundle 'tpope/vim-rails'
-Bundle 'vim-ruby/vim-ruby'
+" Experimental
 
-" Extras
-Bundle 'mattn/webapi-vim'
+" Utils
+Bundle 'benmills/vimux'
 Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-surround'
-Bundle 'benmills/vimux'
-Bundle 'davidoc/taskpaper.vim'
+Bundle 'vim-scripts/AutoTag'
 
-" Filetype Support
-Bundle 'tpope/vim-markdown'
+" Ruby & Rails
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'sunaku/vim-ruby-minitest'
+Bundle 'tpope/vim-rails'
+Bundle 'danchoi/ri.vim'
+
+" HTML & CSS & Others
 Bundle 'kchmck/vim-coffee-script'
+
+" Markdown etc.
+Bundle 'tpope/vim-markdown'
 Bundle 'duwanis/tomdoc.vim'
+Bundle 'davidoc/taskpaper.vim'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized'
@@ -240,6 +245,13 @@ let g:vroom_use_vimux = 1 "enable vimux for vroom
 let g:vroom_use_spring = 1 "enable spring by default
 let g:VimuxUseNearestPane = 1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RI Documentation lookup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap  ,di :call ri#OpenSearchPrompt(0)<cr> " horizontal split
+nnoremap  ,DI :call ri#OpenSearchPrompt(1)<cr> " vertical split
+nnoremap  ,DK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
+
 " ----------------------------------------------------------------------------
 " STATUS LINE
 " ----------------------------------------------------------------------------
@@ -291,8 +303,8 @@ inoremap <s-tab> <c-n>
 " ---------------------------------------------------------------------------
 map <leader>ta :exec("tag ".expand("<cword>"))<CR>
 map <leader>ts :vsp <CR>:exec("tag " .expand("<cword>"))<CR>
+map <Leader>tt :!ctags --extra=+f --exclude=.git --exclude=log -R * `rbenv prefix`/lib/ruby/gems/1.9.1/gems/*<CR><CR>
 set tags+=./tags;
-set tags+=./gems.tags;
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
