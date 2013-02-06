@@ -39,6 +39,7 @@ Bundle 'benmills/vimux'
 Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/AutoTag'
+Bundle 't9md/vim-ruby-xmpfilter'
 
 " Ruby & Rails
 Bundle 'vim-ruby/vim-ruby'
@@ -56,6 +57,7 @@ Bundle 'davidoc/taskpaper.vim'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -260,12 +262,12 @@ nnoremap  ,DK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
 " clear the search buffer when hitting return
 :nnoremap <CR> :nohlsearch<cr>
 
-" Run the current file in pry
-map <leader>x :!pry -r %<cr>
-
 " Shortcut to rapidly toggle `set list
 nmap <leader>l :set list!<cr>
 
+" xmpfilter awesomeness!
+nmap <buffer> <leader>x <Plug>(xmpfilter-run)
+nmap <buffer> <leader>X <Plug>(xmpfilter-mark)
 " ---------------------------------------------------------------------------
 " STRIP ALL TRAILING WHITESPACE
 " ---------------------------------------------------------------------------
