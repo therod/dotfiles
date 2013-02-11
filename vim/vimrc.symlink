@@ -37,6 +37,7 @@ Bundle 'skalnik/vim-vroom'
 " Utils
 Bundle 'benmills/vimux'
 Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/AutoTag'
 Bundle 't9md/vim-ruby-xmpfilter'
