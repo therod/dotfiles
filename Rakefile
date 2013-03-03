@@ -72,7 +72,6 @@ task :dependencies do
     "coreutils",
     "tmux",
     "reattach-to-user-namespace",
-    "vim --with-ruby",
     "ctags",
     "curl"
   ]
