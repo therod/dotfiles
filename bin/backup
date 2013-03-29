@@ -20,6 +20,7 @@ directories=(
   ".dotfiles"
   ".heroku"
   ".zsh_history"
+  ".offlineimaprc"
 )
 
 hdiutil attach -noverify $sparsebundle
@@ -30,3 +31,21 @@ for directory in ${directories[@]}
 done
 
 hdiutil detach $backup_location
+
+#
+# E-Mail Backup
+#
+
+# Sync all emails from gmail to a sparsebundle called gmail-backup.sparsebundle
+gmail_sparsebundle="$HOME/Dropbox/Archive/gmail-backup.sparsebundle"
+
+# Your destination. My gmail-sparsebundle mounts to "gmail-backup".
+mail_backup_location="/Volumes/gmail-backup"
+
+# Attach the sparsebundle
+hdiutil attach -noverify $gmail_sparsebundle
+
+# Run offlineimap. Important: Configuration is stored in ~/.offlineimaprc
+offlineimap
+
+hdiutil detach $mail_backup_location
