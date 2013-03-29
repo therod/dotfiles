@@ -81,7 +81,11 @@ task :dependencies do
     system("brew install #{recipe}")
   end
 
+  # Setup rbenv
   system("git clone git://github.com/sstephenson/rbenv.git ~/.rbenv")
   system("git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build")
+
+  # Setup vundle
+  system("git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
 
 end
