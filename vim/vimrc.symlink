@@ -36,7 +36,6 @@ Bundle 'skalnik/vim-vroom'
 
 " Utils
 Bundle 'airblade/vim-gitgutter'
-Bundle 'benmills/vimux'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'tpope/vim-surround'
@@ -48,6 +47,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'sunaku/vim-ruby-minitest'
 Bundle 'tpope/vim-rails'
 Bundle 'danchoi/ri.vim'
+Bundle 'lucapette/vim-ruby-doc'
 
 " HTML & CSS & Others
 Bundle 'kchmck/vim-coffee-script'
@@ -55,11 +55,9 @@ Bundle 'kchmck/vim-coffee-script'
 " Markdown etc.
 Bundle 'therod/vim-markdown'
 Bundle 'duwanis/tomdoc.vim'
-Bundle 'davidoc/taskpaper.vim'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized'
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -129,8 +127,6 @@ augroup vimrcEx
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
-  autocmd FileType ruby match OverLength /\%81v.\+/
-  autocmd FileType markdown match OverLength /\%81v.\+/
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -241,9 +237,7 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let vroom_detect_spec_helper = 1
-let g:vroom_use_vimux = 1 "enable vimux for vroom
 let g:vroom_use_spring = 1 "enable spring by default
-let g:VimuxUseNearestPane = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RI Documentation lookup
@@ -251,6 +245,8 @@ let g:VimuxUseNearestPane = 1
 nnoremap  ,di :call ri#OpenSearchPrompt(0)<cr> " horizontal split
 nnoremap  ,DI :call ri#OpenSearchPrompt(1)<cr> " vertical split
 nnoremap  ,DK :call ri#LookupNameUnderCursor()<cr> " keyword lookup
+
+let g:ruby_doc_command='open'
 
 " ----------------------------------------------------------------------------
 " STATUS LINE
