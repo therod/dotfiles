@@ -1,2 +1,4 @@
 .DS_Store
+.netrwhist
+vim/vim.symlink/plugin/background-color.vim
 vim/vim.symlink/bundle/*
