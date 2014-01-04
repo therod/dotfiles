@@ -12,15 +12,13 @@ backup_location="/Volumes/backup"
 # Directories to backup. Recursive, implied home (~) location.
 directories=(
   "code"
-  "Documents/iChats"
-  "Dropbox/Notes"
   ".ssh"
-  ".boom"
   ".localrc"
   ".dotfiles"
   ".heroku"
   ".zsh_history"
   ".offlineimaprc"
+  "./Library/Application Support/Evernote"
 )
 
 hdiutil attach -noverify $sparsebundle
