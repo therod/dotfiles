@@ -73,19 +73,15 @@ task :dependencies do
     "tmux",
     "reattach-to-user-namespace",
     "ctags",
-    "curl"
+    "curl",
+    "rbenv",
+    "ruby-build",
+    "vim --override-system-vi"
   ]
 
   brew_recipes.each do |recipe|
     puts "Installing #{recipe}..."
     system("brew install #{recipe}")
   end
-
-  # Setup rbenv
-  system("git clone git://github.com/sstephenson/rbenv.git ~/.rbenv")
-  system("git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build")
-
-  # Setup vundle
-  system("git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
 
 end
