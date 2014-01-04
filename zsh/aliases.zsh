@@ -10,8 +10,6 @@ alias evimrc='vim $ZSH/vim/vimrc.symlink'
 
 # editors
 alias m='mvim -v'
-alias vi='mvim -v'
-alias vim='mvim -v'
 
 # change vim background color
 alias darkvim="echo 'set background=dark' > ~/.vim/plugin/background-color.vim"
