@@ -1,5 +1,7 @@
 --ignore-dir=.bundle
+--ignore-dir=log
 --ignore-dir=tmp
+--ignore-file=is:tags
 
 --type-add
 css=.sass,.scss
