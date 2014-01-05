@@ -96,55 +96,23 @@ set_prompt () {
   colorcode[w]=$colorcode[white]
   colorcode[.]=$colorcode[default]
 
-  typeset -A attcode
-  attcode[none]=00
-  attcode[bold]=01
-  attcode[faint]=02
-  attcode[standout]=03
-  attcode[underline]=04
-  attcode[blink]=05
-  attcode[reverse]=07
-  attcode[conceal]=08
-  attcode[normal]=22
-  attcode[no-standout]=23
-  attcode[no-underline]=24
-  attcode[no-blink]=25
-  attcode[no-reverse]=27
-  attcode[no-conceal]=28
-
   local -A pc
   pc[divider]='black'
   pc[default]='default'
-  pc[date]='cyan'
-  pc[time]='Blue'
   pc[host]='Green'
-  pc[user]='cyan'
-  pc[punc]='yellow'
-  pc[line]='magenta'
-  pc[hist]='green'
-  pc[path]='Cyan'
   pc[shortpath]='default'
-  pc[rc]='red'
-  pc[scm_branch]='green'
-  pc[scm_commitid]='Yellow'
-  pc[scm_status_dirty]='Red'
-  pc[scm_status_staged]='Green'
-  pc[scm_time_short]='green'
-  pc[scm_time_medium]='yellow'
-  pc[scm_time_long]='red'
-  pc[scm_time_uncommitted]='Magenta'
   pc[#]='Yellow'
   for cn in ${(k)pc}; do
     pc[${cn}]=$(colorword $pc[$cn])
   done
   pc[reset]=$(colorword . . 00)
 
-  PROMPT="$pc[divider]\$(repeat \$COLUMNS printf '-')$pc[reset]"
-  PROMPT+="$pc[host]%m$pc[reset]"
-  PROMPT+=":$pc[shortpath]%1~$pc[reset]"
-  PROMPT+="$(git_dirty)$reset_color"
-  PROMPT+="$(need_push)$reset_color"
-  PROMPT+=" $pc[#]\$$pc[reset] "
+  PROMPT="$pc[divider]\$(repeat \$COLUMNS printf '-')%{$reset_color%}"
+  PROMPT+="$pc[host]%m%{$reset_color%}"
+  PROMPT+=":$pc[shortpath]%1~%{$reset_color%}"
+  PROMPT+="$(git_dirty)%{$reset_color%}"
+  PROMPT+="$(need_push)%{$reset_color%}"
+  PROMPT+=" $pc[#]\$%{$reset_color%} "
 
   export PROMPT RPROMPT
 }
