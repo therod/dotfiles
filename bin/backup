@@ -4,10 +4,10 @@ IFS=$'\n'
 # Copies a few key files to a mounted sparsebundle which is then stored in Dropbox.
 
 # Your sparsebundle.
-sparsebundle="$HOME/Dropbox/Archive/backup.sparsebundle"
+sparsebundle="/Volumes/Eddie/Archive/sparsebackup.sparsebundle"
 
 # Your destination. My sparsebundle mounts to "backup".
-backup_location="/Volumes/backup"
+backup_location="/Volumes/sparsebackup"
 
 # Directories to backup. Recursive, implied home (~) location.
 directories=(
@@ -35,7 +35,7 @@ hdiutil detach $backup_location
 #
 
 # Sync all emails from gmail to a sparsebundle called gmail-backup.sparsebundle
-gmail_sparsebundle="$HOME/Dropbox/Archive/gmail-backup.sparsebundle"
+gmail_sparsebundle="/Volumes/Eddie/Archive/gmail-backup.sparsebundle"
 
 # Your destination. My gmail-sparsebundle mounts to "gmail-backup".
 mail_backup_location="/Volumes/gmail-backup"

@@ -107,7 +107,7 @@ set_prompt () {
   done
   pc[reset]=$(colorword . . 00)
 
-  PROMPT="$pc[divider]\$(repeat \$COLUMNS printf '-')%{$reset_color%}"
+  PROMPT="%{$reset_color%}"
   PROMPT+="$pc[host]%m%{$reset_color%}"
   PROMPT+=":$pc[shortpath]%1~%{$reset_color%}"
   PROMPT+="$(git_dirty)%{$reset_color%}"

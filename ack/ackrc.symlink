@@ -2,6 +2,7 @@
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-file=is:tags
+--pager=less -FRSX
 
 --type-add
 css=.sass,.scss
