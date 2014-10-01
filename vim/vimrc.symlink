@@ -1,62 +1,70 @@
 " This is Rodrigo Haenggi's .vimrc file
 
-" Save yourself a lot of pain by leaving this at the top...
 set nocompatible
+filetype off                  " required
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VUNDLE (https://github.com/gmarik/vundle)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-Bundle 'gmarik/vundle'
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VUNDLES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Core
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-eunuch'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'skalnik/vim-vroom'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'skalnik/vim-vroom'
 
 " Utils
-Bundle 'mattn/gist-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/AutoTag'
-Bundle 't9md/vim-ruby-xmpfilter'
+Plugin 'mattn/gist-vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/AutoTag'
+Plugin 't9md/vim-ruby-xmpfilter'
+Plugin 'rizzatti/dash.vim'
 
 " Ruby & Rails
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'sunaku/vim-ruby-minitest'
-Bundle 'tpope/vim-rails'
-Bundle 'danchoi/ri.vim'
-Bundle 'lucapette/vim-ruby-doc'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'sunaku/vim-ruby-minitest'
+Plugin 'tpope/vim-rails'
+Plugin 'danchoi/ri.vim'
+Plugin 'lucapette/vim-ruby-doc'
 
 " HTML & CSS & Others
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'othree/html5.vim'
-Bundle 'tpope/vim-haml'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-haml'
 
 " Markdown etc.
-Bundle 'tpope/vim-markdown'
-Bundle 'duwanis/tomdoc.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'duwanis/tomdoc.vim'
 
 " Colorschemes
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -271,16 +279,15 @@ map ,s :call StripWhitespace ()<CR>
 " ---------------------------------------------------------------------------
 " CUSTOM HIGHLIGHTS
 " ---------------------------------------------------------------------------
-" Whitespace
-highlight TrailSpace ctermbg=red
-2match TrailSpace / \+$/
-autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=red
+" " Whitespace
+" highlight TrailSpace ctermbg=red
+" 2match TrailSpace / \+$/
+" autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=red
 
-" ERUBY lines
-highlight ErbLines ctermbg=7
-match ErbLines /<%\(=\|\)\(.\{-}\)%>/
-autocmd ColorScheme * highlight ErbLines guibg=gray ctermbg=7
-
+" " ERUBY lines
+" highlight ErbLines ctermbg=8
+" match ErbLines /<%\(=\|\)\(.\{-}\)%>/
+" autocmd ColorScheme * highlight ErbLines ctermbg=8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -297,13 +304,15 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
 " ---------------------------------------------------------------------------
-" CTAGS
+" CTAGS / DASH
 " ---------------------------------------------------------------------------
 map <leader>ta :exec("tag ".expand("<cword>"))<CR>
 map <leader>ts :vsp <CR>:exec("tag " .expand("<cword>"))<CR>
 map <Leader>tt1 :!ctags --extra=+f --exclude=.git --exclude=log -R * `rbenv prefix`/lib/ruby/gems/1.9.1/gems/*<CR><CR>
-map <Leader>tt :!ctags --extra=+f --exclude=.git --exclude=log -R * `rbenv prefix`/lib/ruby/gems/2.0.0/gems/*<CR><CR>
+map <Leader>tt :!ctags --extra=+f --exclude=.git --exclude=log -R * `rbenv prefix`/lib/ruby/gems/2.1.0/gems/*<CR><CR>
 set tags+=./tags;
+
+map <leader>da :Dash<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
