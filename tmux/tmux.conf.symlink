@@ -25,14 +25,13 @@ set -s escape-time 1
 setw -g mode-keys vi
 unbind -t vi-copy Space
 unbind -t vi-copy Enter
-bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-selection
 unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Bindings
 bind h select-pane -L
@@ -63,7 +62,7 @@ set -g status-bg black
 set -g status-fg white
 set -g status-interval 2
 set -g status-left-length 80
-set -g status-left "%d/%m %H:%M #[fg=white](#[fg=lightblue] #(curl icanhazip.com) #[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print $2}')#[fg=white] )"
+set -g status-left "%d/%m %H:%M #[fg=white](#[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print $2}')#[fg=white])"
 set -g status-right-length 45
 set -g status-right "#[fg=white]#(tmux-mem-cpu-load 2)#[default]"
 

@@ -1,5 +1,4 @@
 " This is Rodrigo Haenggi's .vimrc file
-
 set nocompatible
 filetype off                  " required
 
@@ -25,7 +24,7 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'skalnik/vim-vroom'
+" Plugin 'skalnik/vim-vroom'
 
 " Utils
 Plugin 'mattn/gist-vim'
@@ -53,6 +52,7 @@ Plugin 'duwanis/tomdoc.vim'
 
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -70,8 +70,17 @@ filetype plugin indent on    " required
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
-colorscheme solarized
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SOLARIZED
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:solarized_termcolor=256
+colorscheme solarized
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASE 16
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme base16-default
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -200,6 +209,7 @@ set wildignore+=*/vendor/rails/*
 set wildignore+=*/.bundle/*
 set wildignore+=*/tmp/*
 set wildignore+=*/build/*
+set wildignore+=*/public/*
 let g:ctrlp_match_window = 'bottom'
 let g:ctrlp_use_caching = 0 "Do not use caching
 let g:ctrlp_max_height = 20 "Display 20 results
@@ -238,9 +248,9 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let vroom_detect_spec_helper = 1
-let g:vroom_use_spring = 0 "enable spring by default
-let g:vroom_use_colors = 1
+" let g:vroom_use_bundle_exec = 1
+" let g:vroom_use_spring = 1 "enable spring by default
+" let g:vroom_use_colors = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RI Documentation lookup
@@ -283,6 +293,7 @@ map ,s :call StripWhitespace ()<CR>
 " highlight TrailSpace ctermbg=red
 " 2match TrailSpace / \+$/
 " autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=red
+autocmd User Rails let b:surround_{char2nr('-')} = "<% \r %>" " displays <% %> correctly
 
 " " ERUBY lines
 " highlight ErbLines ctermbg=8
@@ -340,7 +351,7 @@ map <leader>n :call RenameFile()<cr>
 " OS X Specific
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open the file using Marked.app => Good for previewing MARKDOWN files
-map <leader>p :!open -a /Applications/Marked.app '%'<cr>
+map <leader>p :!open -a /Applications/Marked\ 2.app '%'<cr>
 
 " ---------------------------------------------------------------------------
 " VARIOUS
