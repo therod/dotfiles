@@ -4,6 +4,7 @@ hs.mainModifierKeys = {"ctrl", "cmd"}   -- Variable that holds the main modifier
 
 -- Load custom Modules
 require('modules/windows')
+require('modules/caffeine/caffeine')
 
 -- Reload function
 function reloadConfig(files)
