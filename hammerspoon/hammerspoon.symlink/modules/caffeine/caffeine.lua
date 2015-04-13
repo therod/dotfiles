@@ -2,18 +2,22 @@ local caffeine = hs.menubar.new()
 function setCaffeineDisplay(state)
     if state then
         caffeine:setIcon("modules/caffeine/icons/active.png")
-        hs.alert.show("Caffeine on")
     else
         caffeine:setIcon("modules/caffeine/icons/inactive.png")
-        hs.alert.show("Caffeine off")
     end
 end
 
-function caffeineClicked()
-    setCaffeineDisplay(hs.caffeinate.toggle("displayIdle"))
+-- Only sleep on battery power
+function batt_power_source()
+  if hs.battery.powerSource() == "AC Power" then
+    hs.caffeinate.set("displayIdle", true, false)
+    setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
+  end
+  if hs.battery.powerSource() == "Battery Power" then
+    hs.caffeinate.set("displayIdle", false, false)
+    setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
+  end
 end
 
-if caffeine then
-    caffeine:setClickCallback(caffeineClicked)
-    setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
-end
+-- Run the battery watcher
+hs.battery.watcher.new(batt_power_source):start()
