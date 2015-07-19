@@ -84,6 +84,7 @@ set t_Co=256
 let g:solarized_termcolor=256
 colorscheme solarized
 call togglebg#map("<F5>")
+so ~/.vim/plugin/background-color.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASE 16
@@ -98,7 +99,9 @@ call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AIRLINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=Inconsolata\ for\ Powerline "make sure to escape the spaces in the name properly
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
