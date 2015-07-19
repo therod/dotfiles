@@ -33,3 +33,7 @@ compinit
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Fix SSH Locales error
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
