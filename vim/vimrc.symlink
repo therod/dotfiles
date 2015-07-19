@@ -30,15 +30,12 @@ Plugin 'skalnik/vim-vroom'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'tpope/vim-surround'
-Plugin 't9md/vim-ruby-xmpfilter'
 Plugin 'rizzatti/dash.vim'
 
 " Ruby & Rails
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'sunaku/vim-ruby-minitest'
 Plugin 'tpope/vim-rails'
-Plugin 'danchoi/ri.vim'
-Plugin 'lucapette/vim-ruby-doc'
 
 " HTML & CSS & Others
 Plugin 'kchmck/vim-coffee-script'
@@ -48,19 +45,21 @@ Plugin 'tpope/vim-haml'
 " Swift & Cocoa
 Plugin 'keith/swift.vim'
 
+" Go
+Plugin 'fatih/vim-go'
+
 " Markdown etc.
 Plugin 'tpope/vim-markdown'
 Plugin 'duwanis/tomdoc.vim'
+Plugin 'kylef/apiblueprint.vim'
 
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/base16-vim'
-Plugin 'joedicastro/vim-github256'
-Plugin '29decibel/codeschool-vim-theme'
 
 " Experimental
 Plugin 'szw/vim-tags'
 Plugin 'tpope/vim-rbenv'
+Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,7 +93,12 @@ call togglebg#map("<F5>")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GitHub
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" colorscheme github256
+" colorscheme github
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AIRLINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -103,7 +107,6 @@ filetype plugin indent on
 syntax on
 
 set autoindent
-set nocursorcolumn
 set backspace=indent,eol,start
 set cmdheight=1
 set encoding=utf-8
@@ -115,7 +118,6 @@ set ignorecase smartcase
 set incsearch
 set laststatus=2
 set history=2000
-set nolazyredraw
 set noshowcmd
 set nosmarttab
 set nostartofline
@@ -123,10 +125,10 @@ set nowrap
 set number
 set report=0
 set scrolloff=3
+set scrolljump=8
 set shell=zsh
 set shiftwidth=2
 set shortmess=filtIoOA
-set showmatch
 set showtabline=1
 set smartindent
 set softtabstop=2
@@ -136,6 +138,14 @@ set virtualedit=block
 set whichwrap+=<,>,h,l,[,]
 set wildmenu
 set wildmode=longest,list
+
+" Performance stuff
+set nocursorcolumn
+set nocursorline
+set lazyredraw
+let loaded_matchparen=1
+let html_no_rendering=1
+set noshowmatch
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -164,13 +174,6 @@ augroup vimrcEx
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
 augroup END
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TABS N SHIT | TODO: Add shortcuts to jump to specific tabs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-t> :tabnew<CR>
-map <C-l> :tabnext<CR>
-map <C-h> :tabprev<CR>
 
 " ----------------------------------------------------------------------------
 " REMAPPING
@@ -215,6 +218,15 @@ map <leader>V :view %%
 
 " Search for open Todos inside the directory structure
 map <leader>N :Ack --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFERS N SHIT, BECAUSE FUCK TABS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-t> :enew<CR>
+map <C-l> :bnext<CR>
+map <C-h> :bprevious<CR>
+map <leader>x :bp <BAR> bd #<CR>
+map <leader>bl :ls<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Control P
@@ -336,6 +348,7 @@ map <leader>ts :vsp <CR>:exec("tag " .expand("<cword>"))<CR>
 map <Leader>TT :TagsGenerate!<CR>
 map <Leader>tt :TagsGenerate<CR>
 set tags+=./tags;
+let g:vim_tags_auto_generate = 0
 
 map <leader>da :Dash<CR>
 
