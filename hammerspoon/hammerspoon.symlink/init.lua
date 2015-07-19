@@ -1,6 +1,6 @@
 -- Main Configuration
 hs.window.animationDuration = 0         -- Do not animate window movements
-hs.mainModifierKeys = {"ctrl", "cmd"}   -- Variable that holds the main modifier keys !!IMPORTANT!!
+hs.mainModifierKeys = {"alt", "cmd"}   -- Variable that holds the main modifier keys !!IMPORTANT!!
 
 -- Load Extensions
 local application = require "hs.application"
@@ -16,7 +16,8 @@ local appfinder = require "hs.appfinder"
 
 -- Load custom Modules
 require('modules/windows')
-require('modules/caffeine/caffeine')
+require('modules/shortcuts')
+-- require('modules/caffeine/caffeine')
 
 -- Hotkey Hints
 hotkey.bind(hs.mainModifierKeys,"s",hints.windowHints)
