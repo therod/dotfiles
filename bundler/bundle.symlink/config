@@ -1,3 +1,6 @@
 ---
 BUNDLE_PATH: ".bundle"
 BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
+BUNDLE_GEM__COC: 0
+BUNDLE_GEM__MIT: 0
+BUNDLE_GEM__TEST: minitest
