@@ -6,11 +6,11 @@ alias edot='vim $ZSH'
 alias dotcd='cd $ZSH'
 
 # edit vim stuff
+alias vim='nvim'
 alias evimrc='vim $ZSH/vim/vimrc.symlink'
-alias vim='mvim -v'
 
 # editors
-alias m='mvim -v'
+alias ovim='mvim -v'
 
 # change vim background color
 alias darkvim="echo 'set background=dark' > ~/.vim/plugin/background-color.vim"
