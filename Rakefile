@@ -76,7 +76,6 @@ task :dependencies do
     "curl",
     "rbenv",
     "ruby-build",
-    "vim --override-system-vi"
   ]
 
   brew_recipes.each do |recipe|
