@@ -1,0 +1,487 @@
+#!/usr/bin/python
+#
+# Copyright (C) 2008 Henri Hakkinen
+#
+# Modified (2015) by Arun Prakash Jana <engineerarun@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from __future__ import print_function
+import sys
+import os
+import termios
+import fcntl
+import struct
+import webbrowser
+from getopt import getopt, GetoptError
+import readline
+# Try to load Py3 modules, on error fall back to Py2 module names
+try:
+    import html.parser as HTMLParser
+    from urllib.parse import urljoin, quote_plus, unquote
+    from http.client import HTTPSConnection
+except ImportError:
+    import HTMLParser
+    from urlparse import urljoin
+    from urllib import quote_plus, unquote
+    from httplib import HTTPSConnection
+
+# Global variables
+columns = None    # Terminal window size.
+start = "0"     # The first result to display (option -s)
+num = None    # Number of results to display (option -n)
+lang = None    # Language to search for (option -l)
+openUrl = False   # If True, opens the first URL in browser (option -j)
+colorize = True    # If True, colorizes the output (option -C)
+duration = None    # Time limit search (option -t) [e.g. h5, d5, w5, m5, y5]
+conn = None    # Use a single global connection during navigation
+nav = "n"     # For user navigation
+server = "www.google.com"    # For country-specific search
+debug = False   # Print debug logs
+news = False   # Read news
+
+# Classes
+
+
+class GoogleParser(HTMLParser.HTMLParser):
+
+    def __init__(self):
+        HTMLParser.HTMLParser.__init__(self)
+        self.handle_starttag = self.main_start
+        self.handle_data = self.main_data
+        self.handle_endtag = self.main_end
+        self.results = []
+
+    def main_start(self, tag, attrs):
+        if tag == "li" and len(attrs) > 0 and attrs[0] == ("class", "g"):
+            self.title = ""
+            self.url = ""
+            self.text = ""
+            self.handle_starttag = self.li_start
+            self.handle_data = self.li_data
+            self.handle_endtag = self.li_end
+
+    def main_data(self, data):
+        pass
+
+    def main_end(self, tag):
+        pass
+    # <li class="g"> ... </li>
+
+    def li_start(self, tag, attrs):
+        if tag == "h3":
+            self.handle_starttag = self.h3_start
+            self.handle_data = self.h3_data
+            self.handle_endtag = self.h3_end
+        elif tag == "div" and len(attrs) > 0 and attrs[0] == ("class", "s"):
+            self.handle_starttag = self.div_start
+            self.handle_data = self.div_data
+            self.handle_endtag = self.div_end
+
+    def li_data(self, data):
+        pass
+
+    def li_end(self, tag):
+        if tag == "div":
+            marker = self.url.find("?q=")
+            if marker >= 0:
+                self.url = self.url[marker + 3:]
+            marker = self.url.find("&sa")
+            if marker >= 0:
+                self.url = self.url[:marker]
+
+            if self.url != "":
+                index = len(self.results) + 1
+                self.results.append(Result(index, self.title,
+                                    unquote(self.url), self.text))
+            self.handle_starttag = self.main_start
+            self.handle_data = self.main_data
+            self.handle_endtag = self.main_end
+    # <h3> ... </h3>
+
+    def h3_start(self, tag, attrs):
+        if tag == "a":
+            self.url = attrs[0][1]
+
+    def h3_data(self, data):
+        self.title += data
+
+    def h3_end(self, tag):
+        if tag == "h3":
+            self.handle_starttag = self.li_start
+            self.handle_data = self.li_data
+            self.handle_endtag = self.li_end
+    # <div> ... </div>
+
+    def div_start(self, tag, attrs):
+        if tag == "span" and len(attrs) > 0 and attrs[0] == ("class", "st"):
+            self.handle_starttag = self.span_start
+            self.handle_data = self.span_data
+            self.handle_endtag = self.span_end
+
+    def div_data(self, data):
+        pass
+
+    def div_end(self, tag):
+        pass
+
+    def span_start(self, tag, start):
+        pass
+
+    def span_data(self, data):
+        self.text += data
+
+    def span_end(self, tag):
+        if tag == "span":
+            self.handle_starttag = self.li_start
+            self.handle_data = self.li_data
+            self.handle_endtag = self.li_end
+
+
+class Result:
+
+    def __init__(self, index, title, url, text):
+        self.index = index
+        self.title = title
+        self.url = url
+        self.text = text
+
+    def print_entry(self):
+        index = self.index
+        title = self.title
+        url = self.url
+        text = self.text
+
+        # Clean up URL for cases like %22 changed to %2522
+        url = unquote(url)
+        url = url.replace("%22", "\"")
+
+        # Open the URL in a web browser if option -j was specified.
+        if openUrl:
+            # If empty URL, like first result of 'define hello', just print the result
+            if url == "":
+                print("Showing in console as URL is empty\n")
+            else:
+                self.open()
+                conn.close()
+                sys.exit(0)
+        # Print the title and the URL.
+        if colorize:
+            print("\x1B[1m\x1B[36m", index, "\x1B[92m", title,
+                  "\x1B[0m\n\x1B[93m%s\x1B[39m" % url)
+        else:
+            print("", index, title, "\n%s" % url)
+        # Print the text with truncating.
+        if columns > 0:
+            col = 0
+            for w in text.split():
+                if (col + len(w) + 1) > columns:
+                    col = 0
+                    print()
+                print(w, end=' ')
+                col += len(w) + 1
+            print("\n")
+        else:
+            print("%s\n" % text.replace("\n", " "))
+
+    def open(self):
+        _stderr = os.dup(2)
+        os.close(2)
+        _stdout = os.dup(1)
+        os.close(1)
+        fd = os.open(os.devnull, os.O_RDWR)
+        os.dup2(fd, 2)
+        os.dup2(fd, 1)
+        try:
+            webbrowser.open(self.url)
+        finally:
+            os.close(fd)
+            os.dup2(_stderr, 2)
+            os.dup2(_stdout, 1)
+
+# Functions
+
+
+def is_int(string):
+    try:
+        int(string)
+        return True
+    except:
+        return False
+
+
+def usage():
+    print("Usage: googler [OPTIONS] KEYWORDS...")
+    print("Performs a Google search and prints the results to stdout.\n")
+    print("Options")
+    print("  -s N     start at the Nth result")
+    print("  -n N     show N results (default 10)")
+    print("  -N       show results from news section")
+    print("  -c SERV  country-specific search (refer man or project page for" +
+          " details)")
+    print("  -l LANG  display in language LANG, such as fi for Finnish")
+    print("  -C       disable color output")
+    print("  -j       open the first result in a web browser")
+    print("  -t dN    time limit search [h5 (5 hrs), d5 (5 days), " +
+          "w5 (5 weeks), m5 (5 months), y5 (5 years)]")
+    print("  -d       enable debugging\n")
+    print("Keys")
+    print("  g terms  enter 'g' followed by keywords to initiate a new " +
+          "search (with original options)")
+    print("  n, p     enter 'n' or 'p' to navigate forward or backward")
+    print("  1-N      enter a number to open that result in browser")
+    print("           any other input exits googler\n")
+    print("Version 1.9")
+    print("Copyright (C) 2008 Henri Hakkinen.")
+    print("Modified (2015) by Arun Prakash Jana <engineerarun@gmail.com>")
+    print("Webpage: https://github.com/jarun/google-cli")
+    sys.exit(1)
+
+
+def serverURL(domain):
+    # Google domain ref: https://en.wikipedia.org/wiki/List_of_Google_domains
+    # www.google.co.domain
+    if domain in ["id", "in", "jp", "kr", "uk"]:
+        return "www.google.co." + domain
+    if domain in ["be", "ca", "ch", "cz", "de", "es", "fi", "fr", "it", "nl",
+                  "pl", "pt", "ro", "ru", "se"]:    # www.google.domain
+        return "www.google." + domain
+    # www.google.com.domain
+    if domain in ["ar", "au", "br", "mx", "ph", "tw", "ua"]:
+        return "www.google.com." + domain
+
+    return "www.google.com"
+
+# Program Main
+
+# Process command line options.
+optlist = None
+keywords = None
+
+if len(sys.argv) < 2:
+    usage()
+
+try:
+    optlist, keywords = getopt(sys.argv[1:], "s:n:c:l:t:NCjd")
+    for opt in optlist:
+        if opt[0] == "-s":
+            # Option -s N
+            if not opt[1].isdigit():
+                print("googler: option -s needs an integer")
+                sys.exit(1)
+            start = opt[1]
+        elif opt[0] == "-n":
+            # Option -n N
+            if not opt[1].isdigit():
+                print("googler: option -n needs an integer")
+                sys.exit(1)
+            num = opt[1]
+        elif opt[0] == "-N":
+            news = True
+        elif opt[0] == "-c":
+            server = serverURL(opt[1])
+        elif opt[0] == "-l":
+            # Option -l LANG
+            lang = opt[1]
+        elif opt[0] == "-C":
+            # Option -C
+            colorize = False
+        elif opt[0] == "-j":
+            # Option -j
+            openUrl = True
+            if num is None:
+                num = "1"
+        elif opt[0] == "-t":
+            # Option -t dN
+            duration = opt[1]
+            if not opt[1][0] in ("h", "d", "w", "m", "y",):
+                usage()
+                sys.exit(1)
+            if not opt[1][1].isdigit():
+                usage()
+                sys.exit(1)
+        elif opt[0] == "-d":
+            debug = True
+    if len(keywords) < 1:
+        usage()
+except GetoptError as e:
+    print("googler:", e)
+    sys.exit(1)
+
+# Construct the query URL.
+url = "/search?ie=UTF-8&oe=UTF-8&"
+
+if start is not None:
+    url += "start=" + start + "&"
+if num is not None:
+    url += "num=" + num + "&"
+if news:
+    url += "tbm=nws&"
+if lang is not None:
+    url += "hl=" + lang + "&"
+if duration is not None:
+    url += "tbs=qdr:" + duration + "&"
+
+baseurl = url
+basestart = start
+
+if debug:
+    print("[DEBUG] Base URL [%s]" % url)
+
+url += "q=" + quote_plus(keywords[0])
+for kw in keywords[1:]:
+    url += "+" + quote_plus(kw)
+
+if debug:
+    print("[DEBUG] Search URL [%s : %s]" % (server, url))
+
+# Get the terminal window size.
+winsz = fcntl.ioctl(sys.stderr, termios.TIOCGWINSZ, "1234")
+columns = struct.unpack("HH", winsz)[1]
+
+if columns <= 0:
+    columns = int(os.environ.get('COLUMNS', 0))
+
+# Connect to Google and request the result page.
+conn = HTTPSConnection(server, timeout=45)
+
+
+def fetch_results():
+    global conn
+    global url
+
+    try:
+        conn.request("GET", url)
+        resp = conn.getresponse()
+    except Exception as e:
+        if debug:
+            print("[DEBUG] Exception: %s" % e)
+        conn.close()
+        conn = HTTPSConnection(server, timeout=45)
+        conn.request("GET", url)
+        resp = conn.getresponse()
+
+    if resp.status != 200:
+        if resp.status in (301, 302,):
+            url = urljoin(url, resp.getheader('location', ''))
+            if debug:
+                print("[DEBUG] Redirected URL [%s]" % url)
+            if url.find("sorry/IndexRedirect?") >= 0:
+                print("ERROR: Connection blocked due to unusual activity.")
+                conn.close()
+                sys.exit(1)
+            conn.close()
+            if debug:
+                print("[DEBUG] Next Server [%s]" % url[url.find("//") +
+                      2:url.find("/search")])
+            conn = HTTPSConnection(url[url.find("//") + 2:url.find("/search")],
+                                   timeout=45)
+            url = url[url.find("/search"):]
+            if debug:
+                print("[DEBUG] Next GET [%s]\n" % url)
+
+            try:
+                conn.request("GET", url)
+                resp = conn.getresponse()
+            except Exception as e:
+                print("[DEBUG] Exception: %s" % e)
+                conn.close()
+                sys.exit(1)
+
+            if resp.status != 200:
+                # Failed connecting to redirected server too!
+                print("ERROR after 1st redirection:", str(resp.status), ": ",
+                      resp.reason)
+                conn.close()
+                sys.exit(1)
+        else:
+            # The server responded with an error.
+            print("ERROR:", str(resp.status), ": ", resp.reason)
+            conn.close()
+            sys.exit(1)
+
+    # Parse the HTML document and print the results.
+    parser = GoogleParser()
+    if sys.version_info > (3,):
+        parser.feed(resp.read().decode('utf-8'))
+    else:
+        parser.feed(resp.read())
+
+    results = parser.results
+    for r in results:
+        r.print_entry()
+    return results
+
+
+results = []
+while True:
+    if nav == "n" or nav == "p" or nav == "g":
+        results = fetch_results()
+
+    oldstart = start
+    if sys.version_info > (3,):
+        nav = input("Enter 'n', 'p', 'g keywords', or number to continue: ")
+    else:
+        nav = raw_input("Enter 'n', 'p', 'g keywords' or number to continue: ")
+
+    if nav == "n":
+        if num is not None:
+            start = str(int(start) + int(num))
+        else:
+            start = str(int(start) + 10)
+        print("\n\x1B[91m\x1B[1m     *****     *****     *****     *****\
+                \x1B[0m\n")
+    elif nav == "p":
+        if num is not None:
+            start = str(int(start) - int(num))
+        else:
+            start = str(int(start) - 10)
+        print("\n\x1B[91m\x1B[1m     *****     *****     *****     *****\
+                \x1B[0m\n")
+    elif len(nav) > 2 and nav[0] == "g" and nav[1] == " ":
+        trimsearch = nav[2:].strip().replace(" ", "+")
+        if trimsearch == "":
+            print("Empty search. Exiting.")
+            break
+        url = baseurl + "q=" + trimsearch
+        if debug:
+            print("New search URL [%s]" % url)
+        nav = "g"
+        start = basestart
+        print("\n\x1B[91m\x1B[1m     *****     *****     *****     *****\
+                \x1B[0m\n")
+        continue
+    elif is_int(nav):
+        index = int(nav) - 1
+        if index < 0:
+            print("Index out of bound.")
+            continue
+
+        try:
+            results[index].open()
+        except IndexError:
+            print("Index out of bound.")
+
+        continue
+    else:
+        break
+
+    if int(start) < 0:
+        start = "0"
+
+    url = url.replace("start=" + oldstart + "&", "start=" + start + "&", 1)
+    if debug:
+        print("[DEBUG] Next URL [%s]\n" % url)
+
+conn.close()

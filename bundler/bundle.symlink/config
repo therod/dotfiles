@@ -1,6 +1,7 @@
 ---
-BUNDLE_PATH: ".bundle"
+BUNDLE_PATH: "~/.bundle_cache"
 BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
-BUNDLE_GEM__COC: 0
-BUNDLE_GEM__MIT: 0
+BUNDLE_GEM__COC: '0'
+BUNDLE_GEM__MIT: '0'
 BUNDLE_GEM__TEST: minitest
+BUNDLE_BUILD__EVENTMACHINE: "--with-cppflags=-I/usr/local/opt/openssl/include"

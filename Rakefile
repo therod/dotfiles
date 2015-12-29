@@ -76,6 +76,7 @@ task :dependencies do
     "curl",
     "rbenv",
     "ruby-build",
+    "rbenv-readline",
   ]
 
   brew_recipes.each do |recipe|

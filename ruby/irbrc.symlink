@@ -1,7 +1,8 @@
+require 'irb/ext/save-history'
 require 'irb/completion'
 
-IRB.conf[:EVAL_HISTORY] = 2000
 IRB.conf[:SAVE_HISTORY] = 2000
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+IRB.conf[:HISTORY_FILE] = "/Users/rodrigo/.irb_history"
+IRB.conf[:EVAL_HISTORY] = 2000
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
