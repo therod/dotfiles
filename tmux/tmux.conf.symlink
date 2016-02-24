@@ -60,11 +60,12 @@ set-option -g pane-border-fg white
 set-option -g pane-active-border-fg white
 set -g status-bg black
 set -g status-fg white
-set -g status-interval 0
+set -g status-interval 30
 set -g status-left-length 80
 set -g status-left ""
 set -g status-right-length 45
-set -g status-right "20 / 80"
+set -g status-right 'Battery: #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
+
 
 set-window-option -g window-status-current-fg colour166 #orange
 set-option -g pane-border-fg colour235 #base02
@@ -76,3 +77,18 @@ bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
 bind C-y run "tmux show-buffer | xclip -i"
 # set -g default-terminal 'screen-it'
 # set -g status off
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-urlview'
+
+# Restore tmux sessions examples:
+# set -g @continuum-restore 'on'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+

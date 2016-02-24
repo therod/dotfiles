@@ -18,6 +18,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
 
 " Utils
 " Plugin 'vim-scripts/taglist.vim'
@@ -48,6 +50,9 @@ Plugin 'keith/swift.vim'
 " Go
 Plugin 'fatih/vim-go'
 
+" Node / Jade
+Plugin 'digitaltoad/vim-jade'
+
 " Markdown etc.
 Plugin 'tpope/vim-markdown'
 Plugin 'duwanis/tomdoc.vim'
@@ -58,6 +63,7 @@ Plugin 'altercation/vim-colors-solarized'
 
 " Experimental
 Plugin 'bling/vim-bufferline'
+Plugin 'bronson/vim-trailing-whitespace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -142,6 +148,7 @@ augroup vimrcEx
 
   "leader-r mappings for different languages
   let g:vroom_map_keys = 0 "Disable Vroom
+  let g:vroom_use_colors = 1
 
   " Ruby
   autocmd Filetype ruby map <leader>r :VroomRunTestFile<CR>
@@ -177,6 +184,8 @@ vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 
+
+
 " Insert a hash rocket with <c-l>
 imap <c-l> <space>=><space>
 
@@ -186,7 +195,7 @@ map <leader>e :edit %%
 map <leader>V :view %%
 
 " Search for open Todos inside the directory structure
-map <leader>N :Ack --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+map <leader>N :Ag --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
 
 " ----------------------------------------------------------------------------
 " BUFFERS N SHIT, BECAUSE FUCK TABS
@@ -201,14 +210,23 @@ map <leader>bl :ls<CR>
 " Control P
 " ----------------------------------------------------------------------------
 set wildignore+=*/vendor/rails/*
+set wildignore+=*/public/system/*
+set wildignore+=*/vendor/rails/*
 set wildignore+=*/.bundle/*
 set wildignore+=*/tmp/*
 set wildignore+=*/build/*
+set wildignore+=*/node_modules/*
 " set wildignore+=*/public/*
 let g:ctrlp_match_window = 'bottom'
 let g:ctrlp_use_caching = 0 "Do not use caching
 let g:ctrlp_max_height = 20 "Display 20 results
 let g:ctrlp_show_hidden = 0 "Do not scan for dotfiles and dotdirs
+
+" ----------------------------------------------------------------------------
+" NERDTree
+" ----------------------------------------------------------------------------
+map <leader>n :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
 
 " ----------------------------------------------------------------------------
 " GO

@@ -1,5 +1,5 @@
 ---
-BUNDLE_PATH: "~/.bundle_cache"
+BUNDLE_PATH: ".bundle"
 BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
 BUNDLE_GEM__COC: '0'
 BUNDLE_GEM__MIT: '0'
