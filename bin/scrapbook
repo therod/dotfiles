@@ -1,0 +1,6 @@
+#!/bin/sh
+cd /tmp
+
+webkit2png -W 900 -o sitegrab $1  --ignore-ssl-check
+
+osascript -e "tell application \"Evernote\" to create note title \"$1\" from file \"/tmp/sitegrab-full.png\" notebook \"Scrapbook\""
