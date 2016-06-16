@@ -61,13 +61,13 @@ Plugin 'kylef/apiblueprint.vim'
 
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'NLKNguyen/papercolor-theme'
 
 " Experimental
 Plugin 'bling/vim-bufferline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,10 +78,10 @@ filetype plugin indent on    " required
 " ----------------------------------------------------------------------------
 set t_Co=256
 let g:solarized_termcolor=256
-colorscheme PaperColor
+colorscheme Solarized
 
-let g:airline_theme='PaperColor'
-let g:lightline = { 'colorscheme': 'PaperColor' }
+let g:airline_theme='solarized'
+let g:lightline = { 'colorscheme': 'solarized' }
 call togglebg#map("<F5>")
 so ~/.vim/plugin/background-color.vim
 
@@ -216,10 +216,22 @@ map <leader>bl :ls<CR>
 " ----------------------------------------------------------------------------
 " Airline
 " ----------------------------------------------------------------------------
+" set noshowmode
 let g:airline_powerline_fonts=1
-set noshowmode
+
+let g:bufferline_echo = 1
+
+let g:airline_section_c = ''
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
 
+" ----------------------------------------------------------------------------
+" Commentary
+" ----------------------------------------------------------------------------
+
+map // :Commentary<CR>
 " ----------------------------------------------------------------------------
 " Control P
 " ----------------------------------------------------------------------------
