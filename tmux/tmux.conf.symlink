@@ -6,7 +6,7 @@ unbind C-b
 set-option -g prefix C-a
 
 # General configuration
-set-window-option -g utf8 on # utf8 support
+#set-window-option -g utf8 on # utf8 support
 # set-window-option -g mode-mouse off # disable mouse
 set -sg escape-time 1
 
