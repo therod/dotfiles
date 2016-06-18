@@ -7,7 +7,7 @@ alias dotcd='cd $ZSH'
 
 # edit vim stuff
 alias vim='nvim'
-alias evimrc='vim $ZSH/vim/vimrc.symlink'
+alias evimrc='vim $ZSH/nvim/init.vim'
 
 # editors
 alias ovim='mvim -v'

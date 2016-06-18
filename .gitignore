@@ -1,5 +1,6 @@
 .DS_Store
 .netrwhist
-vim/vim.symlink/plugin/background-color.vim
-vim/vim.symlink/bundle/*
+nvim/plugin/background-color.vim
+nvim/bundle/*
+nvim/plugged/*
 bundler/bundle.symlink/cache*
