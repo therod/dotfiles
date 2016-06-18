@@ -65,7 +65,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 
 " All of your Plugs must be added before the following line
-" call vundle#end()            " required
 call plug#end()
 filetype plugin indent on    " required
 
