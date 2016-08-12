@@ -13,8 +13,8 @@ alias evimrc='vim $ZSH/nvim/init.vim'
 alias ovim='mvim -v'
 
 # change vim background color
-alias darkvim="echo 'set background=dark' > ~/.vim/plugin/background-color.vim"
-alias lightvim="echo 'set background=light' > ~/.vim/plugin/background-color.vim"
+alias darkvim="echo 'set background=dark' > ~/.config/nvim/plugin/background-color.vim"
+alias lightvim="echo 'set background=light' > ~/.config/nvim/plugin/background-color.vim"
 
 #ack madness!
 alias ack='ack --pager="less -FRSX"'

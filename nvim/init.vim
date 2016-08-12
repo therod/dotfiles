@@ -22,7 +22,6 @@ Plug 'szw/vim-tags'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'tpope/vim-surround'
-Plug 'rizzatti/dash.vim'
 Plug 'godlygeek/tabular'
 
 " Ruby & Rails
@@ -56,13 +55,14 @@ Plug 'kylef/apiblueprint.vim'
 
 " Colorschemes
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 
 " Experimental
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'airblade/vim-gitgutter'
 
 " All of your Plugs must be added before the following line
 call plug#end()
@@ -73,7 +73,8 @@ filetype plugin indent on    " required
 " ----------------------------------------------------------------------------
 set t_Co=256
 let g:solarized_termcolor=256
-colorscheme Solarized
+colorscheme gruvbox
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 let g:airline_theme='solarized'
 let g:lightline = { 'colorscheme': 'solarized' }
@@ -241,7 +242,7 @@ set wildignore+=*/build/*
 set wildignore+=*/node_modules/*
 " set wildignore+=*/public/*
 let g:ctrlp_match_window = 'bottom'
-let g:ctrlp_use_caching = 0 "Do not use caching
+let g:ctrlp_use_caching = 1 "Use caching
 let g:ctrlp_max_height = 20 "Display 20 results
 let g:ctrlp_show_hidden = 0 "Do not scan for dotfiles and dotdirs
 
