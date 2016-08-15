@@ -60,6 +60,7 @@ Plug 'morhetz/gruvbox'
 " Experimental
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'junegunn/goyo.vim'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'airblade/vim-gitgutter'
@@ -119,6 +120,9 @@ set virtualedit=block
 set whichwrap+=<,>,h,l,[,]
 set wildmenu
 set wildmode=longest,list
+set colorcolumn=80
+" let &colorcolumn=join(range(81,999),",")
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 " Performance stuff
 set nocursorcolumn
@@ -136,6 +140,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " CUSTOM AUTOCMDS
 " ----------------------------------------------------------------------------
 augroup vimrcEx
+
   " Clear all autocmds in the group
   autocmd!
   autocmd FileType text setlocal textwidth=78
@@ -242,7 +247,7 @@ set wildignore+=*/build/*
 set wildignore+=*/node_modules/*
 " set wildignore+=*/public/*
 let g:ctrlp_match_window = 'bottom'
-let g:ctrlp_use_caching = 1 "Use caching
+let g:ctrlp_use_caching = 0 "Use caching
 let g:ctrlp_max_height = 20 "Display 20 results
 let g:ctrlp_show_hidden = 0 "Do not scan for dotfiles and dotdirs
 
