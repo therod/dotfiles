@@ -122,7 +122,9 @@ if has("nvim")
   set termguicolors
 end
 
-colorscheme base16-ocean
+if filereadable(expand("~/.vimrc_background"))
+  source ~/.vimrc_background
+endif
 
 " ----------------------------------------------------------------------------
 " CUSTOM AUTOCMDS
