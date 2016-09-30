@@ -99,20 +99,20 @@ set_prompt () {
   local -A pc
   pc[divider]='black'
   pc[default]='default'
-  pc[host]='Green'
+  pc[host]='Black'
   pc[shortpath]='default'
-  pc[#]='Yellow'
+  pc[#]='Red'
   for cn in ${(k)pc}; do
     pc[${cn}]=$(colorword $pc[$cn])
   done
   pc[reset]=$(colorword . . 00)
 
   PROMPT="%{$reset_color%}"
-  PROMPT+="$pc[host]%m%{$reset_color%}"
-  PROMPT+=":$pc[shortpath]%1~%{$reset_color%}"
+  PROMPT+="$pc[host]%m%{$reset_color%} "
+  PROMPT+="$pc[shortpath]%~%{$reset_color%} "
   PROMPT+="$(git_dirty)%{$reset_color%}"
   PROMPT+="$(need_push)%{$reset_color%}"
-  PROMPT+=" $pc[#]\$%{$reset_color%} "
+  PROMPT+="$pc[#]>%{$reset_color%} "
 
   export PROMPT RPROMPT
 }
