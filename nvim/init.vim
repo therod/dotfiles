@@ -233,18 +233,9 @@ let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V'
 map // :Commentary<CR>
 
 " FZF
+" Ignore rules can be changed in .zshrc. Read more here:
+" https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
 nnoremap <C-p> :FZF<cr>
-" TODO add wildignore stuff
-" set wildignore+=*/web/*
-" set wildignore+=*/public/assets/*
-" set wildignore+=*/vendor/rails/*
-" set wildignore+=*/public/system/*
-" set wildignore+=*/vendor/rails/*
-" set wildignore+=*/.bundle/*
-" set wildignore+=*/tmp/*
-" set wildignore+=*/build/*
-" set wildignore+=*/node_modules/*
-" set wildignore+=*/public/*
 
 " NERDTree
 map <leader>n :NERDTreeToggle<CR>
