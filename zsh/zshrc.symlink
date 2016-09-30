@@ -37,3 +37,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### Fix SSH Locales error
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+### FZF Config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
