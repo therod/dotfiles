@@ -10,7 +10,6 @@ coloratom() {
 	fi
 	echo $(( $off + $colorcode[${(L)atom}] ))
 }
-
 colorword() {
 	local fg=$1 bg=$2 att=$3
 	local -a s
@@ -50,11 +49,6 @@ git_dirty() {
 git_prompt_info () {
  ref=$(/usr/bin/env git symbolic-ref HEAD 2>/dev/null) || return
   echo "${ref#refs/heads/}"
-}
-
-project_name () {
-  name=$(pwd | awk -F'Development/' '{print $2}' | awk -F/ '{print $1}')
-  echo $name
 }
 
 project_name_color () {
@@ -118,6 +112,15 @@ set_prompt () {
 }
 
 precmd() {
-  title "zsh" "%d" "%55<...<%~"
+  # title "zsh" "%d" "%55<...<%~"
+  # sets the tab title to current dir
+  echo -ne "\e]1;${PWD##*/}\a"
   set_prompt
+}
+update_terminal_cwd ()
+{
+    local SEARCH=' ';
+    local REPLACE='%20';
+    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
+    printf '\e]7;%s\a' "$PWD_URL"
 }
