@@ -1,3 +1,6 @@
+**Note:** I've made a lot of changes over the years and the
+installation-guide is outdated for now. I'll update it when I have time
+
 ## Installation
 
 - `git clone git://github.com/therod/dotfiles ~/.dotfiles`
@@ -33,10 +36,6 @@ There's a few special files in the hierarchy.
   symlinked in when you run `rake install`.
 - **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
   last so that they get loaded after we set up zsh autocomplete functions.
-
-## VIM
-
-Plugins are installed using [Vundle](https://github.com/gmarik/vundle).
 
 ## Special Thanks
 
