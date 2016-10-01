@@ -102,7 +102,6 @@ set wildmode=longest,list
 set colorcolumn=80
 
 " Performance stuff
-" TODO: Unterline current cursor location
 set nocursorcolumn
 set nocursorline
 set lazyredraw
