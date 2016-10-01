@@ -9,13 +9,6 @@ alias dotcd='cd $ZSH'
 alias vim='nvim'
 alias evimrc='vim $ZSH/nvim/init.vim'
 
-# editors
-alias ovim='mvim -v'
-
-# change vim background color
-alias darkvim="echo 'set background=dark' > ~/.config/nvim/plugin/background-color.vim"
-alias lightvim="echo 'set background=light' > ~/.config/nvim/plugin/background-color.vim"
-
 #ack madness!
 alias ack='ack --pager="less -FRSX"'
 alias aack="ack --all"
@@ -36,9 +29,6 @@ alias hi="history 1 | grep $*"
 alias ctags="ctags -R --exclude=.git --exclude=log *"
 
 alias reload!='. ~/.zshrc'
-
-# Tmuxinator
-alias tx="tmuxinator"
 
 # top
 alias ttop="top -F -R -o cpu -s 2"
