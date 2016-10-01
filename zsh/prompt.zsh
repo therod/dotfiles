@@ -112,11 +112,10 @@ set_prompt () {
 }
 
 precmd() {
-  # title "zsh" "%d" "%55<...<%~"
-  # sets the tab title to current dir
-  echo -ne "\e]1;${PWD##*/}\a"
+  title ${PWD##*/}
   set_prompt
 }
+
 update_terminal_cwd ()
 {
     local SEARCH=' ';
