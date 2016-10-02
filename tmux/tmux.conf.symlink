@@ -9,8 +9,8 @@ set-option -g prefix C-a
 set -sg escape-time 1
 
 # Monitor window activity
-setw -g monitor-activity on
-set -g visual-activity on
+setw -g monitor-activity off
+set -g visual-activity off
 
 # Don't start with 0 for indexes
 set -g base-index 1
