@@ -1,6 +1,6 @@
 # Sets reasonable OS X defaults.
 #
-# Run ./set-defaults.sh 
+# Run ./set-defaults.sh
 
 # Use AirDrop over every interface. srsly this should be a default.
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
