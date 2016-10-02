@@ -21,6 +21,7 @@ Plug 'tpope/vim-endwise'
 
 " Colorschemes
 Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
 
 " Writing & ORG
 Plug 'vimwiki/vimwiki'
@@ -70,7 +71,6 @@ set foldlevelstart=20
 set autoindent
 set backspace=indent,eol,start
 set cmdheight=1
-set encoding=utf-8
 set expandtab
 set formatoptions+=n
 set hidden
@@ -227,6 +227,9 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
+let g:airline_section_z = ''
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
 
 " Commentary
 map // :Commentary<CR>
