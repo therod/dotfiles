@@ -12,7 +12,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export ZSH=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-export PROJECTS=~/code
+export PROJECTS=$HOME/code
 
 # source every .zsh file in this rep
 for config_file ($ZSH/**/*.zsh) source $config_file

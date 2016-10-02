@@ -9,12 +9,6 @@ alias dotcd='cd $ZSH'
 alias vim='nvim'
 alias evimrc='vim $ZSH/nvim/init.vim'
 
-#ack madness!
-alias ack='ack --pager="less -FRSX"'
-alias aack="ack --all"
-alias rack="ack --ruby --follow"
-alias jack="ack --js"
-alias pack="ack --python"
 alias l="ls -lah"
 
 # Push and pop it
