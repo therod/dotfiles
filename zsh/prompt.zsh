@@ -35,7 +35,7 @@ git_dirty() {
   st=$(/usr/bin/env git status 2>/dev/null | tail -n 1)
   if [[ $st == "" ]]
   then
-    echo ""
+    echo "(%{$fg[red]%}$(git_prompt_info)%{$reset_color%}%{$fg[green]%} +%{$reset_color%})"
   else
     if [[ $st == "nothing to commit, working tree clean" ]]
     then
