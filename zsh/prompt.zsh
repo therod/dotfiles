@@ -32,12 +32,15 @@ git_branch() {
 }
 
 git_dirty() {
-  st=$(/usr/bin/env git status 2>/dev/null | tail -n 1)
+  st=$(/usr/bin/env git status 2>/dev/null | sed -n 2p)
   if [[ $st == "" ]]
   then
-    echo "(%{$fg[red]%}$(git_prompt_info)%{$reset_color%}%{$fg[green]%} +%{$reset_color%})"
+    echo ""
   else
-    if [[ $st == "nothing to commit, working tree clean" ]]
+    if [[ $st == "Changes to be committed:" ]]
+    then
+      echo "(%{$fg[red]%}$(git_prompt_info)%{$reset_color%}%{$fg[green]%} +%{$reset_color%})"
+    elif [[ $st == "nothing to commit, working tree clean" ]]
     then
       echo "(%{$fg[green]%}$(git_prompt_info)%{$reset_color%})"
     else
