@@ -27,30 +27,33 @@ colorword() {
 	echo "%{"$'\e['${(j:;:)s}m"%}"
 }
 
+if (( $+commands[git] ))
+then
+  git="$commands[git]"
+else
+  git="/usr/local/bin/git"
+fi
+
 git_branch() {
-  echo $(/usr/bin/env git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_dirty() {
-  st=$(/usr/bin/env git status 2>/dev/null | sed -n 2p)
-  if [[ $st == "" ]]
+  if $(! $git status -s &> /dev/null)
   then
     echo ""
   else
-    if [[ $st == "Changes to be committed:" ]]
+    if [[ $($git status --porcelain) == "" ]]
     then
-      echo "(%{$fg[red]%}$(git_prompt_info)%{$reset_color%}%{$fg[green]%} +%{$reset_color%})"
-    elif [[ $st == "nothing to commit, working tree clean" ]]
-    then
-      echo "(%{$fg[green]%}$(git_prompt_info)%{$reset_color%})"
+      echo "(%{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%})"
     else
-      echo "(%{$fg[red]%}$(git_prompt_info)%{$reset_color%})"
+      echo "(%{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%})"
     fi
   fi
 }
 
 git_prompt_info () {
- ref=$(/usr/bin/env git symbolic-ref HEAD 2>/dev/null) || return
+ ref=$($git symbolic-ref HEAD 2>/dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
@@ -60,7 +63,7 @@ project_name_color () {
 }
 
 unpushed () {
-  /usr/bin/env git cherry -v origin/$(git_branch) 2>/dev/null
+  $git cherry -v origin/$(git_branch) 2>/dev/null
 }
 
 need_push () {
