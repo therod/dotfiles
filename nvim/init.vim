@@ -48,12 +48,16 @@ Plug 'kchmck/vim-coffee-script'
 " Evaluating
 Plug 'godlygeek/tabular'
 Plug 'ap/vim-css-color'
+Plug 'neomake/neomake'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fishbullet/deoplete-ruby'
 
 " Experimental
 Plug 'junegunn/gv.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 
 " All of your Plugs must be added before the following line
 call plug#end()
@@ -66,7 +70,7 @@ filetype plugin indent on
 syntax on
 
 set mouse=""
-set foldmethod=syntax
+"set foldmethod=syntax
 set foldlevelstart=20
 set autoindent
 set backspace=indent,eol,start
@@ -150,6 +154,9 @@ augroup vimrcEx
   " Ruby
   autocmd Filetype ruby map <leader>r :VroomRunTestFile<CR>
   autocmd Filetype ruby map <leader>R :VroomRunNearestTest<CR>
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Go
   autocmd Filetype go map <leader>r :! go run %<CR>
@@ -230,6 +237,11 @@ let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V'
 let g:airline_section_z = ''
 let g:airline_right_alt_sep = ''
 let g:airline_right_sep = ''
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#show_buffers = 1
 
 " Commentary
 map // :Commentary<CR>
@@ -271,6 +283,32 @@ augroup pencil
   autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard'})
   autocmd FileType text         call pencil#init({'wrap': 'soft'})
 augroup END
+
+
+" ---------------------------------------------------------------------------
+" Neomake
+" ---------------------------------------------------------------------------
+autocmd! BufWritePost * Neomake
+
+" ---------------------------------------------------------------------------
+" Deoplete
+" ---------------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#disable_auto_complete = 1
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" deoplete tab-complete
+inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ deoplete#mappings#manual_complete()
+          function! s:check_back_space() abort "{{{
+          let col = col('.') - 1
+          return !col || getline('.')[col - 1]  =~ '\s'
+          endfunction"}}}
 
 " ---------------------------------------------------------------------------
 " VARIOUS

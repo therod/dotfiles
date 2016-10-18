@@ -29,3 +29,6 @@ alias ttop="top -F -R -o cpu -s 2"
 
 # kill it, kill it with fire
 alias fixairplay="sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`"
+
+alias mutt='cd ~/Desktop && mutt'
+alias ww='cd ~/vimwiki && vim ./index.wiki'
