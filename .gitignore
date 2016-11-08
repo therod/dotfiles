@@ -1,4 +1,6 @@
 .DS_Store
+mail
+bin/notmuch-mutt
 .netrwhist
 nvim/plugin/background-color.vim
 nvim/bundle/*
