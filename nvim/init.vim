@@ -9,18 +9,20 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Core
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'szw/vim-tags'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-commentary' " Do commenting with `gc`
+Plug 'tpope/vim-eunuch' " Unix sugar for vim
+Plug 'tpope/vim-fugitive' " Git addon for vim
+Plug 'rking/ag.vim' " The silver searcher
+Plug 'scrooloose/nerdtree' " Filetree
+Plug 'bronson/vim-trailing-whitespace' " Delete trailing whitespace with ,s
+Plug 'szw/vim-tags' " ctags for vim
+Plug 'tpope/vim-surround' " surround support
+Plug 'tpope/vim-endwise' " add end statements to ruby
+Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
+Plug 'mattn/webapi-vim' " used by gist-vim
 
 " Colorschemes
-Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim' " Base16 colorscheme system
 Plug 'morhetz/gruvbox'
 
 " Writing & ORG
@@ -29,7 +31,7 @@ Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 
 " Ruby
-Plug 'skalnik/vim-vroom'
+Plug 'skalnik/vim-vroom' " Run tests depending on environment
 Plug 'vim-ruby/vim-ruby'
 Plug 'sunaku/vim-ruby-minitest'
 Plug 'tpope/vim-rails'
@@ -46,18 +48,16 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 
 " Evaluating
-Plug 'godlygeek/tabular'
-Plug 'ap/vim-css-color'
-Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fishbullet/deoplete-ruby'
+Plug 'ervandew/supertab' " Super tabs
+Plug 'godlygeek/tabular' " :Tabularize /,/
+Plug 'ap/vim-css-color' " Adds inline colors for css like this: #ffffff
+Plug 'neomake/neomake' " Used to run Rubocop and highlight syntax errors
 
 " Experimental
-Plug 'junegunn/gv.vim'
+Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
+Plug 'hwartig/vim-seeing-is-believing' " run ruby code using f5. 2 + 2 #  => 4
 
 " All of your Plugs must be added before the following line
 call plug#end()
@@ -98,7 +98,7 @@ set showtabline=1
 set smartindent
 set softtabstop=2
 set switchbuf=useopen
-set tabstop=4
+set tabstop=2
 set virtualedit=block
 set whichwrap+=<,>,h,l,[,]
 set wildmenu
@@ -116,6 +116,39 @@ set noshowmatch
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" ----------------------------------------------------------------------------
+" ALIASES / SHORTCUTS
+" ----------------------------------------------------------------------------
+" Set leader key
+let mapleader = ","
+
+" Save Current File
+nnoremap <c-s> :w!<cr>
+
+" nvim terminal mode
+noremap <esc><esc> <C-\><C-n>
+
+" Commands to remap paragraphs
+nnoremap Q gqap
+vnoremap Q gq
+
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
+
+" Map ,e and ,v to open files in the same directory as the current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>V :view %%
+
+" Search for open Todos inside the directory structure
+map <leader>N :Ag --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+
+" clear the search buffer when hitting return
+nnoremap <CR> :nohlsearch<cr>
+
+" Shortcut to rapidly toggle `set list
+nmap <leader>l :set list!<cr>
 
 " ----------------------------------------------------------------------------
 " COLOR STUFF
@@ -142,6 +175,9 @@ augroup vimrcEx
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
 
+  " Same for vimwiki files
+  " autocmd FileType vimwikki set ai sw=2 sts=2 et
+
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -167,57 +203,16 @@ augroup END
 augroup vimwiki_settings
   autocmd!
   autocmd FileType vimwiki setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
-  let g:vimwiki_folding='syntax'
+  let g:vimwiki_folding='list'
 " ugroup END
 
 " reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-" ----------------------------------------------------------------------------
-" REMAPPING
-" ----------------------------------------------------------------------------
-let mapleader = ","
-map WW :w!<CR>
-
-" nvim terminal mode
-noremap <esc><esc> <C-\><C-n>
-
-nnoremap Q gqap
-vnoremap Q gq
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
-
-" Map ,e and ,v to open files in the same directory as the current file
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>V :view %%
-
-" Search for open Todos inside the directory structure
-map <leader>N :Ag --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
-
-" clear the search buffer when hitting return
-:nnoremap <CR> :nohlsearch<cr>
-
-" Shortcut to rapidly toggle `set list
-nmap <leader>l :set list!<cr>
-
 " ----------------------------------------------------------------------------
 " BUFFERS N SHIT, BECAUSE FUCK TABS
 " ----------------------------------------------------------------------------
-map <C-t> :enew<CR>
 map <C-l> :bnext<CR>
 map <C-h> :bprevious<CR>
 map <leader>x :bp <BAR> bd #<CR>
@@ -280,35 +275,23 @@ map <F9> :setlocal spell! spelllang=en_us<CR>
 
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard'})
-  autocmd FileType text         call pencil#init({'wrap': 'soft'})
+  " autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard'})
+  " autocmd FileType text         call pencil#init({'wrap': 'soft'})
 augroup END
-
 
 " ---------------------------------------------------------------------------
 " Neomake
 " ---------------------------------------------------------------------------
 autocmd! BufWritePost * Neomake
 
-" ---------------------------------------------------------------------------
-" Deoplete
-" ---------------------------------------------------------------------------
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#disable_auto_complete = 1
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" Enable seeing-is-believing mappings only for Ruby
+augroup seeingIsBelievingSettings
+  autocmd!
 
-" deoplete tab-complete
-inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ deoplete#mappings#manual_complete()
-          function! s:check_back_space() abort "{{{
-          let col = col('.') - 1
-          return !col || getline('.')[col - 1]  =~ '\s'
-          endfunction"}}}
+  autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing-is-believing-mark-and-run)
+
+augroup END
 
 " ---------------------------------------------------------------------------
 " VARIOUS
