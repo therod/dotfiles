@@ -13,53 +13,26 @@ Plug 'tpope/vim-commentary' " Do commenting with `gc`
 Plug 'tpope/vim-eunuch' " Unix sugar for vim
 Plug 'tpope/vim-fugitive' " Git addon for vim
 Plug 'rking/ag.vim' " The silver searcher
-Plug 'scrooloose/nerdtree' " Filetree
 Plug 'bronson/vim-trailing-whitespace' " Delete trailing whitespace with ,s
 Plug 'szw/vim-tags' " ctags for vim
 Plug 'tpope/vim-surround' " surround support
-Plug 'tpope/vim-endwise' " add end statements to ruby
 Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
 Plug 'mattn/webapi-vim' " used by gist-vim
-
-" Colorschemes
 Plug 'chriskempson/base16-vim' " Base16 colorscheme system
-Plug 'morhetz/gruvbox'
-
-" Writing & ORG
-Plug 'vimwiki/vimwiki'
-Plug 'reedes/vim-pencil'
-Plug 'junegunn/goyo.vim'
-
-" Ruby
+Plug 'vimwiki/vimwiki' " Org mode for vimwikie
 Plug 'skalnik/vim-vroom' " Run tests depending on environment
-Plug 'vim-ruby/vim-ruby'
-Plug 'sunaku/vim-ruby-minitest'
-Plug 'tpope/vim-rails'
-
-" Other Syntax
-Plug 'keith/swift.vim'
-Plug 'tpope/vim-markdown'
-Plug 'duwanis/tomdoc.vim'
-Plug 'digitaltoad/vim-jade'
-Plug 'fatih/vim-go'
-Plug 'othree/html5.vim'
-Plug 'tpope/vim-haml'
-Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
-
-" Evaluating
+Plug 'vim-ruby/vim-ruby' " Ruby helpers
+Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
+Plug 'tpope/vim-rails' " Rails Helpers
+Plug 'tpope/vim-markdown' " Markdown Support
+Plug 'othree/html5.vim' " HTML 5 Support
+Plug 'pangloss/vim-javascript' " Javascript Support
+Plug 'kchmck/vim-coffee-script' "Coffeescript Support
 Plug 'ervandew/supertab' " Super tabs
-Plug 'godlygeek/tabular' " :Tabularize /,/
-Plug 'ap/vim-css-color' " Adds inline colors for css like this: #ffffff
+Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
+Plug 'bling/vim-bufferline'
 Plug 'neomake/neomake' " Used to run Rubocop and highlight syntax errors
 
-" Experimental
-Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'hwartig/vim-seeing-is-believing' " run ruby code using f5. 2 + 2 #  => 4
-
-" All of your Plugs must be added before the following line
 call plug#end()
 filetype plugin indent on    " required
 
@@ -70,7 +43,6 @@ filetype plugin indent on
 syntax on
 
 set mouse=""
-"set foldmethod=syntax
 set foldlevelstart=20
 set autoindent
 set backspace=indent,eol,start
@@ -117,29 +89,25 @@ set noshowmatch
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+let mapleader = ','
+
 " ----------------------------------------------------------------------------
 " ALIASES / SHORTCUTS
 " ----------------------------------------------------------------------------
-" Set leader key
-let mapleader = ","
-
-" Save Current File
+" Save Current File using ctrl-s
 nnoremap <c-s> :w!<cr>
-
-" nvim terminal mode
-noremap <esc><esc> <C-\><C-n>
 
 " Commands to remap paragraphs
 nnoremap Q gqap
 vnoremap Q gq
 
-" Insert a hash rocket with <c-l>
+" Insert a => rocket with <c-l>
 imap <c-l> <space>=><space>
 
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
-map <leader>V :view %%
+map <leader>v :view %%
 
 " Search for open Todos inside the directory structure
 map <leader>N :Ag --ignore-dir=log 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
@@ -166,7 +134,6 @@ endif
 " CUSTOM AUTOCMDS
 " ----------------------------------------------------------------------------
 augroup vimrcEx
-
   " Clear all autocmds in the group
   autocmd!
   autocmd FileType text setlocal textwidth=80
@@ -174,9 +141,6 @@ augroup vimrcEx
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
-
-  " Same for vimwiki files
-  " autocmd FileType vimwikki set ai sw=2 sts=2 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -194,90 +158,60 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-  " Go
-  autocmd Filetype go map <leader>r :! go run %<CR>
-
 augroup END
 
+" ----------------------------------------------------------------------------
 " VIMIWKI
+" ----------------------------------------------------------------------------
 augroup vimwiki_settings
   autocmd!
   autocmd FileType vimwiki setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
-  let g:vimwiki_folding='list'
-" ugroup END
+  let g:vimwiki_folding='syntax'
+augroup END
 
-" reopening a file
+" ----------------------------------------------------------------------------
+" REOPEN FILE ON SAME LINE AS LAST TIME
+" ----------------------------------------------------------------------------
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
 " ----------------------------------------------------------------------------
 " BUFFERS N SHIT, BECAUSE FUCK TABS
 " ----------------------------------------------------------------------------
 map <C-l> :bnext<CR>
 map <C-h> :bprevious<CR>
 map <leader>x :bp <BAR> bd #<CR>
-map <leader>bl :ls<CR>
 
 " ----------------------------------------------------------------------------
-" PLUGIN CONFIGURATIONS
+" COMMENTARY
 " ----------------------------------------------------------------------------
-" Airline
-let g:airline_powerline_fonts=1
-let g:bufferline_echo = 1
-let g:airline_section_c = ''
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
-let g:airline_section_z = ''
-let g:airline_right_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#show_splits = 1
-let g:airline#extensions#tabline#show_buffers = 1
-
-" Commentary
 map // :Commentary<CR>
 
+" ----------------------------------------------------------------------------
 " FZF
+" ----------------------------------------------------------------------------
 " Ignore rules can be changed in .zshrc. Read more here:
 " https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
 nnoremap <C-p> :FZF<cr>
 
-" NERDTree
-map <leader>n :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "left"
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
-
-" GO
-let g:go_disable_autoinstall = 0
-
-" Trailing Whitespace
+" ----------------------------------------------------------------------------
+" TRAILING WHITESPACE
+" ----------------------------------------------------------------------------
 function! StripWhitespace ()
   exec ':FixWhitespace'
 endfunction
 map <leader>s :call StripWhitespace ()<CR>
 
+" ----------------------------------------------------------------------------
 " CTAGS
+" ----------------------------------------------------------------------------
 map <leader>ta :exec("tag ".expand("<cword>"))<CR>
 map <leader>ts :vsp <CR>:exec("tag " .expand("<cword>"))<CR>
 map <Leader>TT :TagsGenerate!<CR>
 map <Leader>tt :TagsGenerate<CR>
 set tags+=./tags;
 let g:vim_tags_auto_generate = 0
-
-" Goyo & Pencil
-map <F10> :Goyo <bar> :TogglePencil <CR>
-map <F9> :setlocal spell! spelllang=en_us<CR>
-
-augroup pencil
-  autocmd!
-  " autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard'})
-  " autocmd FileType text         call pencil#init({'wrap': 'soft'})
-augroup END
 
 " ---------------------------------------------------------------------------
 " Neomake
@@ -292,13 +226,3 @@ augroup seeingIsBelievingSettings
   autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing-is-believing-mark-and-run)
 
 augroup END
-
-" ---------------------------------------------------------------------------
-" VARIOUS
-" ---------------------------------------------------------------------------
-"  No idea what this does
-let g:netrw_home = $HOME
-
-" OS X STUFF
-" Open the file using Marked.app => Good for previewing MARKDOWN files
-map <leader>p :!open -a /Applications/Marked\ 2.app '%'<cr>
