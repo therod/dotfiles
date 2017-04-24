@@ -1,5 +1,6 @@
 # Fix pb{copy,paste} requires: reattach-to-usernamespace brew
 set-option -g default-command "reattach-to-user-namespace -l zsh"
+#if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
 
 # Don't torture me with your C-b
 unbind C-b
@@ -21,15 +22,14 @@ set -s escape-time 1
 
 # Vim configuraiton
 setw -g mode-keys vi
-unbind -t vi-copy Space
-unbind -t vi-copy Enter
+unbind -T copy-mode-vi Space
+unbind -T copy-mode-vi Enter
 unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 
 # Bindings
 bind h select-pane -L
