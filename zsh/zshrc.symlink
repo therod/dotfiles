@@ -68,6 +68,15 @@ if [[ -a /etc/zshenv ]]; then
   sudo mv /etc/zshenv /etc/zprofile
 fi
 
-# Rbenv
+
+# Lazy load rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+
+if rbenv &>/dev/null; then
+  eval "$(rbenv init -)"
+fi
+
+rbenv() {
+  eval "$(command rbenv init -)"
+  rbenv "$@"
+}
