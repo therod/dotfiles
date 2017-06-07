@@ -34,4 +34,3 @@ alias mutt='cd ~/Desktop && mutt'
 alias ww='cd ~/vimwiki && vim ./index.wiki'
 
 alias searchsploit='/opt/exploit-database/searchsploit'
-alias beer='brew update && brew upgrade && brew cleanup'
