@@ -18,7 +18,7 @@ autoload -U $ZSH/functions/smartextract(:t)
 source $ZSH/aliases.zsh
 source $ZSH/config.zsh
 source $ZSH/prompt.zsh
-source $ZSH/plugins.zsh # Slow thanks to base16 & rbenv
+source $ZSH/plugins.zsh # Slow thanks to base16
 
 # Remove PATH duplicates
 typeset -U path cdpath manpath fpath
