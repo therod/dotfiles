@@ -1,82 +1,32 @@
-# Colored man pages: http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
-# Less Colors for Man Pages
-export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
-export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
-export LESS_TERMCAP_me=$'\E[0m'           # end mode
-export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-export LESS_TERMCAP_so=$'\E[38;5;016m\E[48;5;220m'    # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m'           # end underline
-export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
-
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
-
-# your project folder that we can `c [tab]` to
+# Setup the environment (needs to be on top)
+export ZSH=$HOME/.dotfiles/zsh
 export PROJECTS=$HOME/code
 
-export EDITOR="nvim"
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+source ~/.localrc
 
-# source every .zsh file in this rep
-for config_file ($ZSH/**/*.zsh) source $config_file
+# Setup paths
+source $ZSH/exports.zsh
+
+# Functions to import
+fpath=($ZSH/functions $fpath)
+autoload -U $ZSH/functions/c(:t)
+autoload -U $ZSH/functions/smartextract(:t)
+
+# Import additional .zsh files
+source $ZSH/aliases.zsh
+source $ZSH/config.zsh
+source $ZSH/prompt.zsh
+source $ZSH/plugins.zsh # Slow thanks to base16 & rbenv
 
 # Remove PATH duplicates
 typeset -U path cdpath manpath fpath
 
-# use .localrc for SUPER SECRET CRAP that you don't
-# want in your public, versioned repo.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
-
 # initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-### Fix SSH Locales error
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-### FZF Config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Set ignore
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore /tmp/ --ignore /.bundle/ --ignore /.git/ -g ""'
-
-### Base 16 colors
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-# load cg command
-eval "$($HOME/.cg/bin/cg init -)"
-
-# Include ~/.bin in the path
-export PATH="$HOME/.bin:/usr/local/bin:$PATH"
-
-# Point perl to local modules
-export PERL_LOCAL_LIB_ROOT="$HOME/perl5"
-export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"
-export PERL_MB_OPT="--install_base \"$PERL_LOCAL_LIB_ROOT\""
-export PERL_MM_OPT="INSTALL_BASE=$PERL_LOCAL_LIB_ROOT"
-export PATH="$PERL_LOCAL_LIB_ROOT/bin:$PATH";
-
-# Ensure vim has same shell as Terminal
-if [[ -a /etc/zshenv ]]; then
-  sudo mv /etc/zshenv /etc/zprofile
-fi
-
-
-# Lazy load rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-if rbenv &>/dev/null; then
-  eval "$(rbenv init -)"
-fi
-
-rbenv() {
-  eval "$(command rbenv init -)"
-  rbenv "$@"
-}
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;

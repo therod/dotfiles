@@ -118,7 +118,7 @@ set_prompt () {
 }
 
 precmd() {
-  title ${PWD##*/}
+  # title ${PWD##*/}
   set_prompt
 }
 
@@ -128,4 +128,8 @@ update_terminal_cwd ()
     local REPLACE='%20';
     local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
     printf '\e]7;%s\a' "$PWD_URL"
+}
+
+function title() {
+  PROMPT_COMMAND="" && printf '\e]1;%s\a' "$1"
 }

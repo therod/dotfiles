@@ -1,3 +1,6 @@
+alias zsh_benchmark='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done'
+alias zsh_debug='zsh -i -c -x exit'
+
 # edit this file
 alias ealias='vim $ZSH/zsh/aliases.zsh'
 
@@ -27,9 +30,6 @@ alias reload!='. ~/.zshrc'
 # top
 alias ttop="top -F -R -o cpu -s 2"
 
-# kill it, kill it with fire
-alias fixairplay="sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`"
-
 alias mutt='cd ~/Desktop && mutt'
 alias ww='cd ~/vimwiki && vim ./index.wiki'
 
@@ -57,3 +57,10 @@ alias git=hub
 # redis
 alias redis-up='redis-server /usr/local/etc/redis.conf > /dev/null &'
 alias redis-down='killall redis-server'
+
+# Remove the hosts that I don't want to keep around- in this case, only
+# keep the first host. Like a boss.
+alias hosts="head -2 ~/.ssh/known_hosts | tail -1 > ~/.ssh/known_hosts"
+
+# Pipe my public key to my clipboard. Fuck you, pay me.
+alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pasteboard.'"
