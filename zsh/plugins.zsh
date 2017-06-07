@@ -1,10 +1,34 @@
 # rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
 
-if which rbenv &>/dev/null 2>&1; then
-  eval "$(rbenv init --no-rehash -)"
-  (rbenv rehash &) 2> /dev/null
-fi
+__rbenv_started=0
+
+__rbenv_init() {
+  test $__rbenv_started = 0 && {
+    eval "$(command rbenv init -)"
+    __rbenv_started=1
+  }
+}
+
+rbenv() {
+  __rbenv_init
+  command rbenv "$@"
+}
+
+ruby() {
+  __rbenv_init
+  command ruby "$@"
+}
+
+rake() {
+  __rbenv_init
+  command rake "$@"
+}
+
+bundle() {
+  __rbenv_init
+  command bundle "$@"
+}
 
 # FZF Config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -14,4 +38,4 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore /tmp/ --ignore /.bundle/ --igno
 
 # Base 16 colors
 BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
