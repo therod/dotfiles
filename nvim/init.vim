@@ -12,7 +12,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-commentary' " Do commenting with `gc`
 Plug 'tpope/vim-eunuch' " Unix sugar for vim
 Plug 'tpope/vim-fugitive' " Git addon for vim
-Plug 'rking/ag.vim' " The silver searcher
+Plug 'tpope/vim-rhubarb'
+Plug 'mileszs/ack.vim'  " Ack
 Plug 'bronson/vim-trailing-whitespace' " Delete trailing whitespace with ,s
 Plug 'szw/vim-tags' " ctags for vim
 Plug 'tpope/vim-surround' " surround support
@@ -22,6 +23,7 @@ Plug 'chriskempson/base16-vim' " Base16 colorscheme system
 Plug 'vimwiki/vimwiki' " Org mode for vimwikie
 Plug 'skalnik/vim-vroom' " Run tests depending on environment
 Plug 'vim-ruby/vim-ruby' " Ruby helpers
+Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'tpope/vim-rails' " Rails Helpers
 Plug 'tpope/vim-markdown' " Markdown Support
@@ -31,7 +33,17 @@ Plug 'kchmck/vim-coffee-script' "Coffeescript Support
 Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
 Plug 'bling/vim-bufferline'
-Plug 'neomake/neomake' " Used to run Rubocop and highlight syntax errors
+" Plug 'neomake/neomake' " Used to run Rubocop and highlight syntax errors
+Plug 'scrooloose/nerdtree'
+
+" Plug 'garbas/vim-snipmate'
+" Plug 'sirver/ultisnips'
+" Plug 'honza/vim-snippets'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'hwartig/vim-seeing-is-believing'
+" Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -118,15 +130,25 @@ nnoremap <CR> :nohlsearch<cr>
 " Shortcut to rapidly toggle `set list
 nmap <leader>l :set list!<cr>
 
+" Atom style line moving
+nnoremap <C-j> :m+<CR>==
+nnoremap <C-k> :m-2<CR>==
+inoremap <C-j> <Esc>:m+<CR>==gi
+inoremap <C-k> <Esc>:m-2<CR>==gi
+vnoremap <C-j> :m'>+<CR>gv=gv
+vnoremap <C-k> :m-2<CR>gv=gv
+
 " ----------------------------------------------------------------------------
 " COLOR STUFF
 " ----------------------------------------------------------------------------
 " gui colors if running iTerm
 if has("nvim")
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set termguicolors
 end
 
 if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
   source ~/.vimrc_background
 endif
 
@@ -216,13 +238,55 @@ let g:vim_tags_auto_generate = 0
 " ---------------------------------------------------------------------------
 " Neomake
 " ---------------------------------------------------------------------------
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 
-" Enable seeing-is-believing mappings only for Ruby
-augroup seeingIsBelievingSettings
-  autocmd!
+" " Enable seeing-is-believing mappings only for Ruby
+" augroup seeingIsBelievingSettings
+"   autocmd!
 
-  autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-mark-and-run)
-  autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing-is-believing-mark-and-run)
+"   autocmd FileType ruby nmap <buffer> <C-\> <Plug>(seeing-is-believing-mark-and-run)
+"   autocmd FileType ruby xmap <buffer> <C-\> <Plug>(seeing-is-believing-mark-and-run)
 
-augroup END
+" augroup END
+
+" ---------------------------------------------------------------------------
+" Airline
+" ---------------------------------------------------------------------------
+let g:airline_powerline_fonts=1
+let g:bufferline_echo = 0
+let g:airline_section_c = ''
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
+let g:airline_section_z = ''
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
+" let g:airline_left_sep = ''
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#show_buffers = 1
+
+" ---------------------------------------------------------------------------
+" NERDTree
+" ---------------------------------------------------------------------------
+map <leader>n :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "left"
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
+" ---------------------------------------------------------------------------
+" ACKGrep
+" ---------------------------------------------------------------------------
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+
+" ---------------------------------------------------------------------------
+" Open preview in marked 2
+" ---------------------------------------------------------------------------
+map <leader>p :! open -a '/Applications/Marked 2.app' '%'<cr>
