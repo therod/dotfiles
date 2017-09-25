@@ -26,6 +26,9 @@ export LANG=en_US.UTF-8
 # Include ~/.bin in the path
 export PATH="$HOME/.bin:/usr/local/bin:$PATH"
 
+# Include dotfile scripts
+export PATH="$HOME/.dotfiles/bin:$PATH"
+
 # Point perl to local modules
 export PERL_LOCAL_LIB_ROOT="$HOME/perl5"
 export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"

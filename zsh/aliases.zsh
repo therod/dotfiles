@@ -44,6 +44,9 @@ alias pg-down='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias r='rbenv local'
 alias b='bundle exec'
 
+# Rails
+alias rs='bundle exec bin/rails server'
+
 # Tmux
 alias tlist="tmux list-sessions"
 alias tmux="env TERM=xterm-256color tmux"
