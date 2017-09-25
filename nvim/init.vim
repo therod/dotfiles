@@ -28,6 +28,8 @@ Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'tpope/vim-rails' " Rails Helpers
 Plug 'tpope/vim-markdown' " Markdown Support
 Plug 'othree/html5.vim' " HTML 5 Support
+Plug 'hail2u/vim-css3-syntax' " CSS3 Support
+Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'pangloss/vim-javascript' " Javascript Support
 Plug 'kchmck/vim-coffee-script' "Coffeescript Support
 Plug 'ervandew/supertab' " Super tabs
@@ -42,6 +44,7 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mattn/emmet-vim' " Autocomplete for HTML / CSS
 " Plug 'hwartig/vim-seeing-is-believing'
 " Plug 'vim-syntastic/syntastic'
 
@@ -143,7 +146,6 @@ vnoremap <C-k> :m-2<CR>gv=gv
 " ----------------------------------------------------------------------------
 " gui colors if running iTerm
 if has("nvim")
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set termguicolors
 end
 
@@ -262,7 +264,7 @@ let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V'
 let g:airline_section_z = ''
 let g:airline_right_alt_sep = ''
 let g:airline_right_sep = ''
-" let g:airline_left_sep = ''
+let g:airline_left_sep = ''
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tabs = 0
