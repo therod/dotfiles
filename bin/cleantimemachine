@@ -1,0 +1,4 @@
+#!/bin/bash
+## Remove all local timemachine backups
+
+for i in $(tmutil listlocalsnapshotdates / | awk '{print $1}' | sed -n '1!p' | xargs echo); do tmutil deletelocalsnapshots $i; done
