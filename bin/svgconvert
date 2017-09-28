@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file="$1"
+pnm="${file%%.*}.pnm"
+svg="${file%%.*}.svg"
+
+convert "$file" "$pnm"
+potrace "$pnm" -s -o "$svg"
+
+rm "${file%%.*}".pnm
