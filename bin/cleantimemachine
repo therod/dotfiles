@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 ## Remove all local timemachine backups
-
-for i in $(tmutil listlocalsnapshotdates / | awk '{print $1}' | sed -n '1!p' | xargs echo); do tmutil deletelocalsnapshots $i; done
+`tmutil listlocalsnapshotdates / | sed -n '1!p'`.split("\n").each do |snapshot|
+  system("tmutil deletelocalsnapshots \'#{snapshot}\'")
+end
