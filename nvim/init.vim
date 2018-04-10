@@ -7,46 +7,50 @@ filetype off                  " required
 " ----------------------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
-" Core
+" CORE
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-commentary' " Do commenting with `gc`
 Plug 'tpope/vim-eunuch' " Unix sugar for vim
-Plug 'tpope/vim-fugitive' " Git addon for vim
-Plug 'tpope/vim-rhubarb'
 Plug 'mileszs/ack.vim'  " Ack
 Plug 'bronson/vim-trailing-whitespace' " Delete trailing whitespace with ,s
 Plug 'szw/vim-tags' " ctags for vim
 Plug 'tpope/vim-surround' " surround support
-Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
+Plug 'ervandew/supertab' " Super tabs
+Plug 'scrooloose/nerdtree' " Filetree explorer
+
+" GIT
 Plug 'mattn/webapi-vim' " used by gist-vim
+Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
+Plug 'tpope/vim-fugitive' " Git addon for vim
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive
+Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
+
+" VISUAL
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-bufferline' " list vim buffers
+Plug 'ap/vim-buftabline'
+Plug 'mattn/emmet-vim' " Autocomplete for HTML / CSS
 Plug 'chriskempson/base16-vim' " Base16 colorscheme system
-Plug 'vimwiki/vimwiki' " Org mode for vimwikie
-Plug 'skalnik/vim-vroom' " Run tests depending on environment
+
+" RAILS / RUBY
 Plug 'vim-ruby/vim-ruby' " Ruby helpers
+Plug 'tpope/vim-bundler' "Bundler Helpers (ctags)
+Plug 'skalnik/vim-vroom' " Run tests depending on environment
 Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'tpope/vim-rails' " Rails Helpers
-Plug 'tpope/vim-markdown' " Markdown Support
+
+" HTML / CSS / JS
 Plug 'othree/html5.vim' " HTML 5 Support
 Plug 'hail2u/vim-css3-syntax' " CSS3 Support
 Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'pangloss/vim-javascript' " Javascript Support
 Plug 'kchmck/vim-coffee-script' "Coffeescript Support
-Plug 'ervandew/supertab' " Super tabs
-Plug 'junegunn/gv.vim' " use :GV to open commit browser. :GV! only for this file
-Plug 'bling/vim-bufferline'
-" Plug 'neomake/neomake' " Used to run Rubocop and highlight syntax errors
-Plug 'scrooloose/nerdtree'
 
-" Plug 'garbas/vim-snipmate'
-" Plug 'sirver/ultisnips'
-" Plug 'honza/vim-snippets'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/emmet-vim' " Autocomplete for HTML / CSS
-" Plug 'hwartig/vim-seeing-is-believing'
-" Plug 'vim-syntastic/syntastic'
+" OTHER SYNTAX
+Plug 'chase/vim-ansible-yaml' " YAML Support
+Plug 'tpope/vim-markdown' " Markdown Support
 
 call plug#end()
 filetype plugin indent on    " required
@@ -254,30 +258,33 @@ let g:vim_tags_auto_generate = 0
 " ---------------------------------------------------------------------------
 " Airline
 " ---------------------------------------------------------------------------
-let g:airline_powerline_fonts=1
-let g:bufferline_echo = 0
-let g:airline_section_c = ''
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
-let g:airline_section_z = ''
-let g:airline_right_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_sep = ''
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#show_splits = 1
-let g:airline#extensions#tabline#show_buffers = 1
+" let g:airline_powerline_fonts=1
+" let g:bufferline_echo = 1
+" let g:airline_section_c = ''
+" let g:airline#extensions#tabline#show_buffers = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline_mode_map = {'c': 'C', '^S': 'S', 'R': 'R', 's': 'S', 't': 'T', 'V': 'VL', '^V': 'VB', 'i': 'I', '__': '------', 'S': 'SL', 'v': 'V', 'n': 'N'}
+" let g:airline_section_z = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline#extensions#tabline#show_close_button = 0
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#show_tabs = 0
+" let g:airline#extensions#tabline#show_splits = 1
+" let g:airline#extensions#tabline#show_buffers = 1
 
 " ---------------------------------------------------------------------------
 " NERDTree
 " ---------------------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "left"
+let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
 
 " ---------------------------------------------------------------------------
 " ACKGrep
