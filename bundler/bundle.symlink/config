@@ -1,5 +1,4 @@
 ---
-BUNDLE_PATH: ".bundle"
 BUNDLE_BUILD__NOKOGIRI: "\\\"--with-xml2-include=/opt/local/include/libxml2 --with-xml2-lib=/opt/local/lib"
 BUNDLE_GEM__COC: "0"
 BUNDLE_GEM__MIT: "0"
