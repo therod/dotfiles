@@ -1,6 +1,14 @@
-# Fix pb{copy,paste} requires: reattach-to-usernamespace brew
+# default color
+set -g default-terminal "screen-256color"
 set-option -g default-command "reattach-to-user-namespace -l zsh"
-#if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
+
+# New stuff
+set-option -g status-position bottom
+set-window-option -g xterm-keys on
+
+set-option -g message-fg white
+set-option -g message-bg black
+set-option -g message-attr bright
 
 # Don't torture me with your C-b
 unbind C-b
@@ -55,17 +63,28 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
 # Color
 set-option -g pane-border-fg white
 set-option -g pane-active-border-fg white
-set -g status-bg black
+set -g status-bg default
 set -g status-fg white
+set-option -g status-attr default
 set -g status-interval 30
 set -g status-left-length 80
-set -g status-left ""
-set -g status-right-length 45
-set -g status-right 'Batt: #{battery_icon} #{battery_percentage} #{battery_remain} | %a %h-%d %H:%M '
+set -g status-left " "
+set -g status-justify left
+# set -g status-right-length 45
+set -g status-right " "
+
+setw -g window-status-format         '#(echo "#{window_name}") '
+setw -g window-status-current-format '#(echo "#{window_name}") '
 
 set-window-option -g window-status-current-fg colour166 #orange
 set-option -g pane-border-fg colour235 #base02
 set-option -g pane-active-border-fg colour240 #base01
+# set-window-option -g window-status-fg "#666666"
+# set-window-option -g window-status-bg default
+# set-window-option -g window-status-attr default
+# set-window-option -g window-status-current-fg red
+# set-window-option -g window-status-current-bg default
+# set-window-option -g window-status-current-attr default
 
 # move x clipboard into tmux paste buffer
 bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
