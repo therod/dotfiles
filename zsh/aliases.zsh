@@ -46,6 +46,9 @@ alias b='bundle exec'
 
 # Rails
 alias rs='bundle exec bin/rails server'
+alias rc='bundle exec bin/rails console'
+alias rdm='bundle exec bin/rails db:migrate'
+alias wds='bundle exec bin/webpack-dev-server'
 
 # Tmux
 alias tlist="tmux list-sessions"
