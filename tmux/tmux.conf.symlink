@@ -6,9 +6,8 @@ set-option -g default-command "reattach-to-user-namespace -l zsh"
 set-option -g status-position bottom
 set-window-option -g xterm-keys on
 
-set-option -g message-fg white
-set-option -g message-bg black
-set-option -g message-attr bright
+# set -g message-style fg=white bg=black
+# set-option -g message-attr bright
 
 # Don't torture me with your C-b
 unbind C-b
@@ -61,24 +60,24 @@ bind -r L resize-pane -R 1
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 # Color
-set-option -g pane-border-fg white
-set-option -g pane-active-border-fg white
+set -g pane-border-style fg=white
+set -g pane-active-border-style fg=white
 set -g status-bg default
 set -g status-fg white
-set-option -g status-attr default
+# set-option -g status-attr default
 set -g status-interval 30
 set -g status-left-length 80
-set -g status-left " "
+set -g status-left ""
 set -g status-justify left
-# set -g status-right-length 45
-set -g status-right " "
+set -g status-right-length 45
+set -g status-right '%a %h-%d %H:%M '
 
-setw -g window-status-format         '#(echo "#{window_name}") '
-setw -g window-status-current-format '#(echo "#{window_name}") '
+setw -g window-status-format         '#{window_index} #(echo "#{window_name}") '
+setw -g window-status-current-format '#{window_index} #(echo "#{window_name}") '
 
-set-window-option -g window-status-current-fg colour166 #orange
-set-option -g pane-border-fg colour235 #base02
-set-option -g pane-active-border-fg colour240 #base01
+set -g window-status-current-style fg=colour166 # Orange
+set -g pane-border-style fg=colour235 #base02
+set -g pane-active-border-style fg=colour240 # base01
 # set-window-option -g window-status-fg "#666666"
 # set-window-option -g window-status-bg default
 # set-window-option -g window-status-attr default
@@ -94,7 +93,7 @@ bind C-y run "tmux show-buffer | xclip -i"
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-battery'
+# set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-urlview'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)

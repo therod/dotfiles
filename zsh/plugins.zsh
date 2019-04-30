@@ -30,6 +30,9 @@ bundle() {
   command bundle "$@"
 }
 
+# Node Env
+eval "$(nodenv init -)"
+
 # FZF Config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

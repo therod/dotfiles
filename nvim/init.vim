@@ -35,11 +35,12 @@ Plug 'chriskempson/base16-vim' " Base16 colorscheme system
 
 " RAILS / RUBY
 Plug 'vim-ruby/vim-ruby' " Ruby helpers
-Plug 'tpope/vim-bundler' "Bundler Helpers (ctags)
 Plug 'skalnik/vim-vroom' " Run tests depending on environment
 Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'tpope/vim-rails' " Rails Helpers
+Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-bundler' "Bundler Helpers (ctags)
 
 " HTML / CSS / JS
 Plug 'othree/html5.vim' " HTML 5 Support
@@ -51,6 +52,19 @@ Plug 'kchmck/vim-coffee-script' "Coffeescript Support
 " OTHER SYNTAX
 Plug 'chase/vim-ansible-yaml' " YAML Support
 Plug 'tpope/vim-markdown' " Markdown Support
+Plug 'neomake/neomake'
+Plug 'benmills/vimux'
+
+" Snipmate
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
+" Other
+Plug 'christianrondeau/vim-base64'
+" Plug 'vimwiki/vimwiki'
+" Plug 'junegunn/goyo.vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -178,6 +192,9 @@ augroup vimrcEx
   "leader-r mappings for different languages
   let g:vroom_map_keys = 0 "Disable Vroom
   let g:vroom_use_colors = 1
+  let g:vroom_use_vimux = 1
+  " let g:vroom_test_unit_command = 'rake test'
+  " let g:vroom_command_prefix = 'bin/rails test'
 
   " Ruby
   autocmd Filetype ruby map <leader>r :VroomRunTestFile<CR>
@@ -195,6 +212,8 @@ augroup vimwiki_settings
   autocmd!
   autocmd FileType vimwiki setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
   let g:vimwiki_folding='syntax'
+  let g:vimwiki_list = [{'syntax': 'markdown', 'custom_wiki2html': 'vimwiki_markdown', 'ext': '.md'}]
+  " let g:vimwiki_table_mappings = 0
 augroup END
 
 " ----------------------------------------------------------------------------

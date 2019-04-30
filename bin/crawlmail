@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'spidr'
+require 'pry'
+
+URL = ARGV.first
+REGEXP = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b/
+
+Spidr.site(URL) do |spider|
+  spider.every_html_page do |page|
+    if match = page.body.match(REGEXP)
+      puts page.url.to_s
+      puts "============"
+      puts match
+    end
+  end
+end

@@ -97,7 +97,6 @@ set_prompt () {
   colorcode[.]=$colorcode[default]
 
   local -A pc
-  pc[divider]='Black'
   pc[default]='Default'
   pc[host]='Black'
   pc[shortpath]='default'
@@ -108,7 +107,7 @@ set_prompt () {
   pc[reset]=$(colorword . . 00)
 
   # PROMPT="%{$reset_color%}"
-  PROMPT="$pc[divider]\$(repeat \$COLUMNS printf '-')$pc[reset]"
+  PROMPT="$pc[reset]"
   PROMPT+="$pc[shortpath]%~%{$reset_color%}"
   PROMPT+="$(git_dirty)%{$reset_color%}"
   PROMPT+="$(need_push)%{$reset_color%}"

@@ -1,6 +1,6 @@
 # Setup the environment (needs to be on top)
 export ZSH=$HOME/.dotfiles/zsh
-export PROJECTS=$HOME/code
+export PROJECTS=$HOME/Work/Code
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
@@ -34,3 +34,4 @@ fi;
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 rbenv rehash
+export PATH="/usr/local/opt/libpcap/bin:$PATH"

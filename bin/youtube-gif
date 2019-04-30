@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ID="$1"
+START="$2"
+END="$3"
+# SIZE='400x300' # size of the output GIF
+
+# fetch the video file with youtube-dl
+# convert it to MP4 (not really needed, but keeps the filename predictable)
+if [ ! -f $id.mp4 ]; then
+  ffmpeg -ss $START -to $END -i $(youtube-dl -f 134 --get-url https://www.youtube.com/watch?v=$ID) -an $ID.mp4
+fi
