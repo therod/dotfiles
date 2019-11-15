@@ -1,6 +1,6 @@
 # Setup the environment (needs to be on top)
 export ZSH=$HOME/.dotfiles/zsh
-export PROJECTS=$HOME/Work/Code
+export PROJECTS=$HOME/code
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

@@ -70,7 +70,7 @@ set -g status-left-length 80
 set -g status-left ""
 set -g status-justify left
 set -g status-right-length 45
-set -g status-right '%a %h-%d %H:%M '
+set -g status-right ''
 
 setw -g window-status-format         '#{window_index} #(echo "#{window_name}") '
 setw -g window-status-current-format '#{window_index} #(echo "#{window_name}") '

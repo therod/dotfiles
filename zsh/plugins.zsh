@@ -34,10 +34,10 @@ bundle() {
 eval "$(nodenv init -)"
 
 # FZF Config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Set ignore
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore /tmp/ --ignore /.bundle/ --ignore /.git/ -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore tmp --ignore .bundle --ignore .git -g ""'
 
 # Base 16 colors
 BASE16_SHELL=$HOME/.config/base16-shell/

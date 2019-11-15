@@ -190,9 +190,12 @@ augroup vimrcEx
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
   "leader-r mappings for different languages
-  let g:vroom_map_keys = 0 "Disable Vroom
+  let g:vroom_map_keys = 1 "Disable Vroom
   let g:vroom_use_colors = 1
   let g:vroom_use_vimux = 1
+  let g:vroom_test_unit_command = 'bin/rails test'
+  let g:vroom_use_bundle_exec = 0
+  " let g:vroom_use_spring = 1
   " let g:vroom_test_unit_command = 'rake test'
   " let g:vroom_command_prefix = 'bin/rails test'
 
@@ -263,9 +266,15 @@ let g:vim_tags_auto_generate = 0
 " ---------------------------------------------------------------------------
 " Neomake
 " ---------------------------------------------------------------------------
-" autocmd! BufWritePost * Neomake
 
-" " Enable seeing-is-believing mappings only for Ruby
+" Run NeoMake on read and write operations
+" autocmd! BufReadPost,BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
+" call neomake#configure#automake('w')
+" let g:neomake_open_list = 2
+" let g:neomake_ruby_enabled_makers = ['rubocop']
+
+" Enable seeing-is-believing mappings only for Ruby
 " augroup seeingIsBelievingSettings
 "   autocmd!
 

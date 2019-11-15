@@ -11,6 +11,7 @@ alias dotcd='cd ~/.dotfiles'
 # edit vim stuff
 alias vim='nvim'
 alias evimrc='vim ~/.dotfiles/nvim/init.vim'
+alias skhvim='vim ~/.skhdrc'
 
 alias l="ls -lah"
 
@@ -70,3 +71,8 @@ alias hosts="head -2 ~/.ssh/known_hosts | tail -1 > ~/.ssh/known_hosts"
 
 # Pipe my public key to my clipboard. Fuck you, pay me.
 alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Commands
+oa() { ls -d /Applications/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open -a ;}
+to() { ls -d $HOME/Torrents/*/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
+vf() { fzf | xargs -r -I % $EDITOR % ;}
