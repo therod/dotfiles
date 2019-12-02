@@ -32,6 +32,7 @@ Plug 'tpope/vim-markdown' " Markdown Support
  Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
  Plug 'tpope/vim-fugitive' " Git addon for vim
  Plug 'neomake/neomake' " Used for Rubocop
+ Plug 'scrooloose/nerdtree' " File Navigation
 
 call plug#end()
 filetype plugin indent on    " required
@@ -196,6 +197,17 @@ map <Leader>TT :Ctags<CR>
 " Fugitive
 " ---------------------------------------------------------------------------
 set tags^=./.git/tags;
+
+" ---------------------------------------------------------------------------
+" NERDTree
+" ---------------------------------------------------------------------------
+map <leader>n :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
 
 " ---------------------------------------------------------------------------
 " Neomake
