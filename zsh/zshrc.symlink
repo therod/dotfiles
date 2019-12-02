@@ -23,6 +23,9 @@ source $ZSH/plugins.zsh # Slow thanks to base16
 # Remove PATH duplicates
 typeset -U path cdpath manpath fpath
 
+# Grep coloring
+export GREP_OPTIONS='--color=auto'
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
