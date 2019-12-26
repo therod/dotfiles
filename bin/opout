@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# opout: "open output": A general handler for opening a file's intended output,
+# usually the pdf of a compiled document.
+
+basename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
+
+case "$1" in
+	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) open "$basename".pdf ;;
+	*.[0-9]) open "$basename".pdf ;;
+	*.html) open "$basename".html ;;
+esac

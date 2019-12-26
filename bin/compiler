@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+# This script will compile or run another finishing operation on a document. I
+# have this script run via vim.
+#
+# Runs scripts based on extention or shebang
+
+file=$(greadlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+
+cd "$dir" || exit
+
+textype() {
+  command="pdflatex"
+  ( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
+  $command --output-directory="$dir" "$base" &&
+  grep -i addbibresource "$file" >/dev/null &&
+  biber --input-directory "$dir" "$base" &&
+  $command --output-directory="$dir" "$base" &&
+  $command --output-directory="$dir" "$base"
+}
+
+case "$file" in
+	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
+	*\.tex) textype "$file" ;;
+	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+	*config.h) sudo make install ;;
+        *\.c) cc "$file" -o "$base" && "$base" ;;
+	*\.py) python "$file" ;;
+  *\.rb) ruby "$file" ;;
+	*\.go) go run "$file" ;;
+	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -I % "$file" ;;
+esac
