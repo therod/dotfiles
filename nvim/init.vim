@@ -26,13 +26,17 @@ Plug 'chase/vim-ansible-yaml' " YAML Support
 Plug 'tpope/vim-markdown' " Markdown Support
 
 " OTHER
- Plug 'benmills/vimux' " Send command from vim to tmux
- Plug 'skalnik/vim-vroom' " Run tests depending on environment
- Plug 'mattn/webapi-vim' " used by gist-vim
- Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
- Plug 'tpope/vim-fugitive' " Git addon for vim
- Plug 'neomake/neomake' " Used for Rubocop
- Plug 'scrooloose/nerdtree' " File Navigation
+Plug 'benmills/vimux' " Send command from vim to tmux
+Plug 'skalnik/vim-vroom' " Run tests depending on environment
+Plug 'mattn/webapi-vim' " used by gist-vim
+Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
+Plug 'tpope/vim-fugitive' " Git addon for vim
+Plug 'neomake/neomake' " Used for Rubocop
+Plug 'scrooloose/nerdtree' " File Navigation
+Plug 'ervandew/supertab' " Super tabs
+Plug 'alok/notational-fzf-vim'
+Plug 'junegunn/goyo.vim' " Writing
+Plug 'lervag/vimtex' " LaTeX
 
 call plug#end()
 filetype plugin indent on    " required
@@ -160,6 +164,11 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 augroup END
 
+augroup Markdown
+  autocmd!
+  autocmd FileType markdown set wrap
+augroup END
+
 " ----------------------------------------------------------------------------
 " VROOM SETTINGS
 " ----------------------------------------------------------------------------
@@ -225,3 +234,29 @@ cnoreabbrev AG Ack
 
 " Search for open Todos inside the directory structure
 map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public --ignore-dir=tmp 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+
+" ---------------------------------------------------------------------------
+" Notational FZF Vim
+" ---------------------------------------------------------------------------
+let g:nv_search_paths = ['~/work/zettelkasten']
+nnoremap <leader>f :NV<CR>
+
+" ---------------------------------------------------------------------------
+" Goyo
+" ---------------------------------------------------------------------------
+map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
+
+" ---------------------------------------------------------------------------
+" Compilation
+" ---------------------------------------------------------------------------
+" Compile document, be it groff/LaTeX/markdown/etc.
+map <leader>c :w! \| !compiler "%"<CR>
+
+" Open corresponding .pdf/.html or preview
+map <leader>p :!opout "%"<CR>
+
+" ---------------------------------------------------------------------------
+" VARIOUS
+" ---------------------------------------------------------------------------
+" Urlview
+noremap <leader>u :w \| startinsert \| term urlview %<cr>
