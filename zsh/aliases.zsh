@@ -34,7 +34,7 @@ alias ttop="top -F -R -o cpu -s 2"
 alias mutt='cd ~/Desktop && mutt'
 alias ww='cd ~/vimwiki && vim ./index.wiki'
 
-alias searchsploit='/opt/exploit-database/searchsploit'
+# alias searchsploit='/opt/exploit-database/searchsploit'
 
 # Postgres
 alias pg-up='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -76,3 +76,4 @@ alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pas
 oa() { ls -d /Applications/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open -a ;}
 to() { ls -d $HOME/Torrents/*/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
 vf() { fzf | xargs -r -I % $EDITOR % ;}
+zk() { ls -d $ZETTELKASTEN/* | awk -v q="'" '{print q $0 q}' | fzf | xargs nvim ;}
