@@ -1,0 +1,8 @@
+# Download binary file over http using ruby
+require 'open-uri'
+
+File.open("/my/local/path/sample.flv", "wb") do |saved_file|
+  open("http://somedomain.net/flv/sample/sample.flv", "rb") do |read_file|
+    saved_file.write(read_file.read)
+  end
+end

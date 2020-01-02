@@ -1,0 +1,8 @@
+name: valeriana
+root: ~/code/valeriana
+
+windows:
+  - code:
+  - wds: wds
+  - dev.log: tail -f log/development.log
+  - test.log: tail -f log/test.log

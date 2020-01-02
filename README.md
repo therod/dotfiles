@@ -1,28 +1,12 @@
-**Note:** I've made a lot of changes over the years and the
-installation-guide is outdated for now. I'll update it when I have time
-
 ## Installation
+Dotfile symlinking is handled via [dotbot](https://github.com/anishathalye/dotbot). After cloning the repository have a look at `install.conf.yaml` and run `./install` to generate the symlinks.
 
 - `git clone git://github.com/therod/dotfiles ~/.dotfiles`
 - `cd ~/.dotfiles`
-- `rake install`
-- `rake dependencies`
+- `./install`
+- `rake install_brew` to install homebrew programs defined in `progs.csv`
 
-The install rake task will symlink the appropriate files in `.dotfiles` to your
-home directory. Everything is configured and tweaked within `~/.dotfiles`,
-though.
-
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
-
-## Topical
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `rake install`.
-
-## components
+## Components
 
 There's a few special files in the hierarchy.
 
@@ -30,13 +14,3 @@ There's a few special files in the hierarchy.
   available everywhere.
 - **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
   environment.
-- **topic/\*.symlink**: Any files ending in `*.symlink` get symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `rake install`.
-- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
-  last so that they get loaded after we set up zsh autocomplete functions.
-
-## Special Thanks
-
-to [holman](https://github.com/holman/dotfiles) for the raw bacon!

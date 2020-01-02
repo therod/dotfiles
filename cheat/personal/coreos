@@ -1,0 +1,2 @@
+# systemctl used to interact with services
+sudo systemctl status etcd # shows the status of etcd daemon

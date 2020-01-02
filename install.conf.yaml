@@ -1,0 +1,29 @@
+# https://github.com/anishathalye/dotbot/#configuration
+- defaults:
+    link:
+      relink: true
+- clean: ['~', '~/.config']
+
+- link:
+    # SECRET STUFF GOES HERE
+    ~/.localrc: localrc
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux: tmux/tmux
+    ~/.config/tmuxinator: tmux/tmuxinator
+    ~/.ackrc: ack/ackrc
+    ~/.aws: aws
+    ~/.bundle: bundler/bundle
+    ~/.config/cheat: cheat
+    ~/.cg: cg
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore: git/gitignore
+    ~/.Guardfile: guard/Guardfile
+    ~/.config/nvim: nvim
+    ~/.vimrc: nvim/init.vim
+    ~/.pandoc: pandoc
+    ~/.gemrc: ruby/gemrc
+    ~/.irbrc: ruby/irbrc
+    ~/.rubocop.yml: ruby/rubocop.yml
+    ~/.taskrc: taskwarrior/taskrc
+    ~/.task: taskwarrior/task
+    ~/.zshrc: zsh/zshrc

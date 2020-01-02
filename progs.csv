@@ -1,0 +1,42 @@
+NAME IN HOMEBREW,Description
+awscli, AWS command line tools
+cheat, Cheatsheets in your command line
+coreutils, GNU core utils for macos
+ctags, Reimplementation of ctags
+entr, Run arbitrary commands when files change
+exif, Get exif information from images
+exploitdb,  The official Exploit Database
+fzf, Fuzzy file searcher
+git, Version control system
+heroku, Everything you need to get started with Heroku
+hub, GitHub wrapper for Git
+imagemagick, Tools and libraries to manipulate images in many formats
+jpegoptim, Image optimizer
+mas, CLI Wrapper for the macos App-Store
+mpv, Minimalistic video player
+neovim, Editor of choice
+nmap, Network mapping tool
+node, JavaScript runtime
+nodenv, Node version manager
+pandoc, Swiss-army knife of markup format conversion
+postgresql, PostgreSQL database
+puma-dev, Manage rack apps in development with puma
+rbenv, Ruby version manager
+readline, Library for command-line editing
+reattach-to-user-namespace, Needed to support system clipboard access in TMUX
+ruby-build, Ruby building tool used by rbenv
+sqlite, SQLite3 Database
+sshuttle, Shuttling over SSH
+task, Taskwarrior
+terminal-notifier, Send macos notifications via terminal
+tesseract, OCR scanner
+the_silver_searcher, Better searching tool
+tmux, Terminal Multiplexer
+tmuxinator,  Manage complex tmux session easily
+tree, Display directories as trees
+urlview, Tools to view and open URLs in the command line
+wget, Internet file retriever
+yarn, JavaScript package manager
+youtube-dl, Download YouTube videos from the command-line
+zsh, UNIX shell
+zsh-autosuggestions, Fish-like fast/unobtrusive autosuggestions for zsh

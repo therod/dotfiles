@@ -244,7 +244,9 @@ nnoremap <leader>f :NV<CR>
 " ---------------------------------------------------------------------------
 " Goyo
 " ---------------------------------------------------------------------------
-map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
+map <leader>g :Goyo \| set linebreak<CR>
+let g:goyo_height = 100
+let g:goyo_linenr = 1
 
 " ---------------------------------------------------------------------------
 " Compilation
@@ -260,3 +262,6 @@ map <leader>p :!opout "%"<CR>
 " ---------------------------------------------------------------------------
 " Urlview
 noremap <leader>u :w \| startinsert \| term urlview %<cr>
+
+" Spell Check
+map <leader>o :setlocal spell! spelllang=en_us<CR>

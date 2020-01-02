@@ -1,9 +1,5 @@
 .DS_Store
-mail
-bin/notmuch-mutt
 .netrwhist
-nvim/plugin/background-color.vim
-nvim/bundle/*
 nvim/plugged/*
 bundler/bundle.symlink/cache*
-bin/BrowserStackLocal
+localrc

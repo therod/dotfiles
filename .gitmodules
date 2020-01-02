@@ -1,0 +1,12 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+[submodule "cheat/community"]
+	path = cheat/community
+	url = git@github.com:cheat/cheatsheets.git
+	ignore = dirty
+[submodule "cg"]
+	path = cg
+	url = git@github.com:codegestalt/cg.git
+	ignore = dirty

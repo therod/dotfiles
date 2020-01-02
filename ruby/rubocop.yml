@@ -1,0 +1,16 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'node_modules/**'
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'config/initializers/secret_token.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false

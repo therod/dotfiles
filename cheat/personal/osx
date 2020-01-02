@@ -1,0 +1,2 @@
+# Ability to quit the finder
+defaults write com.apple.finder QuitMenuItem -bool YES;killall Finder

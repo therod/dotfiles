@@ -1,0 +1,2 @@
+Download an m3u8 livestream video using ffmpeg
+ffmpeg -i http://.../playlist.m3u8 -c copy -bsf:a aac_adtstoasc output.mp4

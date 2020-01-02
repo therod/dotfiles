@@ -41,3 +41,5 @@ rbenv rehash
 export PATH="/usr/local/opt/libpcap/bin:$PATH"
 
 eval "$($HOME/.cg/bin/cg init -)"
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
