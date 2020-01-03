@@ -1,3 +1,10 @@
+# Functions
+to() { ls -d $HOME/Torrents/*/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
+zk() { cd $ZETTELKASTEN && nvim -c ":Files" }
+notes() { cd $NOTES && nvim -c ":Files" }
+journal() { cd $JOURNAL && nvim $(date '+%Y-%m-%d.md') -c ":Goyo | set linebreak"  }
+essays() { cd $ESSAYS && nvim -c ":Files" }
+
 alias zsh_benchmark='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done'
 alias zsh_debug='zsh -i -c -x exit'
 alias reload!='. ~/.zshrc'
@@ -15,14 +22,6 @@ alias evimrc='vim ~/.dotfiles/nvim/init.vim'
 alias skhvim='vim ~/.skhdrc'
 
 alias l="ls -lah"
-
-# Push and pop it
-alias d='dirs'
-alias p='pushd'
-alias o='popd'
-
-#grep zsh history
-alias hi="history 1 | grep $*"
 
 # default ctags alias
 alias ctags="ctags -R --exclude=.git --exclude=log *"
@@ -58,10 +57,5 @@ alias git=hub
 alias redis-up='redis-server /usr/local/etc/redis.conf > /dev/null &'
 alias redis-down='killall redis-server'
 
-# Pipe my public key to my clipboard. Fuck you, pay me.
+# Pipe my public key to my clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pasteboard.'"
-
-# Commands
-oa() { ls -d /Applications/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open -a ;}
-to() { ls -d $HOME/Torrents/*/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
-zk() { cd $ZETTELKASTEN && nvim -c ":NV" }

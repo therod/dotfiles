@@ -39,4 +39,4 @@ wget, Internet file retriever
 yarn, JavaScript package manager
 youtube-dl, Download YouTube videos from the command-line
 zsh, UNIX shell
-zsh-autosuggestions, Fish-like fast/unobtrusive autosuggestions for zsh
+zsh-completions, Additional completion definitions for zsh

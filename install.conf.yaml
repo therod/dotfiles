@@ -12,6 +12,7 @@
     ~/.config/tmuxinator: tmux/tmuxinator
     ~/.ackrc: ack/ackrc
     ~/.aws: aws
+    ~/.bin: bin
     ~/.bundle: bundler/bundle
     ~/.config/cheat: cheat
     ~/.cg: cg

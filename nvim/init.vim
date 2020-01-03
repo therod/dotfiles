@@ -7,7 +7,8 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " CORE
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary' " Do commenting with `gc`
 Plug 'chriskempson/base16-vim' " Base16 colorscheme system
 Plug 'mileszs/ack.vim'  " Ack
@@ -34,7 +35,6 @@ Plug 'tpope/vim-fugitive' " Git addon for vim
 Plug 'neomake/neomake' " Used for Rubocop
 Plug 'scrooloose/nerdtree' " File Navigation
 Plug 'ervandew/supertab' " Super tabs
-Plug 'alok/notational-fzf-vim'
 Plug 'junegunn/goyo.vim' " Writing
 Plug 'lervag/vimtex' " LaTeX
 
@@ -194,6 +194,7 @@ map <leader>x :bp <BAR> bd #<CR>
 " Ignore rules can be changed in .zshrc. Read more here:
 " https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
 nnoremap <C-p> :FZF<cr>
+nnoremap <leader>f :Files<CR>
 
 " ----------------------------------------------------------------------------
 " CTAGS
@@ -234,12 +235,6 @@ cnoreabbrev AG Ack
 
 " Search for open Todos inside the directory structure
 map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public --ignore-dir=tmp 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
-
-" ---------------------------------------------------------------------------
-" Notational FZF Vim
-" ---------------------------------------------------------------------------
-let g:nv_search_paths = ['~/work/zettelkasten']
-nnoremap <leader>f :NV<CR>
 
 " ---------------------------------------------------------------------------
 " Goyo

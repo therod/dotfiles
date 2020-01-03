@@ -1,42 +1,22 @@
 # CORE
 export EDITOR="nvim"
-export PATH="/usr/local/bin:./bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="/usr/local/sbin:$HOME./bin:$PATH" # /usr/local/bin included in macos
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export READER=""
-export BROWSER=""
+export WORK="$HOME/work"
 
-# GOLANG
-export GOPATH=$HOME/.golang
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+# Setup the environment (needs to be on top)
+export PROJECTS=$HOME/code
+export ZETTELKASTEN=$WORK/zettelkasten
+export NOTES=$WORK/notes
+export JOURNAL=$WORK/journal
+export ESSAYS=$WORK/essays
 
-# NODE
-export NODE_PATH="/usr/local/lib/node"
-export NODE_BIN="/usr/local/share/npm/bin"
-export PATH="/usr/local/share/npm/bin:$PATH"
-
-# YARN SLOW!!!!
-# export PATH="$PATH:`yarn global bin`"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# Grep coloring
+export GREP_OPTIONS='--color=auto'
 
 ### Fix SSH Locales error
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Include ~/.bin in the path
-export PATH="$HOME/.bin:/usr/local/bin:$PATH"
-
-# Include dotfile scripts
-export PATH="$HOME/.dotfiles/bin:$PATH"
-
-# Point perl to local modules
-export PERL_LOCAL_LIB_ROOT="$HOME/perl5"
-export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"
-export PERL_MB_OPT="--install_base \"$PERL_LOCAL_LIB_ROOT\""
-export PERL_MM_OPT="INSTALL_BASE=$PERL_LOCAL_LIB_ROOT"
-export PATH="$PERL_LOCAL_LIB_ROOT/bin:$PATH";
 
 # Colored man pages: http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
 # Less Colors for Man Pages

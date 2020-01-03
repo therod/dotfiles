@@ -1,31 +1,37 @@
-# Setup the environment (needs to be on top)
-export ZSH=$HOME/.dotfiles/zsh
-export PROJECTS=$HOME/code
-export ZETTELKASTEN=$HOME/work/zettelkasten
-
-# use .localrc for SUPER SECRET CRAP that you don't
-# want in your public, versioned repo.
-source ~/.localrc
+# Profile zsh
+zmodload zsh/zprof
 
 # Setup paths
+export ZSH=$HOME/.dotfiles/zsh
 source $ZSH/exports.zsh
 
-# Functions to import
+# use .localrc for SUPER SECRET CRAP that you don't want in your public, versioned repo.
+source ~/.localrc
+
+# Import additional .zsh files
+source $ZSH/config.zsh
+source $ZSH/prompt.zsh
+source $ZSH/aliases.zsh
+
+# Plugins
+source $ZSH/plugins/base16.zsh
+source $ZSH/plugins/cg.zsh
+source $ZSH/plugins/fzf.zsh
+source $ZSH/plugins/node.zsh
+source $ZSH/plugins/rbenv.zsh
+
+# External Plugins
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Functions
 fpath=($ZSH/functions $fpath)
 autoload -U $ZSH/functions/c(:t)
 autoload -U $ZSH/functions/smartextract(:t)
 
-# Import additional .zsh files
-source $ZSH/aliases.zsh
-source $ZSH/config.zsh
-source $ZSH/prompt.zsh
-source $ZSH/plugins.zsh # Slow thanks to base16
-
-# Remove PATH duplicates
-typeset -U path cdpath manpath fpath
-
-# Grep coloring
-export GREP_OPTIONS='--color=auto'
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -Uz compinit
@@ -34,12 +40,3 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 else
 	compinit -C;
 fi;
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-rbenv rehash
-export PATH="/usr/local/opt/libpcap/bin:$PATH"
-
-eval "$($HOME/.cg/bin/cg init -)"
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

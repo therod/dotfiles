@@ -41,8 +41,6 @@ bindkey "^[[B" history-search-forward
 
 bindkey -v
 bindkey '\e[3~' delete-char
-# bindkey '^R' history-incremental-search-backward
-# bindkey '^F' history-incremental-search-forward
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

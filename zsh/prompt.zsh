@@ -1,8 +1,5 @@
 autoload colors && colors
 
-autoload -U zgitinit
-zgitinit
-
 coloratom() {
 	local off=$1 atom=$2
 	if [[ $atom[1] == [[:upper:]] ]]; then
@@ -10,6 +7,7 @@ coloratom() {
 	fi
 	echo $(( $off + $colorcode[${(L)atom}] ))
 }
+
 colorword() {
 	local fg=$1 bg=$2 att=$3
 	local -a s

@@ -1,3 +1,6 @@
+# FZF
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore tmp --ignore .bundle --ignore .git -g ""'
+
 # Key bindings
 # ------------
 if [[ $- == *i* ]]; then

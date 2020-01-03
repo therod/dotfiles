@@ -14,3 +14,6 @@ There's a few special files in the hierarchy.
   available everywhere.
 - **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
   environment.
+
+## What to do if zsh feels slow / sluggish?
+Read this blog post: https://htr3n.github.io/2018/07/faster-zsh/
