@@ -113,6 +113,7 @@ endif
 " ----------------------------------------------------------------------------
 " Save Current File using ctrl-s
 nnoremap <c-s> :w!<cr>
+cnoreabbrev W w!
 
 " Commands to remap paragraphs
 nnoremap Q gqap
@@ -241,7 +242,7 @@ map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public
 " ---------------------------------------------------------------------------
 map <leader>g :Goyo \| set linebreak<CR>
 let g:goyo_height = 100
-let g:goyo_linenr = 1
+let g:goyo_linenr = 0
 
 " ---------------------------------------------------------------------------
 " Compilation
