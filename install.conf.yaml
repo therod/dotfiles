@@ -25,6 +25,8 @@
     ~/.gemrc: ruby/gemrc
     ~/.irbrc: ruby/irbrc
     ~/.rubocop.yml: ruby/rubocop.yml
+    ~/.restic_includes: restic/restic_includes
+    ~/.restic_excludes: restic/restic_excludes
     ~/.taskrc: taskwarrior/taskrc
     ~/.task: taskwarrior/task
     ~/.zshrc: zsh/zshrc
