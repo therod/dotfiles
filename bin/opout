@@ -9,4 +9,6 @@ case "$1" in
 	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) open "$basename".pdf ;;
 	*.[0-9]) open "$basename".pdf ;;
 	*.html) open "$basename".html ;;
+  *.rb) ruby $1;;
+  *.py) python3 $1;;
 esac
