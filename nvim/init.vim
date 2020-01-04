@@ -91,8 +91,8 @@ let html_no_rendering=1
 set noshowmatch
 
 " Store temporary files in a central spot
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set nobackup
 
 let mapleader = ','
 
