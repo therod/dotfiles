@@ -1,6 +1,6 @@
 # CORE
 export EDITOR="nvim"
-export PATH="/usr/local/sbin:$HOME./bin:$PATH" # /usr/local/bin included in macos
+export PATH="/usr/local/sbin:$HOME/.bin:$PATH" # /usr/local/bin included in macos
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 export WORK="$HOME/work"
 
