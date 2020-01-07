@@ -27,3 +27,8 @@ bundle() {
   __rbenv_init
   command bundle "$@"
 }
+
+# Check if puma-dev has initialized the shell and instantly run rbenv
+if [ "$(basename $(ps -o comm= $PPID))" = "puma-dev" ]; then
+  rbenv rehash
+fi

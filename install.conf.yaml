@@ -22,6 +22,7 @@
     ~/.config/nvim: nvim
     ~/.vimrc: nvim/init.vim
     ~/.pandoc: pandoc
+    ~/.puma-config.rb: puma-dev/puma-config.rb
     ~/.gemrc: ruby/gemrc
     ~/.irbrc: ruby/irbrc
     ~/.rubocop.yml: ruby/rubocop.yml
