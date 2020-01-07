@@ -32,6 +32,7 @@ Plug 'skalnik/vim-vroom' " Run tests depending on environment
 Plug 'mattn/webapi-vim' " used by gist-vim
 Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
 Plug 'tpope/vim-fugitive' " Git addon for vim
+Plug 'tpope/vim-rhubarb' "If fugitive.vim is the Git, rhubarb.vim is the Hub
 Plug 'neomake/neomake' " Used for Rubocop
 Plug 'scrooloose/nerdtree' " File Navigation
 Plug 'ervandew/supertab' " Super tabs
