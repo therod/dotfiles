@@ -1,5 +1,5 @@
 ---
-BUNDLE_BUILD__NOKOGIRI: "\\\"--with-xml2-include=/opt/local/include/libxml2 --with-xml2-lib=/opt/local/lib"
+BUNDLE_BUILD__NOKOGIRI: "--with-xml2-include=/usr/local/opt/libxml2/include --with-xml2-lib=/usr/local/opt/libxml2/lib"
 BUNDLE_GEM__COC: "0"
 BUNDLE_GEM__MIT: "0"
 BUNDLE_GEM__TEST: "minitest"
