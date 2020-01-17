@@ -5,7 +5,6 @@
 - clean: ['~', '~/.config']
 
 - link:
-    # SECRET STUFF GOES HERE
     ~/.localrc: localrc
     ~/.tmux.conf: tmux/tmux.conf
     ~/.tmux: tmux/tmux
@@ -31,3 +30,4 @@
     ~/.taskrc: taskwarrior/taskrc
     ~/.task: taskwarrior/task
     ~/.zshrc: zsh/zshrc
+    ~/.offlineimaprc: offlineimap/offlineimaprc

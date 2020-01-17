@@ -1,0 +1,23 @@
+# Example config file if you want to sync your e-mails from GMail to yoru local
+# computer for backup / other purposes.
+[general]
+accounts = Gmail
+maxsyncaccounts = 3
+
+[Account Gmail]
+localrepository = Local
+remoterepository = Remote
+
+[Repository Local]
+type = Maildir
+localfolders = ~/backup/mail
+
+[Repository Remote]
+sslcacertfile = /usr/local/etc/openssl/cert.pem # requires the 'openssl' formula on macos
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = username@gmail.com
+remotepass = PASSWORD # Generate a Google App password for this https://myaccount.google.com/apppasswords
+ssl = yes
+maxconnections = 1
+realdelete = no
