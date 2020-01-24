@@ -169,6 +169,7 @@ augroup END
 augroup Markdown
   autocmd!
   autocmd FileType markdown set wrap
+  autocmd FileType markdown setlocal spell! spelllang=en_us
 augroup END
 
 " ----------------------------------------------------------------------------

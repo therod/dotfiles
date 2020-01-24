@@ -84,3 +84,9 @@ ctrl-w=          - make all equal size
 2. Press I (capital i)
 3. Append to the first line, press <esc> to update all other lines.
 
+# Spell checking
+:setlocal spell! spelllang=en_us
+
+]s              - Move to next misspelled word
+[s              - Move to previous misspelled word
+z=              - Suggest list of alternatives
