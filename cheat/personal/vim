@@ -90,3 +90,5 @@ ctrl-w=          - make all equal size
 ]s              - Move to next misspelled word
 [s              - Move to previous misspelled word
 z=              - Suggest list of alternatives
+zg              - Add word to dictionary
+zw              - Mark word as incorrect
