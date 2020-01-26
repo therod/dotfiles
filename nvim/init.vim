@@ -38,6 +38,7 @@ Plug 'scrooloose/nerdtree' " File Navigation
 Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
 Plug 'lervag/vimtex' " LaTeX
+Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
 call plug#end()
 filetype plugin indent on    " required

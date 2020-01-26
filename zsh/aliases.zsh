@@ -1,9 +1,10 @@
 # Functions
-to() { ls -d $HOME/Torrents/*/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
+to() { ls -d $HOME/Torrents/**/* | awk -v q="'" '{print q $0 q}' | fzf | xargs open ;}
 zk() { cd $ZETTELKASTEN && nvim -c ":Files" }
 notes() { cd $NOTES && nvim -c ":Files" }
 journal() { cd $JOURNAL && nvim $(date '+%Y-%m-%d.md') -c ":Goyo | set linebreak"  }
 essays() { cd $ESSAYS && nvim -c ":Files" }
+accounting() { cd $WORK/accounting && nvim -c ":Files" }
 
 alias zsh_benchmark='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done'
 alias zsh_debug='zsh -i -c -x exit'

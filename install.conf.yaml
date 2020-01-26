@@ -6,6 +6,7 @@
 
 - link:
     ~/.localrc: localrc
+    ~/.ledgerrc: ledger/ledgerrc
     ~/.tmux.conf: tmux/tmux.conf
     ~/.tmux: tmux/tmux
     ~/.config/tmuxinator: tmux/tmuxinator
