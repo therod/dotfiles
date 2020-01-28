@@ -1,4 +1,5 @@
 --sort date
 --effective
 --real
+--strict
 --file ~/work/accounting/data/main.ledger
