@@ -1,0 +1,22 @@
+name: main
+root: ~/
+
+windows:
+  - base:
+  - accounting:
+      root: ~/work/accounting
+  - notes:
+      root: ~/work/notes
+      panes:
+        - nvim
+  - journal:
+      root: ~/work/journal
+      panes:
+        - nvim
+  - zettelkasten:
+      root: ~/work/zettelkasten
+      panes:
+        - nvim
+  - caffeinate:
+      panes:
+        - caffeinate -d
