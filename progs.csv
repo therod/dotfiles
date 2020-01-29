@@ -32,7 +32,6 @@ flag,name,description
 ,tesseract,OCR scanner
 ,the_silver_searcher,Better searching tool
 ,tmux,Terminal Multiplexer
-,tmuxinator, Manage complex tmux session easily
 ,tree,Display directories as trees
 ,urlview,Tools to view and open URLs in the command line
 ,wget,Internet file retriever

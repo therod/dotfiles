@@ -11,8 +11,6 @@ windows:
         - nvim
   - journal:
       root: ~/work/journal
-      panes:
-        - nvim
   - zettelkasten:
       root: ~/work/zettelkasten
       panes:
