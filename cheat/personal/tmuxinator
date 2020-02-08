@@ -1,0 +1,20 @@
+https://stackoverflow.com/questions/26560963/how-to-split-two-vertical-pane-inside-a-horizontal-pane-in-tmux-using-tmuxinator
+
+Use `list-windows` tmux command to read the current layout and use it in a tmuxinator.conf
+
+```
+1: bash [190x41] [layout c9f8,190x41,0,0[190x20,0,0,190x20,0,21{95x20,0,21,94x20
+,96,21}]]
+```
+then in tmuxinator conf
+
+```
+windows:
+   - editor:
+       layout: c9f8,190x41,0,0[190x20,0,0,190x20,0,21{95x20,0,21,94x20,96,21}]
+       panes:
+         - vim
+         - foo1
+         - foo2
+  - server: rails s
+```
