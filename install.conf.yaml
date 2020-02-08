@@ -9,7 +9,9 @@
     ~/.ledgerrc: ledger/ledgerrc
     ~/.tmux.conf: tmux/tmux.conf
     ~/.tmux: tmux/tmux
+    ~/.ctags: ctags/all.ctags
     ~/.config/tmuxinator: tmux/tmuxinator
+    ~/.config/mutt: mutt
     ~/.ackrc: ack/ackrc
     ~/.aws: aws
     ~/.bin: bin
