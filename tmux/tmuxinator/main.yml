@@ -3,18 +3,17 @@ root: ~/
 
 windows:
   - base:
+  - zettelkasten:
+      root: ~/work/zettelkasten/
+      layout: 39cc,158x48,0,0{83x48,0,0,57,74x48,84,0[74x36,84,0,61,74x11,84,37,62]}
+      panes:
+        - nvim
+        - zks
+        - zkt
   - accounting:
       root: ~/work/accounting
-  - notes:
-      root: ~/work/notes
-      panes:
-        - nvim
   - journal:
       root: ~/work/journal
-  - zettelkasten:
-      root: ~/work/zettelkasten
-      panes:
-        - nvim
   - caffeinate:
       panes:
         - caffeinate -d

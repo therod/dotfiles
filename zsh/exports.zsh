@@ -7,12 +7,8 @@ export WORK="$HOME/work"
 # Setup the environment (needs to be on top)
 export PROJECTS=$HOME/code
 export ZETTELKASTEN=$WORK/zettelkasten
-export NOTES=$WORK/notes
 export JOURNAL=$WORK/journal
 export ESSAYS=$WORK/essays
-
-# Grep coloring
-export GREP_OPTIONS='--color=auto'
 
 ### Fix SSH Locales error
 export LC_ALL=en_US.UTF-8
