@@ -8,3 +8,5 @@
 css=.sass,.scss
 --type-add
 js=.coffee
+--type-add
+taskpaper=.taskpaper

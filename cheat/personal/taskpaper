@@ -1,0 +1,36 @@
+https://github.com/cweagans/vim-taskpaper
+
+<Leader>td     Mark task as done
+<Leader>tx     Mark task as cancelled
+<Leader>tt     Mark task as today
+<Leader>tD     Archive @done items
+<Leader>tX     Show tasks marked as cancelled
+<Leader>tT     Show tasks marked as today
+<Leader>t/     Search for items including keyword
+<Leader>ts     Search for items including tag
+<Leader>tp     Fold all projects
+<Leader>t.     Fold all notes
+<Leader>tP     Focus on the current project
+<Leader>tj     Go to next project
+<Leader>tk     Go to previous project
+<Leader>tg     Go to specified project
+<Leader>tm     Move task to specified project
+
+Marking a task as done will add the "@done" context tag to the end of the task,
+and it will be greyed out by the syntax file.
+
+To show all tasks with a particular context tag, type \ts and a tag name to
+search. If you use the \ts command over the desired context tag, the tag name
+is set as default value. This will fold all the irrelevant tasks leaving only
+the tasks in the current context visible.
+
+To fold all top-level projects leaving only the headings visible use the \tp
+command. Standard fold commands can be used to open (zo) and close (zc)
+individual projects.
+
+To show all projects and tasks use the zR command. This disables folding so
+that the entire file is expanded.
+
+To go to next or previous project use the \tj command or \tk command. To go to
+a project you specify use the \tg command. You can complete project names with
+on prompt.

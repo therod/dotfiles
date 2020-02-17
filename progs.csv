@@ -31,6 +31,7 @@ flag,name,description
 ,terminal-notifier,Send macos notifications via terminal
 ,tesseract,OCR scanner
 ,the_silver_searcher,Better searching tool
+,ack,Search tool like grep
 ,tmux,Terminal Multiplexer
 ,tree,Display directories as trees
 ,urlview,Tools to view and open URLs in the command line

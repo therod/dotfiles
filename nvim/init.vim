@@ -24,7 +24,9 @@ Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'chase/vim-ansible-yaml' " YAML Support
-Plug 'tpope/vim-markdown' " Markdown Support
+" Plug 'tpope/vim-markdown' " Markdown Support
+Plug 'godlygeek/tabular' "Required for vim-markdown
+Plug 'plasticboy/vim-markdown'
 
 " OTHER
 Plug 'benmills/vimux' " Send command from vim to tmux
@@ -39,6 +41,8 @@ Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
 Plug 'lervag/vimtex' " LaTeX
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
+
+Plug 'cweagans/vim-taskpaper' "Taskpaper file format
 
 call plug#end()
 filetype plugin indent on    " required
@@ -179,6 +183,8 @@ augroup END
 let g:vroom_map_keys = 1 "Disable Vroom
 let g:vroom_use_colors = 1
 let g:vroom_use_vimux = 1
+let g:vroom_use_terminal = 0
+let g:vroom_clear_screen = 0
 let g:vroom_test_unit_command = 'bin/rails test'
 let g:vroom_use_bundle_exec = 0
 

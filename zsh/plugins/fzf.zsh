@@ -1,5 +1,5 @@
 # FZF
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore tmp --ignore .bundle --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore tmp --ignore .bundle --ignore node_modules --ignore .git -i -g ""'
 
 # Key bindings
 # ------------
