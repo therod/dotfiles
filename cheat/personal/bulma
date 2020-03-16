@@ -1,0 +1,35 @@
+How to use media query mixins in Bulma
+.some-responsive-thing {
+  border: 1px dashed #990000;
+  @include until($desktop) {
+    border-bottom: 1px solid green;
+  }
+
+  @include from($tablet) {
+    border-left: 1px solid yellow;
+  }
+
+  @include tablet {
+    border-top: 2px solid orange;
+  }
+  @include widescreen-only {
+    border-right: 2px solid blue;
+  }
+}
+
+// output
+
+.some-responsive-thing {
+  border: 1px dashed #990000; }
+  @media screen and (max-width: 1087px) {
+    .some-responsive-thing {
+      border-bottom: 1px solid green; } }
+  @media screen and (min-width: 769px) {
+    .some-responsive-thing {
+      border-left: 1px solid yellow; } }
+  @media screen and (min-width: 769px), print {
+    .some-responsive-thing {
+      border-top: 2px solid orange; } }
+  @media screen and (min-width: 1024px) and (max-width: 1167px) {
+    .some-responsive-thing {
+      border-right: 2px solid blue; } }

@@ -6,7 +6,7 @@ windows:
   - tasks:
       root: ~/work/tasks/
       panes:
-        - nvim today.taskpaper
+        - nvim today.md
   - zettelkasten:
       root: ~/work/zettelkasten/
       layout: 39cc,158x48,0,0{83x48,0,0,57,74x48,84,0[74x36,84,0,61,74x11,84,37,62]}

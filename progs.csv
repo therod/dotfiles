@@ -5,7 +5,6 @@ flag,name,description
 ,ctags,Reimplementation of ctags
 ,entr,Run arbitrary commands when files change
 ,exif,Get exif information from images
-,exploitdb,The official Exploit Database
 ,fzf,Fuzzy file searcher
 ,git,Version control system
 ,heroku,Everything you need to get started with Heroku
@@ -20,7 +19,7 @@ flag,name,description
 ,nodenv,Node version manager
 ,pandoc,Swiss-army knife of markup format conversion
 ,postgresql,PostgreSQL database
-,puma-dev,Manage rack apps in development with puma
+,puma/puma/puma-dev,Manage rack apps in development with puma
 ,rbenv,Ruby version manager
 ,readline,Library for command-line editing
 ,reattach-to-user-namespace,Needed to support system clipboard access in TMUX
@@ -43,14 +42,15 @@ flag,name,description
 ,bat,clone of cat(1) with sytax highlighting and Git integration
 ,grep,GNU grep
 ,fd,Find alternative
+,ledger,Command line accounting like a boss
+,restic,Backup system
+,offlineimap,Download e-mails
 cask,1password,1 Password 7
 cask,alfred,Alfred launcher app
 cask,appcleaner,Uninstaller for macos apps
 cask,anki,Flashcard tool
 cask,basecamp,Basecamp 3 app
 cask,brave-browser,Chromium based browser with better privacy
-cask,colorsnapper,Color picker
-cask,daisydisk,Disk analyzer tool
 cask,dash,Developer documentation
 cask,dropshare,Share screenshots instantly via S3
 cask,firefox,Alternative browser
@@ -62,7 +62,6 @@ cask,pacifist,.pkg inspector for macos
 cask,sketch,wireframing tool
 cask,spectacle,window arrangement tool
 cask,spotify,music player
-cask,telegram,Whatsapp like chat tool but better
 cask,the-archive-browser,unarchiving tool for macos
 cask,tor-browser,browse the internet (somewhat) anonymously
 cask,transmission,bittorrent client
@@ -72,9 +71,14 @@ cask,calibre,ebook conversion tools
 cask,coconutbattery,battery analasys for macs
 cask,iterm2,terminal emulator
 cask,mpv,Media player based on Mplayer and mplayer2
+cask,vlc,VLC Media Player
+cask,audio-hijack,Used for JTBD Interviews
 mas,824171161,Affinity Designer
 mas,824183456,Affinity Photo
 mas,1480793815,GoodNotes 5
 mas,409183694,Keynote
 mas,890031187,Marked 2
-mas,904280696,Things 3
+mas,969418666,colorsnapper
+mas,411643860,daisydisk
+mas,747648890,Telegram
+mas,961632517,BeFocusedPro Pomodoro Timer

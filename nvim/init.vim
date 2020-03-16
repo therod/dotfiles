@@ -24,9 +24,10 @@ Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'chase/vim-ansible-yaml' " YAML Support
-" Plug 'tpope/vim-markdown' " Markdown Support
-Plug 'godlygeek/tabular' "Required for vim-markdown
-Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-markdown' " Markdown Support
+Plug 'masukomi/vim-markdown-folding' " Fold support for markdown
+" Plug 'godlygeek/tabular' "Required for vim-markdown
+" Plug 'plasticboy/vim-markdown'
 
 " OTHER
 Plug 'benmills/vimux' " Send command from vim to tmux
@@ -41,8 +42,6 @@ Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
 Plug 'lervag/vimtex' " LaTeX
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
-
-Plug 'cweagans/vim-taskpaper' "Taskpaper file format
 
 call plug#end()
 filetype plugin indent on    " required
@@ -121,6 +120,9 @@ endif
 nnoremap <c-s> :w!<cr>
 cnoreabbrev W w!
 
+" Copy full (escaped) path to the system clipboard
+map <leader>y :let @* = fnameescape(expand('%:p'))<cr>
+
 " Commands to remap paragraphs
 nnoremap Q gqap
 vnoremap Q gq
@@ -163,9 +165,6 @@ augroup vimrcEx
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
-  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
@@ -173,10 +172,13 @@ augroup END
 
 augroup Markdown
   autocmd!
+  autocmd BufRead *.{mkd,markdown,md}  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufWinLeave *.{mkd,markdown,md} mkview
+  autocmd BufWinEnter *.{mkd,markdown,md} silent! loadview
   autocmd FileType markdown set wrap
-  autocmd FileType markdown setlocal spell! spelllang=en_us
 augroup END
 
+let g:markdown_fenced_languages = ['html', 'sql', 'ruby', 'python', 'bash=sh']
 " ----------------------------------------------------------------------------
 " VROOM SETTINGS
 " ----------------------------------------------------------------------------
@@ -249,7 +251,7 @@ map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public
 " ---------------------------------------------------------------------------
 " Goyo
 " ---------------------------------------------------------------------------
-map <leader>g :Goyo \| set linebreak<CR>
+map <leader>g :Goyo \| set linebreak \| set wrap<CR>
 let g:goyo_height = 100
 let g:goyo_linenr = 0
 
@@ -262,6 +264,9 @@ map <leader>c :w! \| !compiler "%"<CR>
 " Open corresponding .pdf/.html or preview
 map <leader>p :!opout "%"<CR>
 
+" Open marked app
+map <leader>P :!open -a /Applications/Marked\ 2.app "%"<CR>
+
 " ---------------------------------------------------------------------------
 " VARIOUS
 " ---------------------------------------------------------------------------
@@ -270,3 +275,6 @@ noremap <leader>u :w \| startinsert \| term urlview %<cr>
 
 " Spell Check
 map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+" Folding
+nnoremap <Space> za
