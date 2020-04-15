@@ -43,6 +43,10 @@ Plug 'junegunn/goyo.vim' " Writing
 Plug 'lervag/vimtex' " LaTeX
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
+" Test
+Plug 'itchyny/lightline.vim'
+Plug 'keith/swift.vim'
+
 call plug#end()
 filetype plugin indent on    " required
 
@@ -53,7 +57,7 @@ filetype plugin indent on
 syntax on
 
 set mouse=""
-set foldlevelstart=20
+" set foldlevelstart=20
 set autoindent
 set backspace=indent,eol,start
 set cmdheight=1
@@ -172,10 +176,16 @@ augroup END
 
 augroup Markdown
   autocmd!
+  autocmd! BufRead,BufNewFile *{.mkd,markdown,md} set filetype=markdown
   autocmd BufRead *.{mkd,markdown,md}  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufWinLeave *.{mkd,markdown,md} mkview
   autocmd BufWinEnter *.{mkd,markdown,md} silent! loadview
   autocmd FileType markdown set wrap
+  autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+
+  au BufRead,BufNewFile *{.mkd,markdown,md} syntax match StrikeoutMatch /\~\~.*\~\~/   
+  hi def Strikeoutcolor ctermfg=16 guifg=#43484d
+  hi link StrikeoutMatch StrikeoutColor
 augroup END
 
 let g:markdown_fenced_languages = ['html', 'sql', 'ruby', 'python', 'bash=sh']
@@ -259,13 +269,13 @@ let g:goyo_linenr = 0
 " Compilation
 " ---------------------------------------------------------------------------
 " Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>c :w! \| !compiler "%"<CR>
+" map <leader>c :w! \| !compiler "%"<CR>
 
 " Open corresponding .pdf/.html or preview
-map <leader>p :!opout "%"<CR>
+" map <leader>p :!opout "%"<CR>
 
 " Open marked app
-map <leader>P :!open -a /Applications/Marked\ 2.app "%"<CR>
+map <leader>p :!open -a /Applications/Marked\ 2.app "%"<CR>
 
 " ---------------------------------------------------------------------------
 " VARIOUS

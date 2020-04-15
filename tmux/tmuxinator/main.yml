@@ -1,5 +1,4 @@
 name: main
-root: ~/
 
 windows:
   - base:
@@ -18,6 +17,3 @@ windows:
       root: ~/work/accounting
   - journal:
       root: ~/work/journal
-  - caffeinate:
-      panes:
-        - caffeinate -d

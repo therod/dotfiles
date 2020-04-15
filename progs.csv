@@ -2,6 +2,7 @@ flag,name,description
 ,awscli,AWS command line tools
 ,cheat,Cheatsheets in your command line
 ,coreutils,GNU core utils for macos
+,rg,Ripgrep
 ,ctags,Reimplementation of ctags
 ,entr,Run arbitrary commands when files change
 ,exif,Get exif information from images
