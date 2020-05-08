@@ -57,13 +57,11 @@ cask,dropshare,Share screenshots instantly via S3
 cask,firefox,Alternative browser
 cask,flux,The official Flux app
 cask,google-chrome,Google Chrome browser
-cask,harvest,Harvest menubar tool for time tracking
 cask,litte-snitch,Network filter / monitor for macos
 cask,pacifist,.pkg inspector for macos
 cask,sketch,wireframing tool
-cask,spectacle,window arrangement tool
+cask,rectangle,window arrangement tool
 cask,spotify,music player
-cask,the-archive-browser,unarchiving tool for macos
 cask,tor-browser,browse the internet (somewhat) anonymously
 cask,transmission,bittorrent client
 cask,transmit,S3,SFTP,FTP,etc... client
@@ -83,3 +81,5 @@ mas,969418666,colorsnapper
 mas,411643860,daisydisk
 mas,747648890,Telegram
 mas,961632517,BeFocusedPro Pomodoro Timer
+mas,425424353,The Unarchiver
+mas,506189836,Harvest
