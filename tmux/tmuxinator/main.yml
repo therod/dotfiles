@@ -2,18 +2,17 @@ name: main
 
 windows:
   - base:
-  - tasks:
-      root: ~/work/tasks/
-      panes:
-        - nvim today.md
   - zettelkasten:
       root: ~/work/zettelkasten/
-      layout: 39cc,158x48,0,0{83x48,0,0,57,74x48,84,0[74x36,84,0,61,74x11,84,37,62]}
+      layout: c82f,181x52,0,0{124x52,0,0,40,56x52,125,0,44}
       panes:
         - nvim
         - zks
-        - zkt
-  - accounting:
-      root: ~/work/accounting
   - journal:
       root: ~/work/journal
+  - accounting:
+      root: ~/work/accounting
+      layout: 9041,181x52,0,0[181x36,0,0,70,181x15,0,37,72]
+      panes:
+        -
+        - ledger cleared assets liabilities

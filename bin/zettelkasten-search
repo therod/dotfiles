@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'sqlite3'
 require 'set'
-require 'byebug'
 
 # Shamelessly 'borrowed' from https://gist.github.com/sirupsen/03fb05cc7efa6a63c8d5c9737fb0686f <3
 

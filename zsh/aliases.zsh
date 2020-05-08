@@ -52,11 +52,12 @@ alias rdm='bundle exec bin/rails db:migrate'
 alias wds='bundle exec bin/webpack-dev-server'
 
 # Tmux
-alias tlist="tmux list-sessions"
+alias tls="tmux list-sessions"
 alias tmux="env TERM=xterm-256color tmux"
 alias tkill="tmux kill-session -t $*"
 alias tnew="tmux new-session -s $*"
 alias tatt="tmux attach -t $*"
+alias ts="tmux switch-client -t $*"
 
 # git
 alias git=hub

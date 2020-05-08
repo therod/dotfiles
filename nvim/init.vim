@@ -24,10 +24,10 @@ Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'chase/vim-ansible-yaml' " YAML Support
-Plug 'tpope/vim-markdown' " Markdown Support
-Plug 'masukomi/vim-markdown-folding' " Fold support for markdown
+" Plug 'tpope/vim-markdown' " Markdown Support
+" Plug 'masukomi/vim-markdown-folding' " Fold support for markdown
 " Plug 'godlygeek/tabular' "Required for vim-markdown
-" Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 
 " OTHER
 Plug 'benmills/vimux' " Send command from vim to tmux
@@ -40,11 +40,11 @@ Plug 'neomake/neomake' " Used for Rubocop
 Plug 'scrooloose/nerdtree' " File Navigation
 Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
-Plug 'lervag/vimtex' " LaTeX
+" Plug 'lervag/vimtex' " LaTeX
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
 " Test
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'keith/swift.vim'
 
 call plug#end()
@@ -75,7 +75,7 @@ set nostartofline
 set nowrap
 set number
 set report=0
-set scrolloff=3
+set scrolloff=5
 set scrolljump=8
 set shell=zsh
 set shiftwidth=2
@@ -93,7 +93,7 @@ set colorcolumn=80
 
 " Performance stuff
 set nocursorcolumn
-set nocursorline
+set cursorline
 set lazyredraw
 let loaded_matchparen=1
 let html_no_rendering=1
@@ -102,6 +102,7 @@ set noshowmatch
 " Store temporary files in a central spot
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set nobackup
+
 
 let mapleader = ','
 
@@ -116,6 +117,10 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
+" Color Settings
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 
 " ----------------------------------------------------------------------------
 " ALIASES / SHORTCUTS
@@ -174,21 +179,30 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 augroup END
 
-augroup Markdown
-  autocmd!
-  autocmd! BufRead,BufNewFile *{.mkd,markdown,md} set filetype=markdown
-  autocmd BufRead *.{mkd,markdown,md}  set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufWinLeave *.{mkd,markdown,md} mkview
-  autocmd BufWinEnter *.{mkd,markdown,md} silent! loadview
-  autocmd FileType markdown set wrap
-  autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
-
-  au BufRead,BufNewFile *{.mkd,markdown,md} syntax match StrikeoutMatch /\~\~.*\~\~/   
-  hi def Strikeoutcolor ctermfg=16 guifg=#43484d
-  hi link StrikeoutMatch StrikeoutColor
-augroup END
-
 let g:markdown_fenced_languages = ['html', 'sql', 'ruby', 'python', 'bash=sh']
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+
+autocmd FileType markdown setlocal linebreak " wrap on words, not characters
+autocmd FileType markdown set wrap
+
+augroup my_spelling_colors
+  " Underline, don't do intrusive red things.
+  autocmd!
+  " autocmd ColorScheme * hi clear SpellBad
+  autocmd ColorScheme * hi SpellBad cterm=underline ctermfg=NONE ctermbg=NONE term=Reverse
+  autocmd ColorScheme * hi SpellCap cterm=underline ctermfg=NONE ctermbg=NONE term=Reverse
+  autocmd ColorScheme * hi SpellLocal cterm=underline ctermfg=NONE ctermbg=NONE term=Reverse
+  autocmd ColorScheme * hi SpellRare cterm=underline ctermfg=NONE ctermbg=NONE term=Reverse
+augroup END
+set spelllang=en_us
+
 " ----------------------------------------------------------------------------
 " VROOM SETTINGS
 " ----------------------------------------------------------------------------
@@ -235,8 +249,8 @@ set tags^=./.git/tags;
 " ---------------------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
+" let g:NERDTreeDirArrowExpandable = '+'
+" let g:NERDTreeDirArrowCollapsible = '-'
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
 let NERDTreeAutoDeleteBuffer = 1
@@ -288,3 +302,67 @@ map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Folding
 nnoremap <Space> za
+
+" set autochdir
+set tags=./tags,tags;
+function! BuildCtags()
+  silent execute ":!bash -lc ctags-build"
+endfunction
+command! -nargs=* BuildCtags call BuildCtags()
+
+function! BuildCscope()
+  silent execute ":!bash -lc cscope-build"
+endfunction
+command! -nargs=* BuildCscope call BuildCscope()
+
+function! SNote(...)
+  let path = strftime("%Y%m%d%H%M")." ".trim(join(a:000)).".md"
+  execute ":sp " . fnameescape(path)
+endfunction
+command! -nargs=* SNote call SNote(<f-args>)
+
+function! Note(...)
+  let path = strftime("%Y%m%d%H%M")." ".trim(join(a:000)).".md"
+  execute ":e " . fnameescape(path)
+endfunction
+command! -nargs=* Note call Note(<f-args>)
+
+function! ZettelkastenSetup()
+  syntax region mkdFootnotes matchgroup=mkdDelimiter start="\[\["    end="\]\]"
+  highlight mkdFootnotes ctermfg=DarkRed guifg=#cc6666
+
+  inoremap <expr> <plug>(fzf-complete-path-custom) fzf#vim#complete#path("rg --files -t md \| sed 's/^/[[/g' \| sed 's/$/]]/'")
+  imap <buffer> [[ <plug>(fzf-complete-path-custom)
+
+  function! s:CompleteTagsReducer(lines)
+    if len(a:lines) == 1
+      return "#" . a:lines[0]
+    else
+      return split(a:lines[1], '\t ')[1]
+    end
+  endfunction
+
+  inoremap <expr> <plug>(fzf-complete-tags) fzf#vim#complete(fzf#wrap({
+        \ 'source': 'zsh -lc "source ~/.dotfiles/zsh/plugins/zettelkasten.zsh && zk-tags-raw"',
+        \ 'options': '--ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
+        \ 'reducer': function('<sid>CompleteTagsReducer')
+        \ }))
+  imap <buffer> # <plug>(fzf-complete-tags)
+
+  " setlocal formatoptions+=a
+  imap <imap> -- —
+endfunction
+
+" Don't know why I can't get FZF to return {2}
+function! InsertSecondColumn(line)
+  " execute 'read !echo ' .. split(a:e[0], '\t')[1]
+  exe 'normal! o' .. split(a:line, '\t')[1]
+endfunction
+
+command! ZKR call fzf#run(fzf#wrap({
+        \ 'source': 'ruby scripts/tag-related.rb "' .. bufname("%") .. '"',
+        \ 'options': '--ansi --exact --nth 2',
+        \ 'sink':    function("InsertSecondColumn")
+      \}))
+
+autocmd BufNew,BufNewFile,BufRead ~/work/zettelkasten/*.md call ZettelkastenSetup()

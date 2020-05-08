@@ -28,10 +28,15 @@ alias zkt="zk-tags"
 zk-search() {
   cd $ZETTELKASTEN
 
-  fzf --ansi --height 100% --preview 'ruby ~/.bin/zettelkasten-search -f {} {q} | bat --language md --style=plain' \
-    --bind "ctrl-o:execute-silent:tmux send-keys -t \{left\} Escape :e Space && \
-            tmux send-keys -t \{left\} -l {} && \
+  fzf --ansi --height 100% --preview 'ruby ~/.bin/zettelkasten-search -f {} {q} | bat --language md --style=plain --color always' \
+    --bind "ctrl-o:execute-silent:tmux send-keys -t \{left\} Escape :read Space ! Space echo Space && \
+            tmux send-keys -t \{left\} -l \"\[\[{}\]\]\" && \
             tmux send-keys -t \{left\} Enter" \
+    --bind "enter:execute-silent[ \
+            tmux send-keys -t \{left\} Escape :e Space && \
+            tmux send-keys -t \{left\} -l {} && \
+            tmux send-keys -t \{left\} Enter \
+            ]" \
     --bind "change:reload:ruby ~/.bin/zettelkasten-search '{q}'" \
     --bind "enter:execute:nvim {}" --phony --preview-window=top:65%
 }
