@@ -22,7 +22,7 @@
     ~/.gitignore: git/gitignore
     ~/.Guardfile: guard/Guardfile
     ~/.config/nvim: nvim
-    ~/.vimrc: nvim/init.vim
+    ~/.config/alacritty: alacritty
     ~/.pandoc: pandoc
     ~/.puma-config.rb: puma-dev/puma-config.rb
     ~/.gemrc: ruby/gemrc
