@@ -303,18 +303,6 @@ map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Folding
 nnoremap <Space> za
 
-" set autochdir
-set tags=./tags,tags;
-function! BuildCtags()
-  silent execute ":!bash -lc ctags-build"
-endfunction
-command! -nargs=* BuildCtags call BuildCtags()
-
-function! BuildCscope()
-  silent execute ":!bash -lc cscope-build"
-endfunction
-command! -nargs=* BuildCscope call BuildCscope()
-
 function! SNote(...)
   let path = strftime("%Y%m%d%H%M")." ".trim(join(a:000)).".md"
   execute ":sp " . fnameescape(path)
@@ -349,7 +337,7 @@ function! ZettelkastenSetup()
   endfunction
 
   inoremap <expr> <plug>(fzf-complete-tags) fzf#vim#complete(fzf#wrap({
-        \ 'source': 'zsh -lc "source ~/.dotfiles/zsh/plugins/zettelkasten.zsh && zk-tags-raw"',
+        \ 'source': 'zsh -lc "zktr"',
         \ 'options': '--multi --ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
         \ 'reducer': function('<sid>CompleteTagsReducer')
         \ }))
