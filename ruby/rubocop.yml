@@ -7,10 +7,29 @@ AllCops:
     - 'bin/*'
     - 'config/initializers/secret_token.rb'
 
+Style/EmptyMethod:
+  Enabled: false
 Style/Documentation:
   Enabled: false
-
+Style/ClassAndModuleChildren:
+  Enabled: false
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/SymbolArray:
   Enabled: false
 Layout/LineLength:
   Enabled: false
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
