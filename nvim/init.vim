@@ -27,7 +27,7 @@ Plug 'chase/vim-ansible-yaml' " YAML Support
 " Plug 'tpope/vim-markdown' " Markdown Support
 " Plug 'masukomi/vim-markdown-folding' " Fold support for markdown
 " Plug 'godlygeek/tabular' "Required for vim-markdown
-Plug 'plasticboy/vim-markdown'
+Plug 'bouk/vim-markdown', { 'branch': 'wikilinks' }
 
 " OTHER
 Plug 'benmills/vimux' " Send command from vim to tmux
@@ -275,7 +275,7 @@ map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public
 " ---------------------------------------------------------------------------
 " Goyo
 " ---------------------------------------------------------------------------
-map <leader>g :Goyo \| set linebreak \| set wrap<CR>
+map <leader>G :Goyo \| set linebreak \| set wrap<CR>
 let g:goyo_height = 100
 let g:goyo_linenr = 0
 
@@ -331,6 +331,12 @@ function! ZettelkastenSetup()
   syntax region mkdFootnotes matchgroup=mkdDelimiter start="\[\["    end="\]\]"
   highlight mkdFootnotes ctermfg=DarkRed guifg=#cc6666
 
+  nnoremap <silent><leader>gf :FZF -q <C-R>=expand("<cword>")<CR><CR>
+
+  if expand("%:t") !~ '^[0-9]\+'
+    return
+  endif
+
   inoremap <expr> <plug>(fzf-complete-path-custom) fzf#vim#complete#path("rg --files -t md \| sed 's/^/[[/g' \| sed 's/$/]]/'")
   imap <buffer> [[ <plug>(fzf-complete-path-custom)
 
@@ -344,25 +350,10 @@ function! ZettelkastenSetup()
 
   inoremap <expr> <plug>(fzf-complete-tags) fzf#vim#complete(fzf#wrap({
         \ 'source': 'zsh -lc "source ~/.dotfiles/zsh/plugins/zettelkasten.zsh && zk-tags-raw"',
-        \ 'options': '--ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
+        \ 'options': '--multi --ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
         \ 'reducer': function('<sid>CompleteTagsReducer')
         \ }))
   imap <buffer> # <plug>(fzf-complete-tags)
-
-  " setlocal formatoptions+=a
-  imap <imap> -- —
 endfunction
-
-" Don't know why I can't get FZF to return {2}
-function! InsertSecondColumn(line)
-  " execute 'read !echo ' .. split(a:e[0], '\t')[1]
-  exe 'normal! o' .. split(a:line, '\t')[1]
-endfunction
-
-command! ZKR call fzf#run(fzf#wrap({
-        \ 'source': 'ruby scripts/tag-related.rb "' .. bufname("%") .. '"',
-        \ 'options': '--ansi --exact --nth 2',
-        \ 'sink':    function("InsertSecondColumn")
-      \}))
 
 autocmd BufNew,BufNewFile,BufRead ~/work/zettelkasten/*.md call ZettelkastenSetup()
