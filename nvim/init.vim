@@ -106,6 +106,8 @@ set nobackup
 
 let mapleader = ','
 
+nnoremap <leader>1 :source ~/.dotfiles/nvim/init.vim<CR>
+
 " ----------------------------------------------------------------------------
 " COLOR STUFF
 " ----------------------------------------------------------------------------
@@ -279,15 +281,6 @@ map <leader>G :Goyo \| set linebreak \| set wrap<CR>
 let g:goyo_height = 100
 let g:goyo_linenr = 0
 
-" ---------------------------------------------------------------------------
-" Compilation
-" ---------------------------------------------------------------------------
-" Compile document, be it groff/LaTeX/markdown/etc.
-" map <leader>c :w! \| !compiler "%"<CR>
-
-" Open corresponding .pdf/.html or preview
-" map <leader>p :!opout "%"<CR>
-
 " Open marked app
 map <leader>p :!open -a /Applications/Marked\ 2.app "%"<CR>
 
@@ -319,6 +312,8 @@ function! ZettelkastenSetup()
   syntax region mkdFootnotes matchgroup=mkdDelimiter start="\[\["    end="\]\]"
   highlight mkdFootnotes ctermfg=DarkRed guifg=#cc6666
 
+  " TODO: Call zks instead of FZF
+  " https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
   nnoremap <silent><leader>gf :FZF -q <C-R>=expand("<cword>")<CR><CR>
 
   if expand("%:t") !~ '^[0-9]\+'

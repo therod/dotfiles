@@ -10,7 +10,7 @@ cd $ZK_PATH
 #   cp index.db $file
 # fi
 
-fzf --ansi --height 100% --preview 'zk-fts-search -f {} {q} | bat --language md --style=plain --color always' \
+fzf --ansi --height 100% --preview 'zk-fts-search -f {} {q} | bat --language md --style=plain' \
   --bind "ctrl-o:execute-silent@tmux send-keys -t \{left\} Escape :read Space ! Space echo Space && \
           tmux send-keys -t \{left\} -l \"\[\[{}\]\]\" && \
           tmux send-keys -t \{left\} Enter@" \
