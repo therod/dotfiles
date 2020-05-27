@@ -24,9 +24,6 @@ Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'chase/vim-ansible-yaml' " YAML Support
-" Plug 'tpope/vim-markdown' " Markdown Support
-" Plug 'masukomi/vim-markdown-folding' " Fold support for markdown
-" Plug 'godlygeek/tabular' "Required for vim-markdown
 Plug 'bouk/vim-markdown', { 'branch': 'wikilinks' }
 
 " OTHER
@@ -40,11 +37,9 @@ Plug 'neomake/neomake' " Used for Rubocop
 Plug 'scrooloose/nerdtree' " File Navigation
 Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
-" Plug 'lervag/vimtex' " LaTeX
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
 " Test
-" Plug 'itchyny/lightline.vim'
 Plug 'keith/swift.vim'
 
 call plug#end()
@@ -93,7 +88,7 @@ set colorcolumn=80
 
 " Performance stuff
 set nocursorcolumn
-set cursorline
+set nocursorline
 set lazyredraw
 let loaded_matchparen=1
 let html_no_rendering=1
@@ -102,7 +97,6 @@ set noshowmatch
 " Store temporary files in a central spot
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set nobackup
-
 
 let mapleader = ','
 
@@ -260,7 +254,7 @@ let NERDTreeAutoDeleteBuffer = 1
 " ---------------------------------------------------------------------------
 " Neomake
 " ---------------------------------------------------------------------------
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 
 " ---------------------------------------------------------------------------
 " ACKGrep
@@ -293,7 +287,6 @@ noremap <leader>u :w \| startinsert \| term urlview %<cr>
 " Spell Check
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 
-" Folding
 nnoremap <Space> za
 
 function! SNote(...)
