@@ -6,7 +6,7 @@ export WORK="$HOME/work"
 
 # Setup the environment (needs to be on top)
 export PROJECTS=$HOME/code
-export ZK_PATH=$ZETTELKASTEN
+export ZK_PATH=$WORK/zettelkasten
 export JOURNAL=$WORK/journal
 export ESSAYS=$WORK/essays
 
