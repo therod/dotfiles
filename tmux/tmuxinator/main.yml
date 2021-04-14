@@ -2,6 +2,7 @@ name: main
 
 windows:
   - base:
+      root: ~
   - zettelkasten:
       root: ~/work/zettelkasten/
       layout: c82f,181x52,0,0{124x52,0,0,40,56x52,125,0,44}
@@ -10,6 +11,8 @@ windows:
         - zks
   - journal:
       root: ~/work/journal
+      panes:
+        - nvim _main.md
   - accounting:
       root: ~/work/accounting
       layout: 9041,181x52,0,0[181x36,0,0,70,181x15,0,37,72]
