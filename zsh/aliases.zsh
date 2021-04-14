@@ -17,6 +17,10 @@ alias zsh_benchmark='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
 alias zsh_debug='zsh -i -c -x exit'
 alias reload!='. ~/.zshrc'
 
+#core
+alias cp='cp -iv'
+alias grep='grep --color=auto'
+
 # edit this file
 alias ealias='vim ~/.dotfiles/zsh/aliases.zsh'
 
