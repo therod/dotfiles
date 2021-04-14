@@ -1,6 +1,6 @@
 set nocompatible
-filetype off
 
+filetype off
 " ----------------------------------------------------------------------------
 " PLUG (https://github.com/junegunn/vim-plug)
 " ----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary' " Do commenting with `gc`
-Plug 'chriskempson/base16-vim' " Base16 colorscheme system
+Plug 'therod/base16-vim' " Base16 colorscheme system
 Plug 'mileszs/ack.vim'  " Ack
 Plug 'ap/vim-buftabline' " Buffer as tabs
 Plug 'tpope/vim-eunuch' " Unix sugar for vim
@@ -35,12 +35,17 @@ Plug 'tpope/vim-fugitive' " Git addon for vim
 Plug 'tpope/vim-rhubarb' "If fugitive.vim is the Git, rhubarb.vim is the Hub
 Plug 'neomake/neomake' " Used for Rubocop
 Plug 'scrooloose/nerdtree' " File Navigation
-Plug 'ervandew/supertab' " Super tabs
 Plug 'junegunn/goyo.vim' " Writing
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
 " Test
 Plug 'keith/swift.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'neoclide/coc.nvim', {'branch': 'release' }
+Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
+Plug 'mattn/emmet-vim'
+Plug 'alvan/vim-closetag'
+" Plug 'ervandew/supertab' " Super tabs
 
 call plug#end()
 filetype plugin indent on    " required
@@ -147,12 +152,12 @@ map <leader>s :%s/\s\+$//e<CR>
 nmap <leader>l :set list!<cr>
 
 " Atom style line moving
-nnoremap <C-j> :m+<CR>==
-nnoremap <C-k> :m-2<CR>==
-inoremap <C-j> <Esc>:m+<CR>==gi
-inoremap <C-k> <Esc>:m-2<CR>==gi
-vnoremap <C-j> :m'>+<CR>gv=gv
-vnoremap <C-k> :m-2<CR>gv=gv
+" nnoremap <C-j> :m+<CR>==
+" nnoremap <C-k> :m-2<CR>==
+" inoremap <C-j> <Esc>:m+<CR>==gi
+" inoremap <C-k> <Esc>:m-2<CR>==gi
+" vnoremap <C-j> :m'>+<CR>gv=gv
+" vnoremap <C-k> :m-2<CR>gv=gv
 
 " Reopen files on the same line as last time
 if has("autocmd")
@@ -333,3 +338,20 @@ function! ZettelkastenSetup()
 endfunction
 
 autocmd BufNew,BufNewFile,BufRead ~/work/zettelkasten/*.md call ZettelkastenSetup()
+
+" let ruby_fold = 1
+" let ruby_foldable_groups = 'def'
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
