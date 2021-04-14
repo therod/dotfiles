@@ -1,4 +1,6 @@
 #!/bin/bash
+# Requires imagemagick & potrace.
+# brew install imagemagick potrace
 
 file="$1"
 pnm="${file%%.*}.pnm"
