@@ -1,5 +1,4 @@
 #!/bin/sh
 cd $HOME
 
-offlineimap
 restic backup --files-from ~/.restic_includes --exclude-file ~/.restic_excludes
