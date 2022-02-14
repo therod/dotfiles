@@ -1,8 +1,0 @@
-#!/bin/bash
-## Fix postgres after OSX crashed
-
-pg_resetxlog /usr/local/var/postgres
-rm /usr/local/var/postgres/postmaster.pid
-pg_resetxlog /usr/local/var/postgres
-pg_resetxlog -f /usr/local/var/postgres
-pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
