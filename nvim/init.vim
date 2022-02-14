@@ -24,7 +24,7 @@ Plug 'cakebaker/scss-syntax.vim' "SCSS Support
 Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
 Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
 Plug 'chase/vim-ansible-yaml' " YAML Support
-Plug 'bouk/vim-markdown', { 'branch': 'wikilinks' }
+Plug 'tpope/vim-markdown'
 
 " OTHER
 Plug 'benmills/vimux' " Send command from vim to tmux
@@ -42,9 +42,14 @@ Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 Plug 'keith/swift.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'neoclide/coc.nvim', {'branch': 'release' }
-Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
+" Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
+Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'yarn install --frozen-lockfile && yarn run build'}
 Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
+" Plug 'Yggdroot/indentLine'
+" Plug 'tomasiser/vim-code-dark'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'ervandew/supertab' " Super tabs
 
 call plug#end()
@@ -103,9 +108,22 @@ set noshowmatch
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set nobackup
 
+" ----------------------------------------------------------------------------
+" DEFAUT MAPPINGS
+" ----------------------------------------------------------------------------
 let mapleader = ','
 
 nnoremap <leader>1 :source ~/.dotfiles/nvim/init.vim<CR>
+
+map WW :w!<CR>
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+" Commands to remap paragraphs
+nnoremap Q gqap
+vnoremap Q gq
 
 " ----------------------------------------------------------------------------
 " COLOR STUFF
@@ -132,10 +150,6 @@ cnoreabbrev W w!
 
 " Copy full (escaped) path to the system clipboard
 map <leader>y :let @* = fnameescape(expand('%:p'))<cr>
-
-" Commands to remap paragraphs
-nnoremap Q gqap
-vnoremap Q gq
 
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
