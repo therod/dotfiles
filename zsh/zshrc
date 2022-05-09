@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 # Setup paths
 export ZSH=$HOME/.dotfiles/zsh
 source $ZSH/exports.zsh
