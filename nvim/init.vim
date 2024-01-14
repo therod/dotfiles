@@ -168,14 +168,6 @@ map <leader>s :%s/\s\+$//e<CR>
 " Shortcut to rapidly toggle `set list
 nmap <leader>l :set list!<cr>
 
-" Atom style line moving
-" nnoremap <C-j> :m+<CR>==
-" nnoremap <C-k> :m-2<CR>==
-" inoremap <C-j> <Esc>:m+<CR>==gi
-" inoremap <C-k> <Esc>:m-2<CR>==gi
-" vnoremap <C-j> :m'>+<CR>gv=gv
-" vnoremap <C-k> :m-2<CR>gv=gv
-
 " Reopen files on the same line as last time
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
