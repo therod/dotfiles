@@ -14,7 +14,6 @@ render_timer = false
 
 [font]
 # AppleFontSmoothing = true
-# opacity = 1.0
 size = 14.0
 
 # [font.bell]
@@ -138,6 +137,7 @@ multiplier = 3
 [window]
 decorations = "none"
 startup_mode = "Windowed"
+opacity = 1.0
 
 [window.dimensions]
 columns = 150

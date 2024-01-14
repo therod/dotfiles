@@ -9,17 +9,24 @@ call plug#begin('~/.config/nvim/plugged')
 " CORE
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'tpope/vim-commentary' " Do commenting with `gc`
+
 Plug 'therod/base16-vim' " Base16 colorscheme system
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 Plug 'mileszs/ack.vim'  " Ack
-Plug 'ap/vim-buftabline' " Buffer as tabs
+" Plug 'ap/vim-buftabline' " Buffer as tabs
 Plug 'tpope/vim-eunuch' " Unix sugar for vim
 
 " SYNTAX
 Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'RRethy/nvim-treesitter-endwise'
-" Plug 'RRethy/nvim-treesitter-endwise'
 Plug 'tpope/vim-rails' " Rails Helpers
 Plug 'vim-ruby/vim-ruby' " Ruby helpers
 Plug 'hail2u/vim-css3-syntax' " CSS3 Support
@@ -45,17 +52,8 @@ Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 Plug 'github/copilot.vim'
 Plug 'keith/swift.vim'
 Plug 'dhruvasagar/vim-table-mode'
-" Plug 'neoclide/coc.nvim', {'branch': 'release' }
-" Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
-" Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'yarn install --frozen-lockfile && yarn run build'}
 Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
-" Plug 'Yggdroot/indentLine'
-" Plug 'tomasiser/vim-code-dark'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'ervandew/supertab' " Super tabs
-" Plug 'cweagans/vim-taskpaper'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -245,14 +243,6 @@ map <C-h> :bprevious<CR>
 map <leader>x :bp <BAR> bd #<CR>
 
 " ----------------------------------------------------------------------------
-" FZF
-" ----------------------------------------------------------------------------
-" Ignore rules can be changed in .zshrc. Read more here:
-" https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
-nnoremap <C-p> :FZF<cr>
-nnoremap <leader>f :Files<CR>
-
-" ----------------------------------------------------------------------------
 " CTAGS
 " ----------------------------------------------------------------------------
 map <leader>ta :exec("tag ".expand("<cword>"))<CR>
@@ -374,5 +364,49 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
+" ----------------------------------------------------------------------------
+" Airline
+" ----------------------------------------------------------------------------
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:airline_symbols = get(g:, 'airline_symbols', {})
+let g:airline_symbols.space = "\ua0"
+
 " let g:user_emmet_install_global = 0
 " autocmd FileType html,css EmmetInstall
+" ----------------------------------------------------------------------------
+" FZF
+" ----------------------------------------------------------------------------
+" Ignore rules can be changed in .zshrc. Read more here:
+" https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
+" nnoremap <C-p> :Files<cr>
+" nnoremap <leader>f :FZF<CR>
+
+" ----------------------------------------------------------------------------
+" Telescope
+" ----------------------------------------------------------------------------
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = "move_selection_next",
+        ["<C-k>"] = "move_selection_previous"
+      }
+    }
+  }
+}
+EOF
