@@ -42,8 +42,8 @@ alias ctags="ctags -R --exclude=.git --exclude=log *"
 alias ttop="top -F -R -o cpu -s 2"
 
 # Postgres
-alias pg-up='brew services start postgresql'
-alias pg-down='brew services stop postgresql'
+alias pg-up='brew services start postgresql@14'
+alias pg-down='brew services stop postgresql@14'
 
 # Ruby
 alias r='rbenv local'
@@ -63,6 +63,10 @@ alias tnew="tmux new-session -s $*"
 alias tatt="tmux attach -t $*"
 alias ts="tmux switch-client -t $*"
 
+# Python 3
+alias pip=/usr/local/bin/pip3
+alias python=/usr/local/bin/python3
+
 # git
 alias git=hub
 
@@ -75,3 +79,5 @@ alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pas
 
 # Various
 alias ss="open -a ScreenSaverEngine.app"
+alias dokku='bash $HOME/.dokku/contrib/dokku_client.sh'
+#alias obs='open -a obs && sudo renice -20 $(grep obs)'

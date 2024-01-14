@@ -17,6 +17,9 @@ Plug 'tpope/vim-eunuch' " Unix sugar for vim
 
 " SYNTAX
 Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'RRethy/nvim-treesitter-endwise'
+" Plug 'RRethy/nvim-treesitter-endwise'
 Plug 'tpope/vim-rails' " Rails Helpers
 Plug 'vim-ruby/vim-ruby' " Ruby helpers
 Plug 'hail2u/vim-css3-syntax' " CSS3 Support
@@ -39,11 +42,12 @@ Plug 'junegunn/goyo.vim' " Writing
 Plug 'ledger/vim-ledger' " Vim Extension for Ledger
 
 " Test
+Plug 'github/copilot.vim'
 Plug 'keith/swift.vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'neoclide/coc.nvim', {'branch': 'release' }
+" Plug 'neoclide/coc.nvim', {'branch': 'release' }
 " Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
-Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'yarn install --frozen-lockfile && yarn run build'}
+" Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'yarn install --frozen-lockfile && yarn run build'}
 Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-closetag'
 " Plug 'Yggdroot/indentLine'
@@ -51,6 +55,7 @@ Plug 'alvan/vim-closetag'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'ervandew/supertab' " Super tabs
+" Plug 'cweagans/vim-taskpaper'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -355,12 +360,14 @@ autocmd BufNew,BufNewFile,BufRead ~/work/zettelkasten/*.md call ZettelkastenSetu
 
 " let ruby_fold = 1
 " let ruby_foldable_groups = 'def'
+let g:loaded_ruby_provider = 0
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Insert <tab> when previous text is space, refresh completion if not.
+" inoremap <silent><expr> <TAB>
+" \ coc#pum#visible() ? coc#pum#next(1):
+" \ <SID>check_back_space() ? "\<Tab>" :
+" \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1

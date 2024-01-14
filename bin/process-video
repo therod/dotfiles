@@ -1,0 +1,8 @@
+#! /usr/bin/env ruby
+
+files = ARGV
+
+files.each do |file|
+  filename = File.basename(file, File.extname(file))
+  system("ffmpeg -i #{filename}.mkv -map 0:v -framerate 60 -map 0:a:0 -map 0:a:1 -map 0:a:2 -map 0:a:3 -c copy #{filename}.mp4")
+end
