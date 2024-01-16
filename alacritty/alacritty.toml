@@ -14,7 +14,7 @@ render_timer = false
 
 [font]
 # AppleFontSmoothing = true
-size = 14.0
+size = 12.0
 
 # [font.bell]
 # animation = "Linear"
@@ -22,7 +22,7 @@ size = 14.0
 # duration = 1
 
 [font.bold]
-family = "Inconsolata"
+family = "Hack Nerd Font Mono"
 style = "Regular"
 
 [font.glyph_offset]
@@ -30,11 +30,11 @@ x = 0
 y = 0
 
 [font.italic]
-family = "Inconsolata"
+family = "Hack Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "Inconsolata"
+family = "Hack Nerd Font Mono"
 style = "Regular"
 
 [font.offset]

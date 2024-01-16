@@ -1,71 +1,11 @@
 set nocompatible
-
 filetype off
-" ----------------------------------------------------------------------------
-" PLUG (https://github.com/junegunn/vim-plug)
-" ----------------------------------------------------------------------------
-call plug#begin('~/.config/nvim/plugged')
+source ~/.dotfiles/nvim/plugins.vim
 
-" CORE
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'tpope/vim-commentary' " Do commenting with `gc`
-
-Plug 'therod/base16-vim' " Base16 colorscheme system
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-
-Plug 'mileszs/ack.vim'  " Ack
-" Plug 'ap/vim-buftabline' " Buffer as tabs
-Plug 'tpope/vim-eunuch' " Unix sugar for vim
-
-" SYNTAX
-Plug 'tpope/vim-endwise' " Autocomplete Ruby statements.
-Plug 'tpope/vim-rails' " Rails Helpers
-Plug 'vim-ruby/vim-ruby' " Ruby helpers
-Plug 'hail2u/vim-css3-syntax' " CSS3 Support
-Plug 'cakebaker/scss-syntax.vim' "SCSS Support
-Plug 'MaxMEllon/vim-jsx-pretty' " New Javascript Plugin
-Plug 'sunaku/vim-ruby-minitest' " Minitest helpers
-Plug 'chase/vim-ansible-yaml' " YAML Support
-Plug 'tpope/vim-markdown'
-
-" OTHER
-Plug 'benmills/vimux' " Send command from vim to tmux
-Plug 'skalnik/vim-vroom' " Run tests depending on environment
-Plug 'mattn/webapi-vim' " used by gist-vim
-Plug 'mattn/gist-vim' " Ability to edit gists with :Gist -l
-Plug 'tpope/vim-fugitive' " Git addon for vim
-Plug 'tpope/vim-rhubarb' "If fugitive.vim is the Git, rhubarb.vim is the Hub
-Plug 'neomake/neomake' " Used for Rubocop
-Plug 'scrooloose/nerdtree' " File Navigation
-Plug 'junegunn/goyo.vim' " Writing
-Plug 'ledger/vim-ledger' " Vim Extension for Ledger
-
-" Test
-Plug 'github/copilot.vim'
-Plug 'keith/swift.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'mattn/emmet-vim'
-Plug 'alvan/vim-closetag'
-
-call plug#end()
-filetype plugin indent on    " required
-
-" ----------------------------------------------------------------------------
-" BASIC CONFIGURATION
-" ----------------------------------------------------------------------------
 filetype plugin indent on
 syntax on
 
 set mouse=""
-" set foldlevelstart=20
 set autoindent
 set backspace=indent,eol,start
 set cmdheight=1
@@ -137,6 +77,7 @@ end
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
+  let $BAT_THEME='Solarized (dark)'
   source ~/.vimrc_background
 endif
 
@@ -189,18 +130,6 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 augroup END
 
-let g:markdown_fenced_languages = ['html', 'sql', 'ruby', 'python', 'bash=sh']
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_auto_insert_bullets = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_no_extensions_in_markdown = 1
-let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_autowrite = 1
-
-autocmd FileType markdown setlocal linebreak " wrap on words, not characters
-autocmd FileType markdown set wrap
 
 augroup my_spelling_colors
   " Underline, don't do intrusive red things.
@@ -213,19 +142,6 @@ augroup my_spelling_colors
 augroup END
 set spelllang=en_us
 
-" ----------------------------------------------------------------------------
-" VROOM SETTINGS
-" ----------------------------------------------------------------------------
-let g:vroom_map_keys = 1 "Disable Vroom
-let g:vroom_use_colors = 1
-let g:vroom_use_vimux = 1
-let g:vroom_use_terminal = 0
-let g:vroom_clear_screen = 0
-let g:vroom_test_unit_command = 'bin/rails test'
-let g:vroom_use_bundle_exec = 0
-
-autocmd Filetype ruby map <leader>r :VroomRunTestFile<CR>
-autocmd Filetype ruby map <leader>R :VroomRunNearestTest<CR>
 
 " ----------------------------------------------------------------------------
 " BUFFERS N SHIT, BECAUSE FUCK TABS
@@ -283,6 +199,84 @@ let g:goyo_linenr = 0
 
 " Open marked app
 map <leader>p :!open -a /Applications/Marked\ 2.app "%"<CR>
+
+" ----------------------------------------------------------------------------
+" VIM-VROOM
+" ----------------------------------------------------------------------------
+
+let g:vroom_map_keys = 1 "Disable Vroom
+let g:vroom_use_colors = 1
+let g:vroom_use_vimux = 1
+let g:vroom_use_terminal = 0
+let g:vroom_clear_screen = 0
+let g:vroom_test_unit_command = 'bin/rails test'
+let g:vroom_use_bundle_exec = 0
+
+autocmd Filetype ruby map <leader>r :VroomRunTestFile<CR>
+autocmd Filetype ruby map <leader>R :VroomRunNearestTest<CR>
+
+" ----------------------------------------------------------------------------
+" VIM-MARKDOWN
+" ----------------------------------------------------------------------------
+let g:markdown_fenced_languages = ['html', 'sql', 'ruby', 'python', 'bash=sh']
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+
+autocmd FileType markdown setlocal linebreak " wrap on words, not characters
+autocmd FileType markdown set wrap
+
+" ----------------------------------------------------------------------------
+" Airline
+" ----------------------------------------------------------------------------
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:airline_symbols = get(g:, 'airline_symbols', {})
+let g:airline_symbols.space = "\ua0"
+
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
+" ----------------------------------------------------------------------------
+" FZF
+" ----------------------------------------------------------------------------
+" Ignore rules can be changed in .zshrc. Read more here:
+" https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
+nnoremap <C-p> <cmd>Files<cr>
+" nnoremap <leader>f :FZF<CR>
+
+" ----------------------------------------------------------------------------
+" Telescope
+" ----------------------------------------------------------------------------
+" nnoremap <C-p> <cmd>Telescope find_files<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" lua << EOF
+" require('telescope').setup{
+"   defaults = {
+"     mappings = {
+"       i = {
+"         ["<C-j>"] = "move_selection_next",
+"         ["<C-k>"] = "move_selection_previous"
+"       }
+"     }
+"   }
+" }
+" EOF
+
 
 " ---------------------------------------------------------------------------
 " VARIOUS
@@ -355,50 +349,3 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-
-" ----------------------------------------------------------------------------
-" Airline
-" ----------------------------------------------------------------------------
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-let g:airline_symbols = get(g:, 'airline_symbols', {})
-let g:airline_symbols.space = "\ua0"
-
-" let g:user_emmet_install_global = 0
-" autocmd FileType html,css EmmetInstall
-" ----------------------------------------------------------------------------
-" FZF
-" ----------------------------------------------------------------------------
-" Ignore rules can be changed in .zshrc. Read more here:
-" https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
-" nnoremap <C-p> :Files<cr>
-" nnoremap <leader>f :FZF<CR>
-
-" ----------------------------------------------------------------------------
-" Telescope
-" ----------------------------------------------------------------------------
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-lua << EOF
-require('telescope').setup{
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-j>"] = "move_selection_next",
-        ["<C-k>"] = "move_selection_previous"
-      }
-    }
-  }
-}
-EOF
