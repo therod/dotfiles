@@ -1,3 +1,6 @@
+" lua require("lua/init")
+let mapleader = ","
+
 set nocompatible
 filetype off
 source ~/.dotfiles/nvim/plugins.vim
@@ -50,12 +53,13 @@ set noshowmatch
 " Store temporary files in a central spot
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set nobackup
+set nowritebackup
+set noswapfile
+
 
 " ----------------------------------------------------------------------------
 " DEFAUT MAPPINGS
 " ----------------------------------------------------------------------------
-let mapleader = ','
-
 nnoremap <leader>1 :source ~/.dotfiles/nvim/init.vim<CR>
 
 map WW :w!<CR>
@@ -166,6 +170,7 @@ set tags^=./.git/tags;
 " NERDTree
 " ---------------------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
+map <leader>N :NERDTreeFind<CR>
 let g:NERDTreeWinPos = "right"
 " let g:NERDTreeDirArrowExpandable = '+'
 " let g:NERDTreeDirArrowCollapsible = '-'
@@ -188,7 +193,7 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
 " Search for open Todos inside the directory structure
-map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public --ignore-dir=tmp 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
+" map <leader>N :Ag --ignore-dir=log --ignore-dir=node_modules --ignore-dir=public --ignore-dir=tmp 'TODO\|FIXME\|CHANGED\|NOTE' *<CR>
 
 " ---------------------------------------------------------------------------
 " Goyo
