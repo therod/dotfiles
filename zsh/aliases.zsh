@@ -33,6 +33,9 @@ alias vim='nvim'
 alias evimrc='vim ~/.dotfiles/nvim/init.vim'
 alias skhvim='vim ~/.skhdrc'
 
+# edit espanso config
+alias eespanso='vim ~/Library/Application\ Support/espanso/match/base.yml'
+
 alias l="ls -lah"
 
 # default ctags alias

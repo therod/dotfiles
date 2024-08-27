@@ -37,3 +37,6 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 else
 	compinit -C;
 fi;
+
+# Created by `pipx` on 2024-05-30 17:16:52
+export PATH="$PATH:/Users/rodrigo/.local/bin"
