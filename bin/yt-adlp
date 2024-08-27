@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Check if the correct number of arguments are passed
+if [ "$#" -ne 4 ]; then
+  echo "Usage: $0 <YouTube URL> <Start Time> <End Time> <Output MP3 File>"
+  exit 1
+fi
+
+# Assign command line arguments to variables
+YOUTUBE_URL="$1"
+START_TIME="$2"
+END_TIME="$3"
+OUTPUT_MP3="$4"
+
+# Temporary file name for the downloaded audio
+TEMP_AUDIO="temp_audio.m4a"
+
+# Download the best audio using yt-dlp
+echo "Downloading audio..."
+yt-dlp -f 140 -o "$TEMP_AUDIO" "$YOUTUBE_URL"
+
+# Since we're directly downloading to MP3, we adjust the trimming process.
+# Note: Trimming accuracy might not be frame-precise without re-encoding, but this method avoids additional conversion steps.
+
+# Convert and trim the audio directly to the final MP3, removing the need for a temporary trimmed audio file
+echo "Trimming and converting to MP3..."
+ffmpeg -ss "$START_TIME" -to "$END_TIME" -i "$TEMP_AUDIO" -codec:a libmp3lame -b:a 192k "$OUTPUT_MP3"
+
+# No need to remove a temporary video file, as we're directly working with audio now
+echo "Process completed. Output MP3 file: $OUTPUT_MP3"
+
+rm "$TEMP_AUDIO"

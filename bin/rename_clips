@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ] && [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <prefix> <start_number> [dry_run]"
+    echo "Example: $0 spellblade 220"
+    echo "Example with dry run: $0 spellblade 220 dry_run"
+    exit 1
+fi
+
+prefix=$1
+start_number=$2
+dry_run=false
+
+if [ "$#" -eq 3 ] && [ "$3" = "dry_run" ]; then
+    dry_run=true
+fi
+
+# Find the highest existing number
+highest_num=$(find . -maxdepth 1 -name "${prefix}_*.mp4" | sed -E "s/.*${prefix}_0*([0-9]+)\.mp4$/\1/" | sort -rn | head -n1)
+
+# If no existing files found, use the provided start_number
+if [ -z "$highest_num" ] || [ "$start_number" -gt "$highest_num" ]; then
+    counter=$start_number
+else
+    counter=$((highest_num + 1))
+    echo "Warning: Found existing files. Starting from number $counter to avoid overwriting."
+fi
+
+find . -maxdepth 1 -name "*.mp4" | sort | while read file; do
+    if [[ "$file" =~ ${prefix}_[0-9]{5}\.mp4 ]]; then
+        echo "Skipping already formatted file: $file"
+        continue
+    fi
+    new_name=$(printf "${prefix}_%05d.mp4" $counter)
+    if $dry_run; then
+        echo "Would rename $file to $new_name"
+    else
+        echo "Renaming $file to $new_name"
+        mv "$file" "$new_name"
+    fi
+    ((counter++))
+done
+
+if $dry_run; then
+    echo "Dry run complete. No files were actually renamed."
+else
+    echo "Renaming complete."
+fi

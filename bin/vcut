@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Check if the correct number of arguments are passed
+if [ "$#" -ne 4 ]; then
+  echo "Usage: $0 <file> <Start Time> <End Time> <Output file>"
+  exit 1
+fi
+
+
+VIDEO_FILE="$1"
+START_TIME="$2"
+END_TIME="$3"
+OUTFILE="$4"
+
+ffmpeg -ss "$START_TIME" -to "$END_TIME" -i "$VIDEO_FILE" -c copy "$OUTFILE"

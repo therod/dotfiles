@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+require "openai"
+require 'pry'
+
+
+binding.pry
+
+
+
+
+
+### FARADAY VARIANT
+# require 'faraday'
+# require 'faraday/multipart'
+# require 'pry'
+
+# DEEPL_AUTH_KEY = ENV["DEEPL_AUTH_KEY"]
+
+# input_file = ARGV[0]
+# output_file = ARGV[1]
+
+# conn = Faraday.new(url: 'https://api.deepl.com') do |f|
+#   f.request :multipart
+#   f.request :url_encoded
+#   f.adapter Faraday.default_adapter # Use the default net/http adapter
+# end
+
+# # Prepare the request payload with multipart encoding
+# payload = {
+#   source_lang: 'DE',
+#   target_lang: 'EN',
+#   file: Faraday::Multipart::FilePart.new(File.open(input_file), 'text/plain')
+# }
+
+# response = conn.post do |req|
+#   req.url '/v2/document'
+#   req.headers['Authorization'] = "DeepL-Auth-Key #{DEEPL_AUTH_KEY}"
+#   req.body = payload
+# end
