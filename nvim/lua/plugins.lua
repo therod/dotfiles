@@ -1,16 +1,15 @@
 return {
   -- Core plugins
   { "junegunn/fzf", build = "./install --all" },
+  "junegunn/fzf.vim",
   "tpope/vim-commentary",
   "tpope/vim-eunuch",
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "mileszs/ack.vim",
-
   "vim-airline/vim-airline",
   "vim-airline/vim-airline-themes",
   "ryanoasis/vim-devicons",
-
 
   -- Utility plugins
   "benmills/vimux",
@@ -48,12 +47,7 @@ return {
   -- Colorscheme
   "chriskempson/base16-vim",
 
-  -- Writing
-  "junegunn/goyo.vim",
-  "reedes/vim-pencil",
-
   -- Experimental
-  "bling/vim-bufferline",
   "scrooloose/nerdtree",
   { "yetone/avante.nvim", branch = "main" },
 
@@ -61,7 +55,7 @@ return {
   "neomake/neomake",
 
   { "neoclide/coc.nvim", branch = "release" },
-  -- { "rodrigore/coc-tailwind-intellisense", build = "npm install" },
+  { "rodrigore/coc-tailwind-intellisense", build = "NODE_OPTIONS=--openssl-legacy-provider npm install" },
 
   "ngmy/vim-rubocop",
 
@@ -105,6 +99,18 @@ return {
         },
         ft = { "markdown", "Avante" },
       },
+    },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      -- suggested keymap
+      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   }
 }

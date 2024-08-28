@@ -26,3 +26,6 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 # ~/ cleanup:
 export LESSHISTFILE="-"
+
+# libgit2
+export LD_LIBRARY_PATH="/usr/local/opt/libgit2/lib:$LD_LIBRARY_PATH"
