@@ -4,3 +4,5 @@ nvim/plugged/*
 bundler/bundle.symlink/cache*
 bundler/bundle/config
 localrc
+.avante_chat_history/
+mandark-history.json

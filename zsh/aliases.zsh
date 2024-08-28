@@ -30,7 +30,7 @@ alias dotcd='cd ~/.dotfiles'
 
 # edit vim stuff
 alias vim='nvim'
-alias evimrc='vim ~/.dotfiles/nvim/init.vim'
+alias evimrc='vim ~/.dotfiles/nvim/init.lua'
 alias skhvim='vim ~/.skhdrc'
 
 # edit espanso config

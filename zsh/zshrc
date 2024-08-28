@@ -40,3 +40,5 @@ fi;
 
 # Created by `pipx` on 2024-05-30 17:16:52
 export PATH="$PATH:/Users/rodrigo/.local/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
