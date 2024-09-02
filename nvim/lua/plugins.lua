@@ -7,8 +7,8 @@ return {
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "mileszs/ack.vim",
-  "vim-airline/vim-airline",
-  "vim-airline/vim-airline-themes",
+  -- "vim-airline/vim-airline",
+  -- "vim-airline/vim-airline-themes",
   "ryanoasis/vim-devicons",
 
   -- Utility plugins
@@ -51,13 +51,13 @@ return {
   "scrooloose/nerdtree",
   { "yetone/avante.nvim", branch = "main" },
 
-  "godlygeek/tabular",
+  -- "godlygeek/tabular",
   "neomake/neomake",
 
-  { "neoclide/coc.nvim", branch = "release" },
-  { "rodrigore/coc-tailwind-intellisense", build = "NODE_OPTIONS=--openssl-legacy-provider npm install" },
+  -- { "neoclide/coc.nvim", branch = "release" },
+  -- { "rodrigore/coc-tailwind-intellisense", build = "NODE_OPTIONS=--openssl-legacy-provider npm install" },
 
-  "ngmy/vim-rubocop",
+  -- "ngmy/vim-rubocop",
 
   { "aduros/ai.vim", branch = "main" },
   {
@@ -75,6 +75,10 @@ return {
     end,
   },
   {
+      'nvim-lualine/lualine.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+  {
     "yetone/avante.nvim",
     event = "VeryLazy",
     build = "make",
@@ -90,15 +94,15 @@ return {
         dependencies = {
           "MunifTanjim/nui.nvim"
         }
-      },
-      --- The below is optional, make sure to setup it properly if you have lazy=true
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+      }
+      -- --- The below is optional, make sure to setup it properly if you have lazy=true
+      -- {
+      --   'MeanderingProgrammer/render-markdown.nvim',
+      --   opts = {
+      --     file_types = { "markdown", "Avante" },
+      --   },
+      --   ft = { "markdown", "Avante" },
+      -- },
     },
   },
   {

@@ -31,6 +31,48 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {'buffers'},
+  },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 
 vim.cmd('filetype off')
 vim.cmd('filetype plugin indent on')
@@ -77,7 +119,7 @@ vim.opt.foldmethod = 'syntax'
 vim.opt.foldlevelstart = 20
 
 -- Status line
-vim.opt.statusline = "%<%f\\ (%{&ft})\\ %-4(%m%)%=%-19(%3l,%02c%03V%)"
+-- vim.opt.statusline = "%<%f\\ (%{&ft})\\ %-4(%m%)%=%-19(%3l,%02c%03V%)"
 
 -- Store temporary files in a central spot
 vim.opt.backupdir = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
@@ -173,13 +215,13 @@ function _G.show_docs()
 end
 vim.keymap.set("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
--- Highlight the symbol and its references when holding the cursor
-vim.api.nvim_create_augroup("CocGroup", {})
-vim.api.nvim_create_autocmd("CursorHold", {
-    group = "CocGroup",
-    command = "silent call CocActionAsync('highlight')",
-    desc = "Highlight symbol under cursor on CursorHold"
-})
+-- -- Highlight the symbol and its references when holding the cursor
+-- vim.api.nvim_create_augroup("CocGroup", {})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--     group = "CocGroup",
+--     command = "silent call CocActionAsync('highlight')",
+--     desc = "Highlight symbol under cursor on CursorHold"
+-- })
 
 -- Symbol renaming
 vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
@@ -188,21 +230,21 @@ vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
 vim.keymap.set("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
 vim.keymap.set("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
 
--- Setup formatexpr specified filetype(s)
-vim.api.nvim_create_autocmd("FileType", {
-  group = "CocGroup",
-  pattern = "typescript,json",
-  command = "setl formatexpr=CocAction('formatSelected')",
-  desc = "Setup formatexpr specified filetype(s)."
-})
+-- -- Setup formatexpr specified filetype(s)
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = "CocGroup",
+--   pattern = "typescript,json",
+--   command = "setl formatexpr=CocAction('formatSelected')",
+--   desc = "Setup formatexpr specified filetype(s)."
+-- })
 
--- Update signature help on jump placeholder
-vim.api.nvim_create_autocmd("User", {
-  group = "CocGroup",
-  pattern = "CocJumpPlaceholder",
-  command = "call CocActionAsync('showSignatureHelp')",
-  desc = "Update signature help on jump placeholder"
-})
+-- -- Update signature help on jump placeholder
+-- vim.api.nvim_create_autocmd("User", {
+--   group = "CocGroup",
+--   pattern = "CocJumpPlaceholder",
+--   command = "call CocActionAsync('showSignatureHelp')",
+--   desc = "Update signature help on jump placeholder"
+-- })
 
 -- Apply codeAction to the selected region
 vim.keymap.set("x", "<leader>a", "<Plug>(coc-codeaction-selected)", {silent = true})
@@ -238,7 +280,7 @@ vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", {na
 vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
 
 -- Add (Neo)Vim's native statusline support
-vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
+-- vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
 
 -- DEFAULT MAPPINGS
 vim.api.nvim_set_keymap('', 'WW', ':w!<CR>', { noremap = true })
@@ -335,18 +377,6 @@ vim.cmd([[
   autocmd FileType markdown setlocal linebreak
   autocmd FileType markdown set wrap
 ]])
-
--- ----------------------------------------------------------------------------
--- Airline
--- ----------------------------------------------------------------------------
-vim.g.airline_theme = 'solarized'
-vim.g.airline_solarized_bg = 'dark'
-vim.g.airline_powerline_fonts = 1
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline#extensions#tabline#formatter'] = 'unique_tail'
---
-vim.g.airline_symbols = vim.g.airline_symbols or {}
-vim.g.airline_symbols.space = "\u{00a0}"
 
 -- FZF
 -- ----------------------------------------------------------------------------
