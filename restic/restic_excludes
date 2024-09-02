@@ -1,3 +1,7 @@
 code/**/node_modules/*
 code/**/tmp/cache/
+code/**/storage/*
+code/**/log/*
+code/**/node_modules/*
 .dotfiles/bundler/bundle/cache/
+work/_archive/_nobackup
