@@ -1,7 +1,7 @@
 {
   "ack.vim": { "branch": "master", "commit": "36e40f9ec91bdbf6f1adf408522a73a6925c3042" },
   "ai.vim": { "branch": "main", "commit": "489d2c1b1e5373d7da7e50ba189b289a375c2034" },
-  "avante.nvim": { "branch": "main", "commit": "d520f0933323ba982c9665d8e4fe91000ff14e99" },
+  "avante.nvim": { "branch": "main", "commit": "9765eaca21a96c6a726b8af4b8ab6b7d94eb9365" },
   "base16-vim": { "branch": "master", "commit": "3be3cd82cd31acfcab9a41bad853d9c68d30478d" },
   "copilot.vim": { "branch": "release", "commit": "782461159655b259cff10ecff05efa761e3d4764" },
   "dash.vim": { "branch": "master", "commit": "25b17d9488454a1fcdbb2cbe829a23226f95e3c2" },
@@ -29,7 +29,7 @@
   "vim-devicons": { "branch": "master", "commit": "71f239af28b7214eebb60d4ea5bd040291fb7e33" },
   "vim-endwise": { "branch": "master", "commit": "3719ffddb5e42bf67b55b2183d7a6fb8d3e5a2b8" },
   "vim-eunuch": { "branch": "master", "commit": "8fb3904be27b6b60d086f87c2570085902414069" },
-  "vim-fugitive": { "branch": "master", "commit": "0444df68cd1cdabc7453d6bd84099458327e5513" },
+  "vim-fugitive": { "branch": "master", "commit": "1d18c696c4284e9ce9467a5c04d3adf8af43f994" },
   "vim-jade": { "branch": "master", "commit": "ea39cd942cf3194230cf72bfb838901a5344d3b3" },
   "vim-javascript": { "branch": "master", "commit": "c470ce1399a544fe587eab950f571c83cccfbbdc" },
   "vim-markdown": { "branch": "master", "commit": "f405b47fd8774ecd5e808e6de9c85d9029da251c" },

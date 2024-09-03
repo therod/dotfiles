@@ -49,7 +49,6 @@ return {
 
   -- Experimental
   "scrooloose/nerdtree",
-  { "yetone/avante.nvim", branch = "main" },
 
   -- "godlygeek/tabular",
   "neomake/neomake",
@@ -78,6 +77,7 @@ return {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
+  { "yetone/avante.nvim", branch = "main" },
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
