@@ -141,7 +141,7 @@ multiplier = 3
 [window]
 decorations = "none"
 startup_mode = "Windowed"
-opacity = 1.0
+opacity = 1.00
 
 [window.dimensions]
 columns = 150

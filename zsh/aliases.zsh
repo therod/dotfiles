@@ -69,10 +69,16 @@ alias ts="tmux switch-client -t $*"
 
 # Zellij
 alias z="zellij -l welcome"
+alias znew="zellij"
 alias zls="zellij list-sessions"
-alias zkill="zellij delete-session $* --force"
+alias zkill="zellij kill-session $*"
+alias zkillall="zellij kill-all-sessions"
 alias znew="zellij -s $*"
 alias zatt="zellij attach $*"
+alias zedit='vim ~/.dotfiles/zellij/config.kdl'
+
+# Alacritty
+alias aedit='vim ~/.dotfiles/alacritty/alacritty.toml'
 
 # Python 3
 alias pip=/usr/local/bin/pip3
