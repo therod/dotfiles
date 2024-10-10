@@ -67,6 +67,13 @@ alias tnew="tmux new-session -s $*"
 alias tatt="tmux attach -t $*"
 alias ts="tmux switch-client -t $*"
 
+# Zellij
+alias z="zellij -l welcome"
+alias zls="zellij list-sessions"
+alias zkill="zellij delete-session $* --force"
+alias znew="zellij -s $*"
+alias zatt="zellij attach $*"
+
 # Python 3
 alias pip=/usr/local/bin/pip3
 alias python=/usr/local/bin/python3

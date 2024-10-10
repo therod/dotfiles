@@ -32,6 +32,7 @@ return {
   { "duwanis/tomdoc.vim" },
 
   -- Experimental
+  { "imsnif/kdl.vim" },
   { "neomake/neomake" },
   {
     "folke/tokyonight.nvim",
