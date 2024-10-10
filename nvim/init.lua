@@ -251,13 +251,46 @@ vim.api.nvim_set_keymap('n', '<Leader>TT', ':Ctags<CR>', { noremap = true })
 -- Fugitive
 vim.opt.tags:prepend('./.git/tags;')
 
--- NERDTree
-vim.api.nvim_set_keymap('n', '<leader>n', ':NERDTreeToggle<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>N', ':NERDTreeFind<CR>', { noremap = true })
-vim.g.NERDTreeWinPos = "right"
-vim.g.NERDTreeMinimalUI = 1
-vim.g.NERDTreeDirArrows = 1
-vim.g.NERDTreeAutoDeleteBuffer = 1
+-- Neotree
+require('neo-tree').setup({
+  window = {
+    position = "right",
+    width = 40,
+    mappings = {
+      ["o"] = "reveal_in_finder",
+    }
+  },
+  commands = {
+    reveal_in_finder = function(state)
+      local node = state.tree:get_node()
+      local path = node:get_id()
+      vim.fn.system("open -R '" .. path .. "'")
+    end,
+  }
+})
+
+vim.api.nvim_set_keymap('n', '<leader>n', ':lua ToggleNeotree()<CR>', { noremap = true, silent = true })
+
+function ToggleNeotree()
+    local neotree_wins = {}
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.bo[buf].filetype == "neo-tree" then
+            table.insert(neotree_wins, win)
+        end
+    end
+
+    if #neotree_wins > 0 then
+        vim.cmd("Neotree close")
+    else
+        vim.cmd("Neotree")
+    end
+end
+-- vim.api.nvim_set_keymap('n', '<leader>N', ':NERDTreeFind<CR>', { noremap = true })
+-- vim.g.NERDTreeWinPos = "right"
+-- vim.g.NERDTreeMinimalUI = 1
+-- vim.g.NERDTreeDirArrows = 1
+-- vim.g.NERDTreeAutoDeleteBuffer = 1
 
 -- VIM-MARKDOWN
 vim.g.markdown_fenced_languages = {'html', 'sql', 'ruby', 'python', 'bash=sh'}

@@ -34,13 +34,22 @@ return {
   "duwanis/tomdoc.vim",
 
   -- Experimental
-  "scrooloose/nerdtree",
   "neomake/neomake",
 
   { "aduros/ai.vim", branch = "main" },
   { 'echasnovski/mini.base16', version = false },
   { 'echasnovski/mini.colors', version = false },
-  { "ibhagwan/fzf-lua",
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    }
+  },
+  {
+    "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
@@ -48,7 +57,8 @@ return {
       require("fzf-lua").setup({})
     end
   },
-  { "github/copilot.vim",
+  {
+    "github/copilot.vim",
     branch = "release",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -61,10 +71,12 @@ return {
       })
     end,
   },
-  { 'nvim-lualine/lualine.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
-  { "yetone/avante.nvim",
+  {
+    "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
     version = false,
@@ -99,7 +111,8 @@ return {
       },
     },
   },
-  { "HakonHarnes/img-clip.nvim",
+  {
+    "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
     keys = {
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
