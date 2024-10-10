@@ -1,44 +1,41 @@
 return {
   -- Core plugins
   { "junegunn/fzf", build = "./install --all" },
-  "tpope/vim-commentary",
-  "tpope/vim-eunuch",
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
-  "mileszs/ack.vim",
+  { "tpope/vim-commentary" },
+  { "tpope/vim-eunuch" },
+  { "tpope/vim-fugitive" },
+  { "tpope/vim-rhubarb" },
+  { "mileszs/ack.vim" },
 
   -- Utility plugins
-  "benmills/vimux",
-  "tpope/vim-surround",
-  "tpope/vim-repeat",
-  "mattn/gist-vim",
-  "mattn/webapi-vim",
+  { "benmills/vimux" },
+  { "tpope/vim-surround" },
+  { "tpope/vim-repeat" },
+  { "mattn/gist-vim" },
+  { "mattn/webapi-vim" },
 
   -- Ruby & Rails
-  "skalnik/vim-vroom",
-  "vim-ruby/vim-ruby",
-  "tpope/vim-rails",
-  "tpope/vim-endwise",
+  { "skalnik/vim-vroom" },
+  { "vim-ruby/vim-ruby" },
+  { "tpope/vim-rails" },
+  { "tpope/vim-endwise" },
 
   -- HTML, CSS & Others
-  "kchmck/vim-coffee-script",
-  "othree/html5.vim",
-  "digitaltoad/vim-jade",
+  { "othree/html5.vim" },
 
   -- Javascript
-  "pangloss/vim-javascript",
-  "leafgarland/typescript-vim",
+  { "pangloss/vim-javascript" },
+  { "leafgarland/typescript-vim" },
 
   -- Markdown
-  "tpope/vim-markdown",
-  "duwanis/tomdoc.vim",
+  { "tpope/vim-markdown" },
+  { "duwanis/tomdoc.vim" },
 
   -- Experimental
-  "neomake/neomake",
-
-  { "aduros/ai.vim", branch = "main" },
+  { "neomake/neomake" },
   { 'echasnovski/mini.base16', version = false },
   { 'echasnovski/mini.colors', version = false },
+
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
