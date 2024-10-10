@@ -204,14 +204,7 @@ if vim.fn.has("gui_running") == 1 then
 end
 
 -- COLOR STUFF
-require('mini.colors').setup()
-vim.cmd('colorscheme base16-gruvbox-light-hard')
-
-if vim.fn.filereadable(vim.fn.expand("~/.vimrc_background")) == 1 then
-  vim.g.base16colorspace = 256
-  -- vim.env.BAT_THEME = 'Solarized (dark)'
-  -- vim.cmd('source ~/.vimrc_background')
-end
+vim.cmd[[colorscheme tokyonight-storm]]
 
 -- Always show the signcolumn
 if vim.fn.has("patch-8.1.1564") == 1 then

@@ -33,9 +33,12 @@ return {
 
   -- Experimental
   { "neomake/neomake" },
-  { 'echasnovski/mini.base16', version = false },
-  { 'echasnovski/mini.colors', version = false },
-
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -47,10 +50,8 @@ return {
   },
   {
     "ibhagwan/fzf-lua",
-    -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      -- calling `setup` is optional for customization
       require("fzf-lua").setup({})
     end
   },
@@ -64,7 +65,7 @@ return {
         callback = function()
           vim.cmd("Copilot auth")
         end,
-        once = true, -- to ensure it runs only once
+        once = true,
       })
     end,
   },
@@ -83,8 +84,8 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "nvim-tree/nvim-web-devicons",
+      "zbirenbaum/copilot.lua",
       {
         "HakonHarnes/img-clip.nvim",
         event = "VeryLazy",

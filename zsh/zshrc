@@ -12,7 +12,7 @@ source $ZSH/prompt.zsh
 source $ZSH/aliases.zsh
 
 # Plugins
-source $ZSH/plugins/base16.zsh
+# source $ZSH/plugins/base16.zsh
 source $ZSH/plugins/cg.zsh
 source $ZSH/plugins/fzf.zsh
 source $ZSH/plugins/node.zsh
