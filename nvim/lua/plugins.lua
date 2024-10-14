@@ -15,7 +15,6 @@ return {
   { "mattn/webapi-vim" },
 
   -- Ruby & Rails
-  { "skalnik/vim-vroom" },
   { "vim-ruby/vim-ruby" },
   { "tpope/vim-rails" },
   { "tpope/vim-endwise" },

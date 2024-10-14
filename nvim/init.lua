@@ -171,31 +171,6 @@ function ToggleNeotree()
     end
 end
 
--- Vroom Configuration
-vim.g.vroom_map_keys = 1
-vim.g.vroom_use_colors = 1
-vim.g.vroom_use_vimux = 1
-vim.g.vroom_use_terminal = 0
-vim.g.vroom_clear_screen = 0
-vim.g.vroom_test_unit_command = 'bin/rails test'
-vim.g.vroom_use_bundle_exec = 0
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"ruby"},
-  callback = function()
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':VroomRunTestFile<CR>', { noremap = true })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>R', ':VroomRunNearestTest<CR>', { noremap = true })
-  end
-})
-
-vim.keymap.set('n', '<leader>R', function()
-  require("neotest").run.run(vim.fn.expand("%"))
-end, { noremap = true, buffer = 0 })
-
-vim.keymap.set('n', '<leader>r', function()
-  require("neotest").run.run()
-end, { noremap = true, buffer = 0 })
-
 -- GUI settings
 if vim.fn.has("gui_running") == 1 then
   vim.opt.guifont = "Inconsolata:h14"
