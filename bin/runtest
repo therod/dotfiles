@@ -1,4 +1,4 @@
 #!/bin/bash
 # Run rails tests on file change
 # USAGE: runtest [FOLDER]
-find $1 -name "*.rb" | entr -r -p -c bin/rails test /_
+find $1 -name "*.rb" | entr -r -c bin/rails test /_

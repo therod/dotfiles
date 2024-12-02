@@ -98,3 +98,7 @@ alias pubkey="more ~/.ssh/id_rsa.pub| pbcopy | echo '=> Public key copied to pas
 alias ss="open -a ScreenSaverEngine.app"
 alias dokku='bash $HOME/.dokku/contrib/dokku_client.sh'
 #alias obs='open -a obs && sudo renice -20 $(grep obs)'
+
+# Theme
+alias day="sed -i -e 's/tokyonight_storm/tokyonight_day/g' ~/.config/alacritty/alacritty.toml"
+alias night="sed -i -e 's/tokyonight_day/tokyonight_storm/g' ~/.config/alacritty/alacritty.toml"
