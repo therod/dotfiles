@@ -35,7 +35,7 @@ require("lazy").setup({
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
   callback = function()
-    -- require("config.autocmds")
+    require("config.autocmds")
     -- require("config.keymaps")
     -- require('config.coc')
     -- require('config.color')

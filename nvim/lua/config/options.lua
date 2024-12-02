@@ -1,9 +1,6 @@
 -- Basic Neovim settings
 vim.g.mapleader = ","
 
--- COLOR STUFF
--- vim.cmd.colorscheme "tokyonight-storm"
-
 vim.cmd('filetype off')
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax on')
@@ -117,9 +114,6 @@ vim.cmd([[
   autocmd FileType markdown setlocal linebreak
   autocmd FileType markdown set wrap
 ]])
-
--- FZF
-vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>FzfLua files<cr>', { noremap = true })
 
 -- Urlview
 vim.api.nvim_set_keymap('n', '<leader>u', ':w | startinsert | term urlview %<cr>', { noremap = true })

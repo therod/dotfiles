@@ -51,7 +51,6 @@ return {
       require("themery").setup({
         themes = {"tokyonight-storm", "tokyonight-day"},
         livePreview = true,
-        themeConfigFile = "~/.config/nvim/lua/theme.lua",
         defaultTheme = "tokyonight-storm"
       })
     end
@@ -61,13 +60,25 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({})
+      require("legendary").keymaps({
+        {
+          itemgroup = "fzf-lua",
+          icon = "fzf",
+          description = "Fuzzy Search",
+          keymaps = {
+            {
+              '<C-p>',
+              '<cmd>FzfLua files<cr>',
+              description = 'Fuzzy search files',
+              mode = { 'n' }
+            }
+          },
+        },
+      })
     end
   },
   {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
-    keys = {
-      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-    },
   }
 }
