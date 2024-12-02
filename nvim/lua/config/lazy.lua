@@ -38,6 +38,6 @@ vim.api.nvim_create_autocmd("User", {
     -- require("config.autocmds")
     -- require("config.keymaps")
     -- require('config.coc')
-    require('config.color')
+    -- require('config.color')
   end,
 })
