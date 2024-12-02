@@ -3,7 +3,7 @@
   "aerial.nvim": { "branch": "master", "commit": "ddd25f57e5205b36bc2e939c486b47818bef9ec3" },
   "codecompanion.nvim": { "branch": "main", "commit": "1848048ae804097538c8b58269fe28d58f953453" },
   "copilot.lua": { "branch": "master", "commit": "f8d8d872bb319f640d5177dad5fbf01f7a16d7d0" },
-  "fzf": { "branch": "master", "commit": "e182d3db7a5fc6947741c635333fb1b9ba209910" },
+  "fzf": { "branch": "master", "commit": "b5f94f961dbf9e5d12b7ac5a5b514d12be89cb97" },
   "fzf-lua": { "branch": "main", "commit": "175ddbb9bbe28eef006516f38b126215de1fef57" },
   "gist-vim": { "branch": "master", "commit": "5bfbb5450d9eff248f6c074de0b7800392439304" },
   "html5.vim": { "branch": "master", "commit": "485f2cd62162c81e56d8604b4c630f0b5ef69d1f" },
