@@ -81,7 +81,7 @@ return {
       require("legendary").keymaps({
         {
           itemgroup = "fzf-lua",
-          icon = "fzf",
+          icon = "",
           description = "Fuzzy Search",
           keymaps = {
             {

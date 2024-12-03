@@ -121,7 +121,7 @@ return {
     event = "InsertEnter",
     keys = {
       {
-        "<C-a>",
+        "<Tab>",
         function()
           require("copilot.suggestion").accept()
         end,

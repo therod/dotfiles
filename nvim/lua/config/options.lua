@@ -51,4 +51,3 @@ vim.opt.directory = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
 
 -- Fugitive
 vim.opt.tags:prepend('./.git/tags;')
-
