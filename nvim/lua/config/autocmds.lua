@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "text" },
   callback = function()
     vim.opt_local.textwidth = 78
-  end
+  end,
 })
 
 -- Reopen files on the same line as last time
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.sw = 2
     vim.opt_local.sts = 2
     vim.opt_local.expandtab = true
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -39,12 +39,17 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.sw = 4
     vim.opt_local.sts = 4
     vim.opt_local.expandtab = true
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.sass" },
-  command = "setfiletype sass"
+  command = "setfiletype sass",
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.yml", "*.yaml", "*.eruby.yaml" },
+  command = "set filetype=yaml syntax=yaml",
 })
 
 vim.api.nvim_create_autocmd("BufRead", {
@@ -58,16 +63,16 @@ vim.api.nvim_create_autocmd("BufRead", {
     vim.opt_local.wrapmargin = 0
     vim.opt_local.linebreak = true
     vim.opt_local.wrap = true
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.md.erb" },
-  command = "set filetype=eruby.markdown"
+  command = "set filetype=eruby.markdown",
 })
 
 -- ACKGrep
-vim.g.ackprg = 'ag --vimgrep --smart-case'
+vim.g.ackprg = "ag --vimgrep --smart-case"
 vim.cmd([[
   cnoreabbrev ag Ack
   cnoreabbrev aG Ack
@@ -77,11 +82,11 @@ vim.cmd([[
 
 -- Use tab for trigger completion with characters ahead and navigate
 local function check_back_space()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
 end
 
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
 -- Always show the signcolumn
 if vim.fn.has("patch-8.1.1564") == 1 then
