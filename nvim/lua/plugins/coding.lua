@@ -1,18 +1,30 @@
 return {
+  "tpope/vim-sleuth", -- Automatically detects which indents should be used in the current buffer
+  {
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
+    end,
+  },
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
+      -- { "nvim-treesitter/nvim-treesitter" },
+      -- { "nvim-lua/plenary.nvim" },
+      -- { "hrsh7th/nvim-cmp" },
+      -- { "stevearc/dressing.nvim", opts = {} },
+      -- { "nvim-telescope/telescope.nvim" },
       { "echasnovski/mini.pick", config = true },
-      { "ibhagwan/fzf-lua", config = true },
-      "nvim-treesitter/nvim-treesitter",
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }
+      { "ibhagwan/fzf-lua",      config = true },
+      -- The following are optional:
+      -- { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }
     },
     config = function()
       require("codecompanion").setup({
-        opts = {
-          debug = true
-        },
         adapters = {
           copilot = function()
             return require("codecompanion.adapters").extend("copilot", {
@@ -88,21 +100,21 @@ return {
           description = "Use the power of AI...",
           keymaps = {
             {
-              '<leader>p',
-              '<cmd>Legendary<cr>',
-              description = 'Open Legendary',
-              mode = { 'n' }
-            },
-            {
               "<leader>a",
               "<cmd>CodeCompanionActions<CR>",
               description = "Open the action palette",
               mode = { "n", "v" },
             },
+            -- {
+            --   "<LocalLeader>a",
+            --   "<cmd>CodeCompanionChat Toggle<CR>",
+            --   description = "Toggle a chat buffer",
+            --   mode = { "n", "v" },
+            -- },
             {
-              "<LocalLeader>a",
-              "<cmd>CodeCompanionChat Toggle<CR>",
-              description = "Toggle a chat buffer",
+              "<leader>c",
+              "<cmd>CodeCompanion<CR>",
+              description = "Toggle an inline chat",
               mode = { "n", "v" },
             },
             {
@@ -121,7 +133,7 @@ return {
     event = "InsertEnter",
     keys = {
       {
-        "<Tab>",
+        "<C-a>",
         function()
           require("copilot.suggestion").accept()
         end,
