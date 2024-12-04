@@ -209,7 +209,7 @@ return {
           {
             "LspInstallAll",
             function()
-              for _, name in pairs(tulpa.lsp.servers) do
+              for _, name in pairs(rod.lsp.servers) do
                 vim.cmd("LspInstall " .. name)
               end
             end,
@@ -466,6 +466,7 @@ return {
         php = { "php-cs-fixer" },
         python = { "isort", "black" },
         ruby = { "rubocop" },
+        yaml = { "yamlfix" },
       },
     },
   },

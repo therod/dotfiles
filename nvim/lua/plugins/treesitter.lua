@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter", -- Smarter code understanding like syntax Highlight and navigation
     build = ":TSUpdate",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",   -- Syntax aware text-objects, select, move, swap, and peek support.
+      "nvim-treesitter/nvim-treesitter-textobjects", -- Syntax aware text-objects, select, move, swap, and peek support.
       {
         "JoosepAlviste/nvim-ts-context-commentstring", -- Smart commenting in multi language files - Enabled in Treesitter file
       },
@@ -39,11 +39,11 @@ return {
         end,
       },
       {
-        "abecodes/tabout.nvim",         -- Tab out from parenthesis, quotes, brackets...
+        "abecodes/tabout.nvim", -- Tab out from parenthesis, quotes, brackets...
         opts = {
-          tabkey = "<Tab>",             -- key to trigger tabout, set to an empty string to disable
+          tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
           backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-          completion = true,            -- We use tab for completion so set this to true
+          completion = true, -- We use tab for completion so set this to true
         },
       },
     },
@@ -57,7 +57,7 @@ return {
           keymaps = {
             init_selection = "<M-w>",
             scope_incremental = "<CR>",
-            node_incremental = "<Tab>",   -- increment to the upper named parent
+            node_incremental = "<Tab>", -- increment to the upper named parent
             node_decremental = "<S-Tab>", -- decrement to the previous node
           },
         },
