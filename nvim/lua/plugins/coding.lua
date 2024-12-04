@@ -13,15 +13,8 @@ return {
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
-      -- { "nvim-treesitter/nvim-treesitter" },
-      -- { "nvim-lua/plenary.nvim" },
-      -- { "hrsh7th/nvim-cmp" },
-      -- { "stevearc/dressing.nvim", opts = {} },
-      -- { "nvim-telescope/telescope.nvim" },
       { "echasnovski/mini.pick", config = true },
-      { "ibhagwan/fzf-lua",      config = true },
-      -- The following are optional:
-      -- { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }
+      { "ibhagwan/fzf-lua", config = true },
     },
     config = function()
       require("codecompanion").setup({
@@ -33,8 +26,8 @@ return {
                   default = "claude-3.5-sonnet",
                 },
                 max_tokens = {
-                  default = 8192
-                }
+                  default = 8192,
+                },
               },
             })
           end,
@@ -105,12 +98,6 @@ return {
               description = "Open the action palette",
               mode = { "n", "v" },
             },
-            -- {
-            --   "<LocalLeader>a",
-            --   "<cmd>CodeCompanionChat Toggle<CR>",
-            --   description = "Toggle a chat buffer",
-            --   mode = { "n", "v" },
-            -- },
             {
               "<leader>c",
               "<cmd>CodeCompanion<CR>",
