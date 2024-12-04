@@ -465,7 +465,6 @@ return {
         lua = { "stylua" },
         php = { "php-cs-fixer" },
         python = { "isort", "black" },
-        ruby = { "rubocop" },
         yaml = { "yamlfix" },
       },
     },
