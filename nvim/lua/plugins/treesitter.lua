@@ -5,9 +5,6 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects", -- Syntax aware text-objects, select, move, swap, and peek support.
       {
-        "JoosepAlviste/nvim-ts-context-commentstring", -- Smart commenting in multi language files - Enabled in Treesitter file
-      },
-      {
         "windwp/nvim-ts-autotag", -- Autoclose and autorename HTML and Vue tags
         config = true,
       },
@@ -64,7 +61,7 @@ return {
         indent = { enable = true },
 
         -- nvim-treesitter-endwise plugin
-        endwise = { enable = true },
+        endwise = { enable = false },
 
         textobjects = {
           select = {
