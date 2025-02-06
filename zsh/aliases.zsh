@@ -80,10 +80,6 @@ alias zedit='vim ~/.dotfiles/zellij/config.kdl'
 # Alacritty
 alias aedit='vim ~/.dotfiles/alacritty/alacritty.toml'
 
-# Python 3
-alias pip=/usr/local/bin/pip3
-alias python=/usr/local/bin/python3
-
 # git
 alias git=hub
 
