@@ -96,5 +96,5 @@ alias dokku='bash $HOME/.dokku/contrib/dokku_client.sh'
 #alias obs='open -a obs && sudo renice -20 $(grep obs)'
 
 # Theme
-alias day="sed -i -e 's/tokyonight_storm/tokyonight_day/g' ~/.config/alacritty/alacritty.toml"
-alias night="sed -i -e 's/tokyonight_day/tokyonight_storm/g' ~/.config/alacritty/alacritty.toml"
+alias day="sed -i -e 's/gruvbox_dark/gruvbox_light/g' ~/.config/alacritty/alacritty.toml"
+alias night="sed -i -e 's/gruvbox_light/gruvbox_dark/g' ~/.config/alacritty/alacritty.toml"
