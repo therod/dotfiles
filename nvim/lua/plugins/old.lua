@@ -51,6 +51,7 @@ return {
   -- Experimental
   { "imsnif/kdl.vim" },
   { "neomake/neomake" },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
   {
     "folke/tokyonight.nvim",
     lazy = false,  -- Keep this false to load immediately
@@ -67,9 +68,20 @@ return {
     lazy = false,
     config = function()
       require("themery").setup({
-        themes = {"tokyonight-storm", "tokyonight-day"},
-        livePreview = true,
-        defaultTheme = "tokyonight-storm"
+        themes = {{
+          name = "Day",
+          colorscheme = "gruvbox",
+          before = [[
+            vim.opt.background = "light"
+          ]]
+        },
+        {
+          name = "Night",
+          colorscheme = "gruvbox",
+          before = [[
+            vim.opt.background = "dark"
+          ]]
+        }}
       })
     end
   },

@@ -443,10 +443,6 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
       formatters = {
         -- Configure formatter-specific settings
         stylua = {

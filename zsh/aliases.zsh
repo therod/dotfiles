@@ -45,9 +45,9 @@ alias ctags="ctags -R --exclude=.git --exclude=log *"
 alias ttop="top -F -R -o cpu -s 2"
 
 # Postgres
-alias pg-up='brew services start postgresql@14'
-alias pg-down='brew services stop postgresql@14'
-alias pg-restart='brew services restart postgresql@14'
+alias pg-up='brew services start postgresql@17'
+alias pg-down='brew services stop postgresql@17'
+alias pg-restart='brew services restart postgresql@17'
 
 # Ruby
 alias r='rbenv local'

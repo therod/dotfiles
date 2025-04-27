@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Check if correct number of arguments is provided
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <input_png> <output_icns_name> <output_ico_name>"
+    exit 1
+fi
+
+INPUT_PNG="$1"
+OUTPUT_ICNS="$2"
+OUTPUT_ICO="$3"
+OUTPUT_PNG="${OUTPUT_ICO%.*}.png" # Derive PNG name from ICO name
+ICONSET_DIR="TempIcon.iconset"
+
+# Check if input file exists and is a PNG
+if [ ! -f "$INPUT_PNG" ] || [ "${INPUT_PNG##*.}" != "png" ]; then
+    echo "Error: Input file must be a PNG."
+    exit 1
+fi
+
+# Check if ImageMagick is installed (needed for .ico)
+if ! command -v convert &> /dev/null; then
+    echo "Error: ImageMagick is required for .ico creation. Install it with 'brew install imagemagick'."
+    exit 1
+fi
+
+# Create temporary iconset directory for .icns
+mkdir -p "$ICONSET_DIR"
+
+# Resize PNG to required sizes for .icns
+sips -z 16 16 "$INPUT_PNG" --out "$ICONSET_DIR/icon_16x16.png" > /dev/null
+sips -z 32 32 "$INPUT_PNG" --out "$ICONSET_DIR/icon_16x16@2x.png" > /dev/null
+sips -z 32 32 "$INPUT_PNG" --out "$ICONSET_DIR/icon_32x32.png" > /dev/null
+sips -z 64 64 "$INPUT_PNG" --out "$ICONSET_DIR/icon_32x32@2x.png" > /dev/null
+sips -z 128 128 "$INPUT_PNG" --out "$ICONSET_DIR/icon_128x128.png" > /dev/null
+sips -z 256 256 "$INPUT_PNG" --out "$ICONSET_DIR/icon_128x128@2x.png" > /dev/null
+sips -z 256 256 "$INPUT_PNG" --out "$ICONSET_DIR/icon_256x256.png" > /dev/null
+sips -z 512 512 "$INPUT_PNG" --out "$ICONSET_DIR/icon_256x256@2x.png" > /dev/null
+sips -z 512 512 "$INPUT_PNG" --out "$ICONSET_DIR/icon_512x512.png" > /dev/null
+sips -z 1024 1024 "$INPUT_PNG" --out "$ICONSET_DIR/icon_512x512@2x.png" > /dev/null
+
+# Convert iconset to .icns
+iconutil -c icns "$ICONSET_DIR" -o "$OUTPUT_ICNS"
+
+# Clean up temporary iconset directory
+rm -R "$ICONSET_DIR"
+
+# Create 256x256 .ico file using ImageMagick
+convert "$INPUT_PNG" -resize 256x256 "$OUTPUT_ICO"
+
+# Create 512x512 PNG using sips
+sips -z 512 512 "$INPUT_PNG" --out "$OUTPUT_PNG" > /dev/null
+
+echo "Created $OUTPUT_ICNS, $OUTPUT_ICO, and $OUTPUT_PNG successfully."
