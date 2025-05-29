@@ -105,7 +105,7 @@ simplified_ui false
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "gruvbox_dark"
+theme "gruvbox-dark"
 
 // Choose the base input mode of zellij.
 // Default: normal
