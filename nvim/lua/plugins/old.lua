@@ -8,11 +8,10 @@ return {
   { "mileszs/ack.vim" },
 
   -- Utility plugins
-  { "benmills/vimux" },
   { "tpope/vim-surround" },
   { "tpope/vim-repeat" },
-  { "mattn/gist-vim" },
-  { "mattn/webapi-vim" },
+  -- { "mattn/gist-vim" },
+  -- { "mattn/webapi-vim" },
 
   -- Ruby & Rails
   { "vim-ruby/vim-ruby" },
@@ -49,20 +48,9 @@ return {
   { "duwanis/tomdoc.vim" },
 
   -- Experimental
-  { "imsnif/kdl.vim" },
+  -- { "imsnif/kdl.vim" },
   { "neomake/neomake" },
   { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,  -- Keep this false to load immediately
-    priority = 1000,
-    config = function()
-      -- Load and configure the colorscheme
-      require("tokyonight").setup({
-          -- your custom config here
-      })
-    end
-  },
   {
     "zaldih/themery.nvim",
     lazy = false,
@@ -106,9 +94,9 @@ return {
         },
       })
     end
-  },
-  {
-    "HakonHarnes/img-clip.nvim",
-    event = "VeryLazy",
   }
+  -- {
+  --   "HakonHarnes/img-clip.nvim",
+  --   event = "VeryLazy",
+  -- }
 }

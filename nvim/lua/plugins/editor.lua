@@ -1,25 +1,5 @@
 return {
   {
-    "kevinhwang91/nvim-ufo", -- Better folds in Neovim
-    dependencies = "kevinhwang91/promise-async",
-    keys = {
-      {
-        "zR",
-        function()
-          require("ufo").openAllFolds()
-        end,
-        desc = "Open all folds",
-      },
-      {
-        "zM",
-        function()
-          require("ufo").closeAllFolds()
-        end,
-        desc = "Close all folds",
-      },
-    },
-  },
-  {
     "stevearc/oil.nvim", -- File manager
     opts = {
       default_file_explorer = false,
@@ -83,7 +63,7 @@ return {
       close_on_select = true,
       layout = {
         min_width = 30,
-        default_direction = "prefer_right",
+        default_direction = "prefer_left",
       },
       -- Use nvim-navic icons
       icons = {
@@ -116,7 +96,7 @@ return {
       },
     },
     keys = {
-      { "<C-t>", "<cmd>AerialToggle<CR>", mode = { "n", "x", "o" }, desc = "Aerial Toggle" },
+      { "<leader>i", "<cmd>AerialToggle<CR>", mode = { "n", "x", "o" }, desc = "Aerial Toggle" },
     },
   },
   {

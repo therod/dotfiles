@@ -7,7 +7,7 @@ return {
     dependencies = "kkharji/sqlite.lua",
     keys = {
       {
-        "<leader>-p",
+        "<leader>p",
         function()
           require("legendary").find()
         end,
