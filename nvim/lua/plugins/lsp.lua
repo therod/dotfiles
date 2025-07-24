@@ -27,8 +27,8 @@ return {
         formatting = {
           fields = { "abbr", "kind", "menu" },
           format = require("lspkind").cmp_format({
-            mode = "symbol", -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters
+            mode = "symbol",       -- show only symbol annotations
+            maxwidth = 50,         -- prevent the popup from showing more than provided characters
             ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
           }),
         },
@@ -85,10 +85,10 @@ return {
           end, { "i", "s" }),
         }),
         sources = {
-          { name = "luasnip", priority = 100, max_item_count = 5 },
-          { name = "nvim_lsp", priority = 90 },
-          { name = "path", priority = 20 },
-          { name = "buffer", priority = 10, keyword_length = 3, max_item_count = 8 },
+          { name = "luasnip",                priority = 100, max_item_count = 5 },
+          { name = "nvim_lsp",               priority = 90 },
+          { name = "path",                   priority = 20 },
+          { name = "buffer",                 priority = 10,  keyword_length = 3, max_item_count = 8 },
           { name = "nvim_lua" },
           { name = "nvim_lsp_signature_help" },
         },
@@ -149,14 +149,7 @@ return {
       require("lspconfig.ui.windows").default_options.border = "single"
       vim.o.runtimepath = vim.o.runtimepath .. ",~/.dotfiles/.config/snippets"
 
-      local capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      })
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig_defaults = require("lspconfig").util.default_config
       lspconfig_defaults.capabilities = vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, capabilities)
@@ -186,6 +179,7 @@ return {
           },
         })
       end
+
       local function commands(client, bufnr)
         -- Only need to set these once!
         if vim.g.lsp_commands then
@@ -229,11 +223,12 @@ return {
 
         vim.g.lsp_commands = true
       end
+
       local function mappings(client, bufnr)
         if
-          #vim.tbl_filter(function(keymap)
-            return (keymap.desc or ""):lower() == "rename symbol"
-          end, vim.api.nvim_buf_get_keymap(bufnr, "n")) > 0
+            #vim.tbl_filter(function(keymap)
+              return (keymap.desc or ""):lower() == "rename symbol"
+            end, vim.api.nvim_buf_get_keymap(bufnr, "n")) > 0
         then
           return {}
         end
@@ -276,7 +271,7 @@ return {
             },
             {
               "K",
-              "<cmd>lua vim.lsp.buf.hover<CR>",
+              "<cmd>lua vim.lsp.buf.hover()<CR>",
               description = "Show hover information",
               opts = { buffer = bufnr },
             },
@@ -388,13 +383,32 @@ return {
           ["ruby_lsp"] = function()
             require("lspconfig").ruby_lsp.setup({
               capabilities = capabilities,
-              filetypes = { "ruby" }, -- Remove 'eruby' to prevent interference with markdown
-              settings = {
-                rubyLsp = {
-                  diagnostics = false, -- Disable diagnostics in non-ruby files
-                  formatter = false, -- Disable formatting in non-ruby files
+              cmd = { "bundle", "exec", "ruby-lsp" }, -- Use bundled version
+              filetypes = { "ruby", "eruby" },
+              init_options = {
+                addonSettings = {
+                  ["Ruby LSP Rails"] = {
+                    enablePendingMigrationsPrompt = false,
+                  },
                 },
               },
+              settings = {
+                rubyLsp = {
+                  enabledFeatures = {
+                    "documentHighlights",
+                    "documentSymbols",
+                    "documentLink", -- Important for Rails navigation
+                    "diagnostics",
+                    "formatting",
+                    "codeActions",
+                    "workspaceSymbol", -- Find symbols across the project
+                    "definition",      -- Go to definition
+                    "foldingRanges",
+                    "selectionRanges",
+                    "semanticHighlighting",
+                  },
+                },
+              }
             })
           end,
         },
@@ -406,12 +420,8 @@ return {
           text = icons,
         },
         underline = false,
-        update_in_insert = true,
+        update_in_insert = false,
         virtual_text = false,
-        -- virtual_text = {
-        --   prefix = "",
-        --   spacing = 0,
-        -- },
       })
     end,
   },
@@ -430,11 +440,11 @@ return {
         return ft ~= "lazy" and ft ~= "mason" and ft ~= "codecompanion"
       end,
       severity_format = vim
-        .iter(ipairs(icons))
-        :map(function(sev, icon)
-          return icon
-        end)
-        :totable(),
+          .iter(ipairs(icons))
+          :map(function(sev, icon)
+            return icon
+          end)
+          :totable(),
     },
   },
 
@@ -442,15 +452,9 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      formatters = {
-        -- Configure formatter-specific settings
-        stylua = {
-          prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
-        },
-        prettier = {
-          prepend_args = { "--tab-width", "2" },
-        },
-        -- Add other formatter configurations as needed
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
       },
       formatters_by_ft = {
         css = { "prettier" },
@@ -460,11 +464,12 @@ return {
         lua = { "stylua" },
         php = { "php-cs-fixer" },
         python = { "isort", "black" },
+        ruby = { "rubocop" },
         yaml = { "yamlfix" },
       },
     },
   },
 
-  -- Others
+  -- Icons for LSP
   "onsails/lspkind.nvim",
 }
