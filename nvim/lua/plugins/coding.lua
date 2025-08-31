@@ -19,18 +19,20 @@ return {
     config = function()
       require("codecompanion").setup({
         adapters = {
-          copilot = function()
-            return require("codecompanion.adapters").extend("copilot", {
-              schema = {
-                model = {
-                  default = "claude-sonnet-4",
+          http = {
+            copilot = function()
+              return require("codecompanion.adapters").extend("copilot", {
+                schema = {
+                  model = {
+                    default = "claude-sonnet-4",
+                  },
+                  max_tokens = {
+                    default = 8192,
+                  },
                 },
-                max_tokens = {
-                  default = 8192,
-                },
-              },
-            })
-          end,
+              })
+            end,
+          },
         },
         strategies = {
           chat = {

@@ -449,26 +449,26 @@ return {
   },
 
   -- Formatting
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
-      formatters_by_ft = {
-        css = { "prettier" },
-        html = { "prettier" },
-        javascript = { "prettier" },
-        json = { "prettier" },
-        lua = { "stylua" },
-        php = { "php-cs-fixer" },
-        python = { "isort", "black" },
-        ruby = { "rubocop" },
-        yaml = { "yamlfix" },
-      },
-    },
-  },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   opts = {
+  --     format_on_save = {
+  --       timeout_ms = 500,
+  --       lsp_fallback = true,
+  --     },
+  --     formatters_by_ft = {
+  --       css = { "prettier" },
+  --       html = { "prettier" },
+  --       javascript = { "prettier" },
+  --       json = { "prettier" },
+  --       lua = { "stylua" },
+  --       php = { "php-cs-fixer" },
+  --       python = { "isort", "black" },
+  --       ruby = { "rubocop" },
+  --       yaml = { "yamlfix" },
+  --     },
+  --   },
+  -- },
 
   -- Icons for LSP
   "onsails/lspkind.nvim",
